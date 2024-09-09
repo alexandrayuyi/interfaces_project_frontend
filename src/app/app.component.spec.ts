@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
-    }).compileComponents();
+    imports: [RouterTestingModule, AppComponent],
+}).compileComponents();
   });
 
   it('should create the app', () => {
@@ -14,16 +15,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'ux-ui-project-front' title`, () => {
+  it(`should have as title 'angular-tailwind'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ux-ui-project-front');
+    expect(app.title).toEqual('angular-tailwind');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, ux-ui-project-front');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-tailwind app is running!');
   });
 });
