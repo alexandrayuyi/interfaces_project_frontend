@@ -1,1 +1,54 @@
-<p>profile works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css" rel="stylesheet">
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-base-100 shadow-md">
+    <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+      <a class="text-xl font-bold" href="#">MyApp</a>
+      <div>
+        <a class="btn btn-ghost" href="#">Home</a>
+        <a class="btn btn-ghost" href="#">Profile</a>
+        <a class="btn btn-ghost" href="#">Settings</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow container mx-auto px-4 py-8">
+    <div class="max-w-lg mx-auto bg-base-200 p-6 rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold mb-4">Profile Information</h2>
+      <form>
+        <div class="mb-4">
+          <label class="block text-sm font-medium mb-2" for="name">Name</label>
+          <input class="input input-bordered w-full" type="text" id="name" name="name" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium mb-2" for="email">Email</label>
+          <input class="input input-bordered w-full" type="email" id="email" name="email" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium mb-2" for="bio">Bio</label>
+          <textarea class="textarea textarea-bordered w-full" id="bio" name="bio" rows="4"></textarea>
+        </div>
+        <button class="btn btn-primary w-full" type="submit">Save</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-base-100 shadow-md mt-auto">
+    <div class="container mx-auto px-4 py-4 text-center">
+      <p class="text-sm">&copy; 2023 MyApp. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
