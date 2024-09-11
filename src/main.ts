@@ -7,6 +7,14 @@ import { AppRoutingModule } from './app/app-routing.module';
 import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
+import { App } from './app/app';
+import { appConfig } from './app/app.config';
+
+
+bootstrapApplication(App, appConfig)
+  .catch((err) => console.error(err));
+
+
 if (environment.production) {
   enableProdMode();
   //show this warning only on prod mode

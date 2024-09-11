@@ -3,6 +3,15 @@
 	"compileOnSave": false,
 	"compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@core/*": ["src/app/core/*"],
+      "@data/*": ["src/app/data/*"],
+      "@icon/*": ["src/app/icon/*"],
+      "@layout/*": ["src/app/layout/*"],
+      "@pages/*": ["src/app/pages/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@env/*": ["src/environments/*"],
+    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -24,12 +33,16 @@
       "es2020",
       "dom"
     ],
-    "useDefineForClassFields": false
+    "types": [
+      "node"
+    ],
+    "useDefineForClassFields": false,
+    "skipLibCheck": true
   },
 	"angularCompilerOptions": {
 		"enableI18nLegacyMessageIdFormat": false,
 		"strictInjectionParameters": true,
 		"strictInputAccessModifiers": true,
 		"strictTemplates": true
-	}
+	},
 }

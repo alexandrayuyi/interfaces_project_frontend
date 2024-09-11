@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="base">
+<html lang="en" data-theme="base" class="dark">
   <head>
     <meta charset="utf-8" />
     <title>Angular Tailwind</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta name="theme-color" content="#3867d6" />
   </head>
 
   <body class="bg-background font-poppins selection:bg-primary selection:text-primary-foreground">
+    <app>
+      <div class="flex h-screen items-center justify-center">
+        <div class="rounded-md h-12 w-12 border-4 border-t-4 border-black dark:border-white animate-spin absolute"></div>
+      </div>
+    </app>
     <app-root>
       <div class="flex h-screen">
         <div class="m-auto">

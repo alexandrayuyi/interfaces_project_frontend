@@ -45,6 +45,8 @@
     "@tailwindcss/typography": "^0.5.4",
     "angular-svg-icon": "^13.0.0",
     "apexcharts": "^3.35.3",
+    "marked": "^14.1.2",
+    "medium-zoom": "^1.1.0",
     "ng-apexcharts": "^1.7.1",
     "ngx-sonner": "^2.0.1",
     "rxjs": "~7.4.0",
@@ -77,5 +79,11 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "url": false
   }
 }

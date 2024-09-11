@@ -1,38 +1,33 @@
-import { Injectable, signal } from '@angular/core';
-import { Theme } from '../models/theme.model';
-import { effect } from '@angular/core';
-
+import { Injectable, Signal, computed, signal } from '@angular/core';
+import { environment } from '@env/environment';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ThemeService {
-  public theme = signal<Theme>({ mode: 'dark', color: 'base' });
-
-  constructor() {
-    this.loadTheme();
-    effect(() => {
-      this.setTheme();
-    });
+  public color = signal<string>(this.getInitialColor());
+  public openColor = signal<boolean>(false)
+  public getColor: Signal<string> = computed(() => this.color());
+  setThemeColor(color: string){
+    this.color.set(color);
+    this.saveColor(color);
   }
-
-  private loadTheme() {
-    const theme = localStorage.getItem('theme');
-    if (theme) {
-      this.theme.set(JSON.parse(theme));
+  toggle(){
+    this.openColor.set(!this.openColor());
+  }
+  private saveColor(color: string){
+    (localStorage as any).color = color;
+  }
+  private getInitialColor(): string {
+    if (typeof window !== 'undefined') {
+      const storedColor = localStorage.getItem('color');
+      if(storedColor){
+        return storedColor;
+      }
     }
-  }
+    return environment.mainColor
+}
 
-  private setTheme() {
-    localStorage.setItem('theme', JSON.stringify(this.theme()));
-    this.setThemeClass();
-  }
+}
 
-  public get isDark(): boolean {
-    return this.theme().mode == 'dark';
-  }
-
-  private setThemeClass() {
-    document.querySelector('html')!.className = this.theme().mode;
-    document.querySelector('html')!.setAttribute('data-theme', this.theme().color);
-  }
+export interface Theme {
 }
