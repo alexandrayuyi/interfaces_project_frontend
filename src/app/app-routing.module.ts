@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth',
+    redirectTo: 'landing',
     pathMatch: 'full',
   },
   {
@@ -20,6 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./modules/error/error.module').then((m) => m.ErrorModule),
   },
   { path: 'profile', loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule) },
+  { path: 'landing', loadChildren: () => import('./modules/landing/landing.module').then(m => m.LandingModule) },
   { path: '**', redirectTo: 'errors/404' },
 ];
 
