@@ -1,1 +1,112 @@
-<p>landing works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyApp</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css" rel="stylesheet">
+</head>
+<body class="flex flex-col min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-base-100 shadow-md">
+    <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+      <a class="text-xl font-bold" href="#">MyApp</a>
+      <div>
+        <a class="btn btn-ghost" href="#">Home</a>
+        <a class="btn btn-ghost" href="#">Profile</a>
+        <a class="btn btn-ghost" href="#">Settings</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner -->
+  <section class="bg-primary text-primary-content py-16 text-center">
+    <div class="container mx-auto">
+      <h1 class="text-4xl font-bold mb-4">Welcome to MyApp</h1>
+      <p class="text-lg">Your one-stop solution for all your needs.</p>
+    </div>
+  </section>
+
+  <!-- Photo Gallery/Carousel -->
+  <section class="py-8">
+    <div class="container mx-auto">
+      <div class="carousel w-full">
+        <div id="slide1" class="carousel-item relative w-full">
+          <img src="https://via.placeholder.com/800x400" class="w-full" alt="Slide 1">
+          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href="#slide4" class="btn btn-circle">❮</a> 
+            <a href="#slide2" class="btn btn-circle">❯</a>
+          </div>
+        </div> 
+        <div id="slide2" class="carousel-item relative w-full">
+          <img src="https://via.placeholder.com/800x400" class="w-full" alt="Slide 2">
+          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href="#slide1" class="btn btn-circle">❮</a> 
+            <a href="#slide3" class="btn btn-circle">❯</a>
+          </div>
+        </div> 
+        <div id="slide3" class="carousel-item relative w-full">
+          <img src="https://via.placeholder.com/800x400" class="w-full" alt="Slide 3">
+          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href="#slide2" class="btn btn-circle">❮</a> 
+            <a href="#slide4" class="btn btn-circle">❯</a>
+          </div>
+        </div> 
+        <div id="slide4" class="carousel-item relative w-full">
+          <img src="https://via.placeholder.com/800x400" class="w-full" alt="Slide 4">
+          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <a href="#slide3" class="btn btn-circle">❮</a> 
+            <a href="#slide1" class="btn btn-circle">❯</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards Section -->
+  <section class="py-8">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="card bg-base-100 shadow-md">
+        <figure><img src="https://via.placeholder.com/400x200" alt="Card Image 1"></figure>
+        <div class="card-body">
+          <h2 class="card-title">Card Title 1</h2>
+          <p>Card description goes here.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md">
+        <figure><img src="https://via.placeholder.com/400x200" alt="Card Image 2"></figure>
+        <div class="card-body">
+          <h2 class="card-title">Card Title 2</h2>
+          <p>Card description goes here.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md">
+        <figure><img src="https://via.placeholder.com/400x200" alt="Card Image 3"></figure>
+        <div class="card-body">
+          <h2 class="card-title">Card Title 3</h2>
+          <p>Card description goes here.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-base-100 shadow-md mt-auto">
+    <div class="container mx-auto px-4 py-4 text-center">
+      <p class="text-sm">&copy; 2023 MyApp. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
