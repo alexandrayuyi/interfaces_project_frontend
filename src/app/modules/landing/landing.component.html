@@ -29,9 +29,45 @@
     </div>
   </section>
 
-  <!-- Photo Gallery/Carousel -->
+  <!-- Cards Section -->
+  <section class="py-8">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="card bg-base-100 shadow-md">
+        <figure><img src="../../../assets/images/143-400x200.jpg" alt="Card Image 1"></figure>
+        <div class="card-body">
+          <h2 class="card-title">Card Title 1</h2>
+          <p>Card description goes here.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md">
+        <figure><img src="../../../assets/images/352-400x200.jpg" alt="Card Image 2"></figure>
+        <div class="card-body">
+          <h2 class="card-title">Card Title 2</h2>
+          <p>Card description goes here.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-md">
+        <figure><img src="../../../assets/images/418-400x200.jpg" alt="Card Image 3"></figure>
+        <div class="card-body">
+          <h2 class="card-title">Card Title 3</h2>
+          <p>Card description goes here.</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <div class="slideshow-container">
+   <!-- Photo Gallery/Carousel -->
+
+   <div class="slideshow-container">
     <div *ngFor="let slide of slides; let i = index" class="mySlides fade" [ngClass]="{ 'active': activeIndex === i }" [style.display]="activeIndex === i ? 'block' : 'none'">
       <div class="numbertext">{{ i + 1 }} / {{ slides.length }}</div>
       <img [src]="slide.imageSrc" style="width:100%">
@@ -97,42 +133,6 @@
     targetItem.classList.add('active');
   }
   </script> -->
-
-  <!-- Cards Section -->
-  <section class="py-8">
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="card bg-base-100 shadow-md">
-        <figure><img src="../../../assets/images/143-400x200.jpg" alt="Card Image 1"></figure>
-        <div class="card-body">
-          <h2 class="card-title">Card Title 1</h2>
-          <p>Card description goes here.</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">Learn More</button>
-          </div>
-        </div>
-      </div>
-      <div class="card bg-base-100 shadow-md">
-        <figure><img src="../../../assets/images/352-400x200.jpg" alt="Card Image 2"></figure>
-        <div class="card-body">
-          <h2 class="card-title">Card Title 2</h2>
-          <p>Card description goes here.</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">Learn More</button>
-          </div>
-        </div>
-      </div>
-      <div class="card bg-base-100 shadow-md">
-        <figure><img src="../../../assets/images/418-400x200.jpg" alt="Card Image 3"></figure>
-        <div class="card-body">
-          <h2 class="card-title">Card Title 3</h2>
-          <p>Card description goes here.</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">Learn More</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Footer -->
   <footer class="bg-base-100 shadow-md mt-auto">
