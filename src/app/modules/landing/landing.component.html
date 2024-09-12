@@ -30,40 +30,73 @@
   </section>
 
   <!-- Photo Gallery/Carousel -->
-  <section class="py-8">
+
+  <div class="slideshow-container">
+    <div *ngFor="let slide of slides; let i = index" class="mySlides fade" [ngClass]="{ 'active': activeIndex === i }" [style.display]="activeIndex === i ? 'block' : 'none'">
+      <div class="numbertext">{{ i + 1 }} / {{ slides.length }}</div>
+      <img [src]="slide.imageSrc" style="width:100%">
+      <div class="text">{{ slide.caption }}</div>
+    </div>
+  
+    <!-- Next/prev buttons -->
+    <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+    <a class="next" (click)="plusSlides(1)">&#10095;</a>
+  </div>
+  
+  <br>
+  
+  <!-- Dots/bullets -->
+  <div style="text-align:center">
+    <span *ngFor="let slide of slides; let i = index" class="dot" [ngClass]="{ 'active': activeIndex === i }" (click)="currentSlide(i + 1)"></span>
+  </div>
+      
+  <!-- <section class="py-8">
     <div class="container mx-auto">
       <div class="carousel w-full">
         <div id="slide1" class="carousel-item relative w-full">
           <img src="../../../assets/images/381-800x400.jpg" class="w-full" alt="Slide 1">
           <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide4" class="btn btn-circle">❮</a> 
-            <a href="#slide2" class="btn btn-circle">❯</a>
+            <a onclick="changeSlide('slide4')" class="btn btn-circle">❮</a> 
+            <a onclick="changeSlide('slide2')" class="btn btn-circle">❯</a>
           </div>
         </div> 
         <div id="slide2" class="carousel-item relative w-full">
-          <img src="../../../assets/images/390-800x400.jpg" class="w-full" alt="Slide 2">
+          <img src="../../../assets/images/390-800x400.jpg" class="w-full" alt="Slide 1">
           <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide1" class="btn btn-circle">❮</a> 
-            <a href="#slide3" class="btn btn-circle">❯</a>
+            <a onclick="changeSlide('slide1')" class="btn btn-circle">❮</a> 
+            <a onclick="changeSlide('slide3')" class="btn btn-circle">❯</a>
           </div>
         </div> 
         <div id="slide3" class="carousel-item relative w-full">
-          <img src="../../../assets/images/607-800x400.jpg" class="w-full" alt="Slide 3">
+          <img src="../../../assets/images/607-800x400.jpg" class="w-full" alt="Slide 1">
           <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide2" class="btn btn-circle">❮</a> 
-            <a href="#slide4" class="btn btn-circle">❯</a>
+            <a onclick="changeSlide('slide2')" class="btn btn-circle">❮</a> 
+            <a onclick="changeSlide('slide4')" class="btn btn-circle">❯</a>
           </div>
         </div> 
         <div id="slide4" class="carousel-item relative w-full">
-          <img src="../../../assets/images/926-800x400.jpg" class="w-full" alt="Slide 4">
+          <img src="../../../assets/images/926-800x400.jpg" class="w-full" alt="Slide 1">
           <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a href="#slide3" class="btn btn-circle">❮</a> 
-            <a href="#slide1" class="btn btn-circle">❯</a>
+            <a onclick="changeSlide('slide3')" class="btn btn-circle">❮</a> 
+            <a onclick="changeSlide('slide1')" class="btn btn-circle">❯</a>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   </section>
+  
+  <script>
+  function changeSlide(targetId) {
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    
+    // Remove active class from all items
+    carouselItems.forEach(item => item.classList.remove('active'));
+    
+    // Find the target item and add active class
+    const targetItem = document.getElementById(targetId);
+    targetItem.classList.add('active');
+  }
+  </script> -->
 
   <!-- Cards Section -->
   <section class="py-8">
