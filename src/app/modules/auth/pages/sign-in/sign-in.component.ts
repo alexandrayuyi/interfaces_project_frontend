@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { NgClass, NgIf } from '@angular/common';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,13 +18,16 @@ export class SignInComponent implements OnInit {
   submitted = false;
   passwordTextType!: boolean;
 
-  constructor(private readonly _formBuilder: FormBuilder, private readonly _router: Router) {}
+  constructor(private readonly _formBuilder: FormBuilder, private readonly _router: Router, private authService: AuthService) {}
 
   onClick() {
     console.log('Button clicked');
   }
 
   ngOnInit(): void {
+    this.authService.getProducts().subscribe((data) => {
+      console.log(data);
+    });
     this.form = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -42,6 +46,11 @@ export class SignInComponent implements OnInit {
     this.submitted = true;
     const { email, password } = this.form.value;
 
+    this.authService.postLogin(email, password).subscribe((data) => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
     // stop here if form is invalid
     if (this.form.invalid) {
       return;
