@@ -17,6 +17,8 @@ export class SignInComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
   passwordTextType!: boolean;
+  errorMessage: string = '';
+
 
   constructor(private readonly _formBuilder: FormBuilder, private readonly _router: Router, private authService: AuthService) {}
 
@@ -42,14 +44,21 @@ export class SignInComponent implements OnInit {
     this.passwordTextType = !this.passwordTextType;
   }
 
+
+
   onSubmit() {
     this.submitted = true;
     const { email, password } = this.form.value;
 
-    this.authService.postLogin(email, password).subscribe((data) => {
-      console.log(data);
-    }, error => {
-      console.log(error);
+    this.authService.postLogin(email, password).subscribe((response) => {
+      if (response.succes){
+        this._router.navigate(['/']);
+      }
+    },
+    (error) => {
+      if (error.status === 404) {
+        this._router.navigate(['/auth/sign-up']);
+      }
     });
     // stop here if form is invalid
     if (this.form.invalid) {

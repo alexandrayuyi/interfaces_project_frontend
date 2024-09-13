@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +13,14 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
   imports: [FormsModule, RouterLink, AngularSvgIconModule, ButtonComponent],
 })
 export class SignUpComponent implements OnInit {
-  constructor() {}
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  confirmPassword: string = '';
+  errorMessage: string = '';
+
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 }
