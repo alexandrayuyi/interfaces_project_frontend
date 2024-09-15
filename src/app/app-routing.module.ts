@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from './modules/auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./modules/layout/layout.module').then((m) => m.LayoutModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'auth',
@@ -20,9 +22,20 @@ const routes: Routes = [
     path: 'errors',
     loadChildren: () => import('./modules/error/error.module').then((m) => m.ErrorModule),
   },
-  { path: 'profile', loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule) },
-  { path: 'landing', loadChildren: () => import('./modules/landing/landing.module').then(m => m.LandingModule) },
-  { path: '**', redirectTo: 'errors/404' },
+  {
+    path: 'profile',
+    loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'landing',
+    loadChildren: () => import('./modules/landing/landing.module').then(m => m.LandingModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: 'errors/404'
+  },
 ];
 
 @NgModule({
