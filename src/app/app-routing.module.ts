@@ -9,11 +9,11 @@ const routes: Routes = [
     redirectTo: 'landing',
     pathMatch: 'full',
   },
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./modules/layout/layout.module').then((m) => m.LayoutModule),
-    canActivate: [AuthGuard],
-  },
+  // {
+  //   path: 'dashboard',
+  //   loadChildren: () => import('./modules/layout/layout.module').then((m) => m.LayoutModule),
+  //   canActivate: [AuthGuard],pe
+  // },
   {
     path: 'auth',
     loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
