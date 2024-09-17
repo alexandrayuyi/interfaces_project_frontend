@@ -111,7 +111,14 @@ export class ProfileComponent {
       console.error('Invalid selection or map is not initialized properly.');
     }
   }
-
+  // Método para manejar la selección del archivo de imagen
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.profilePicture = file;
+    }
+    console.log('Selected file:', this.profilePicture);
+  }
   // Method to handle form submission
 // Method to handle form submission
 saveProfile() {
@@ -119,7 +126,6 @@ saveProfile() {
 
   if (this.firstname) updatedFields.firstname = this.firstname;
   if (this.lastname) updatedFields.lastname = this.lastname;
-  // Asegúrate de que birthdate sea un string en formato ISO 8601
   if (this.birthdate) updatedFields.birthdate = new Date(this.birthdate).toISOString();
   if (this.gender) updatedFields.gender = this.gender;
   if (this.phone) updatedFields.phone = Number(this.phone);
@@ -151,19 +157,28 @@ saveProfile() {
   console.log('Sending birthdate:', this.birthdate);
 
 }
-updateProfile(id: number, updatedFields: any) {
-  if (updatedFields.birthdate && !(updatedFields.birthdate instanceof Date)) {
-    updatedFields.birthdate = new Date(updatedFields.birthdate.toString());
-  }
-
-  this.apiService.patchProfile(id, updatedFields).subscribe(
-    (response: any) => {
-      console.log('Profile updated successfully:', response);
-    },
-    (error: any) => {
-      console.error('Error updating profile:', error);
+  // Método para actualizar el perfil en el backend
+  updateProfile(id: number, updatedFields: any) {
+    const formData = new FormData();
+    // Añadir campos normales
+    for (const key in updatedFields) {
+      if (updatedFields.hasOwnProperty(key)) {
+        formData.append(key, updatedFields[key]);
+      }
     }
-  );
-  this.router.navigate(['/profile/readonly']);
-}
+    // Añadir archivo de imagen si está disponible
+    if (this.profilePicture) {
+      formData.append('imagePath', this.profilePicture);
+    }
+
+    this.apiService.patchProfile(id, formData).subscribe(
+      (response: any) => {
+        console.log('Perfil actualizado exitosamente:', response);
+        this.router.navigate(['/profile/readonly']);
+      },
+      (error: any) => {
+        console.error('Error al actualizar el perfil:', error);
+      }
+    );
+  }
 }

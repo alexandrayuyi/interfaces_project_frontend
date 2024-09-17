@@ -10,6 +10,7 @@ interface UserProfile {
   gender: string;
   phone: string;
   email: string;
+  imagePath: string;
   user: {
     username: string;
     password: string;
@@ -74,6 +75,7 @@ export class ProfileReadonlyComponent implements OnInit {
         this.gender = profile.gender;
         this.phone = profile.phone;
         this.email = profile.email;
+        this.profilePicture = profile.imagePath;
         this.username = profile.user.username;
         this.password = profile.user.password;
         this.street = profile.address.street;
