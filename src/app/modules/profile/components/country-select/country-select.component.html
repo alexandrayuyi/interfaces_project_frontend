@@ -1,8 +1,11 @@
+<label class="label">
+  <span class="label-text">Country of nationality</span>
+</label>
+<div (scroll)="onScroll($event)">
+  <select class="select select-bordered w-full max-w-xs" 
+        >
+  <option disabled selected>Select your country</option>
+  <option *ngFor="let country of countries">{{ country }}</option>
+</select>
+</div>
 
-  <label class="label">
-    <span class="label-text">Country of nationality</span>
-  </label>
-  <select class="select select-bordered w-full max-w-xs">
-    <option disabled selected>Select your country</option>
-    <option *ngFor="let country of countries">{{ country }}</option>
-  </select>
