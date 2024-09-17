@@ -110,51 +110,56 @@ export class ProfileComponent {
   }
 
   // Method to handle form submission
-  saveProfile() {
-    const updatedFields = {
-      firstname: this.firstname || "",
-      lastname: this.lastname || "",
-      birthdate: this.birthdate ? new Date(this.birthdate) : null,
-      gender: this.gender || "",
-      phone: this.phone ? Number(this.phone) : null,
-      username: this.username || "",
-      email: this.email || null,
-      password: this.password || "",
-      address: {
-        name: this.name || "",
-        state: this.state || "",
-        country: this.country || "",
-        city: this.city || "",
-        lat: this.lat ? parseFloat(this.lat) : null,
-        lon: this.lon ? parseFloat(this.lon) : null,
-        postcode: this.postcode ? parseInt(this.postcode) : null,
-        street: this.street || ""
-      }
-    };
+// Method to handle form submission
+saveProfile() {
+  const updatedFields: any = {};
 
-    // Example id; replace with the actual profile id
-    const profileId = localStorage.getItem('userid');
+  if (this.firstname) updatedFields.firstname = this.firstname;
+  if (this.lastname) updatedFields.lastname = this.lastname;
+  if (this.birthdate) updatedFields.birthdate = new Date(this.birthdate);
+  if (this.gender) updatedFields.gender = this.gender;
+  if (this.phone) updatedFields.phone = Number(this.phone);
+  if (this.username) updatedFields.username = this.username;
+  if (this.email) updatedFields.email = this.email;
+  if (this.password) updatedFields.password = this.password;
 
-    if (profileId) {
-      this.updateProfile(Number(profileId), updatedFields);
-    } else {
-      console.error('Profile ID is null or undefined.');
-    }
+  const address: any = {};
+  if (this.name) address.name = this.name;
+  if (this.state) address.state = this.state;
+  if (this.country) address.country = this.country;
+  if (this.city) address.city = this.city;
+  if (this.lat) address.lat = parseFloat(this.lat);
+  if (this.lon) address.lon = parseFloat(this.lon);
+  if (this.postcode) address.postcode = parseInt(this.postcode);
+  if (this.street) address.street = this.street;
+
+  if (Object.keys(address).length > 0) {
+    updatedFields.address = address;
   }
 
-  updateProfile(id: number, updatedFields: any) {
-    // Ensure birthdate is a Date instance
-    if (updatedFields.birthdate && !(updatedFields.birthdate instanceof Date)) {
-      updatedFields.birthdate = new Date(updatedFields.birthdate);
-    }
+  // Example id; replace with the actual profile id
+  const profileId = localStorage.getItem('userid');
 
-    this.apiService.patchProfile(id, updatedFields).subscribe(
-      (response: any) => {
-        console.log('Profile updated successfully:', response);
-      },
-      (error: any) => {
-        console.error('Error updating profile:', error);
-      }
-    );
+  if (profileId) {
+    this.updateProfile(Number(profileId), updatedFields);
+  } else {
+    console.error('Profile ID is null or undefined.');
   }
+}
+
+updateProfile(id: number, updatedFields: any) {
+  // Ensure birthdate is a Date instance
+  if (updatedFields.birthdate && !(updatedFields.birthdate instanceof Date)) {
+    updatedFields.birthdate = new Date(updatedFields.birthdate);
+  }
+
+  this.apiService.patchProfile(id, updatedFields).subscribe(
+    (response: any) => {
+      console.log('Profile updated successfully:', response);
+    },
+    (error: any) => {
+      console.error('Error updating profile:', error);
+    }
+  );
+}
 }
