@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgClass, NgIf } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,11 +20,14 @@ export class SignInComponent implements OnInit {
   passwordTextType = false;
   errorMessage: string = '';
   successMessage: string = ''; // Nueva propiedad para el mensaje de éxito
+  isRegistered: boolean = false;
+
 
   constructor(
     private readonly _formBuilder: FormBuilder,
     private readonly _router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -39,20 +43,27 @@ export class SignInComponent implements OnInit {
     this.form.get('password')?.valueChanges.subscribe(() => {
       this.clearMessages();
     });
+
+    this.checkUserRegistration();
   }
 
-  // Getter para acceder a los controles del formulario
+  checkUserRegistration(): void {
+    this.http.get<any[]>('http://localhost:5000/api/v1/users').subscribe(users => {
+      this.isRegistered = users.length > 0;
+    }, error => {
+      console.error('Error fetching users:', error);
+    });
+  }
+
   get f() {
     return this.form.controls;
   }
 
-  // Método para limpiar los mensajes de error y éxito
   clearMessages() {
     this.errorMessage = '';
     this.successMessage = '';
   }
 
-  // Método para alternar la visibilidad de la contraseña
   togglePasswordTextType() {
     this.passwordTextType = !this.passwordTextType;
   }
@@ -74,7 +85,7 @@ export class SignInComponent implements OnInit {
           console.log('Token:', response.access_token);
 
           // Redirigir a una página protegida
-          this._router.navigate(['/home']);
+          this._router.navigate(['/profile']);
         }
       },
       (error) => {

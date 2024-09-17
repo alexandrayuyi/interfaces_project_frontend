@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthGuard } from './modules/auth/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -30,7 +30,7 @@ const routes: Routes = [
   {
     path: 'landing',
     loadChildren: () => import('./modules/landing/landing.module').then(m => m.LandingModule),
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: '**',
