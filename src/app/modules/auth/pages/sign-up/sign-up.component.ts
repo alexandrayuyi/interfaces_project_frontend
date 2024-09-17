@@ -1,26 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularSvgIconModule } from 'angular-svg-icon';
-import { Router, RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
   standalone: true,
-  imports: [FormsModule, RouterLink, AngularSvgIconModule, ButtonComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ButtonComponent
+  ]
 })
 export class SignUpComponent implements OnInit {
-  name: string = '';
+  username: string = '';
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
   errorMessage: string = '';
 
-
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
+
+  onSubmit(): void {
+    if (this.password !== this.confirmPassword) {
+      this.errorMessage = 'Passwords do not match';
+      return;
+    }
+
+    this.authService.postRegister(this.email, this.password, this.username).subscribe({
+      next: (response) => {
+        // Handle successful registration
+        this.authService.postLogin(this.email, this.password).subscribe({
+          next: (loginResponse) => {
+            // Handle successful login
+            this.authService.setToken(response.access_token);
+            this.router.navigate(['/profile']);
+          },
+          error: (loginError) => {
+            // Handle login error
+            this.errorMessage = 'Login failed. Please try again.';
+          }
+        });
+      },
+      error: (error) => {
+        // Handle registration error
+        this.errorMessage = 'Registration failed. Please try again.';
+      }
+    });
+  }
 }

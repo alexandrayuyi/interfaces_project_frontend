@@ -23,8 +23,8 @@ export class AuthService {
     const data = { email, password };
     return this.servicio.post(this.login, data);
   }
-  postRegister(email: string, password: string, name: string): Observable<any> {
-    const data = { email, password, name };
+  postRegister(email: string, password: string, username: string): Observable<any> {
+    const data = { email, password, username };
     return this.servicio.post(this.register, data);
   }
 
