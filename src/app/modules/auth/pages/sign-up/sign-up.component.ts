@@ -38,12 +38,11 @@ export class SignUpComponent implements OnInit {
         // Handle successful registration
         this.authService.postLogin(this.email, this.password).subscribe({
           next: (loginResponse) => {
-            // Handle successful login
-            this.authService.setToken(response.access_token);
+            console.log('Login Response:', loginResponse);  // Agrega esta línea para depurar
+            this.authService.setToken(loginResponse.access_token);
             this.router.navigate(['/profile']);
           },
           error: (loginError) => {
-            // Handle login error
             this.errorMessage = 'Login failed. Please try again.';
           }
         });
