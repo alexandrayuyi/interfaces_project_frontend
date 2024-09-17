@@ -83,7 +83,7 @@ export class SignInComponent implements OnInit {
           this.authService.setToken(response.access_token);
           this.successMessage = 'Login successful!';
           console.log('Token:', response.access_token);
-
+          this.authService.setId(response.user.id);
           // Redirigir a una página protegida
           this._router.navigate(['/profile']);
         }

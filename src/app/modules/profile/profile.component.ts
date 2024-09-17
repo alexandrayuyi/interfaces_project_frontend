@@ -132,9 +132,13 @@ export class ProfileComponent {
     };
 
     // Example id; replace with the actual profile id
-    const profileId = 10;
+    const profileId = localStorage.getItem('userid');
 
-    this.updateProfile(profileId, updatedFields);
+    if (profileId) {
+      this.updateProfile(Number(profileId), updatedFields);
+    } else {
+      console.error('Profile ID is null or undefined.');
+    }
   }
 
   updateProfile(id: number, updatedFields: any) {

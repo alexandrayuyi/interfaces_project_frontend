@@ -40,6 +40,7 @@ export class SignUpComponent implements OnInit {
           next: (loginResponse) => {
             console.log('Login Response:', loginResponse);  // Agrega esta línea para depurar
             this.authService.setToken(loginResponse.access_token);
+            this.authService.setId(loginResponse.user.id);
             this.router.navigate(['/profile']);
           },
           error: (loginError) => {
@@ -52,5 +53,8 @@ export class SignUpComponent implements OnInit {
         this.errorMessage = 'Registration failed. Please try again.';
       }
     });
+  }
+  redirectToSignIn() {
+    this.router.navigate(['/auth/sign-in']);
   }
 }

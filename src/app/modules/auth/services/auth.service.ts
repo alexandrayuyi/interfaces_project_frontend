@@ -10,6 +10,7 @@ export class AuthService {
   login="http://localhost:5000/api/v1/auth/login";
   register="http://localhost:5000/api/v1/auth/register";
   private readonly TOKEN_KEY = 'access_token'; // Llave para el token
+  private readonly USER_ID = 'userid'; // Llave para el id del usuario
 
 
   constructor(private servicio:HttpClient) { }
@@ -30,6 +31,9 @@ export class AuthService {
 
   setToken(token: string): void {
     localStorage.setItem(this.TOKEN_KEY, token);
+  }
+  setId(id: string): void {
+    localStorage.setItem(this.USER_ID, id);
   }
 
   getToken(): string | null {
