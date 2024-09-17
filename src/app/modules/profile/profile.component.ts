@@ -123,6 +123,7 @@ saveProfile() {
   if (this.email) updatedFields.email = this.email;
   if (this.password) updatedFields.password = this.password;
 
+  // Construcción del objeto address
   const address: any = {};
   if (this.name) address.name = this.name;
   if (this.state) address.state = this.state;
@@ -137,7 +138,7 @@ saveProfile() {
     updatedFields.address = address;
   }
 
-  // Example id; replace with the actual profile id
+  // Ejemplo de id; reemplazar con el id real del perfil
   const profileId = localStorage.getItem('userid');
 
   if (profileId) {
@@ -148,7 +149,7 @@ saveProfile() {
 }
 
 updateProfile(id: number, updatedFields: any) {
-  // Ensure birthdate is a Date instance
+  // Asegúrate de que birthdate sea una instancia de Date
   if (updatedFields.birthdate && !(updatedFields.birthdate instanceof Date)) {
     updatedFields.birthdate = new Date(updatedFields.birthdate);
   }
