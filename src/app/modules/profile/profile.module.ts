@@ -9,12 +9,14 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FormsModule } from '@angular/forms';
 import { BottomNavbarComponent } from "../layout/components/bottom-navbar/bottom-navbar.component";
 import { ButtonComponent } from "../../shared/components/button/button.component";
+import { ProfileReadonlyComponent } from './profile-readonly/profile-readonly.component';
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
-    CountrySelectComponent
+    CountrySelectComponent,
+    ProfileReadonlyComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,7 @@ import { ButtonComponent } from "../../shared/components/button/button.component
     AutoCompleteModule,
     FormsModule,
     BottomNavbarComponent,
-    ButtonComponent
+    ButtonComponent,
 ]
 })
 export class ProfileModule { }

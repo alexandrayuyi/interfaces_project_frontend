@@ -41,7 +41,7 @@ export class SignUpComponent implements OnInit {
             console.log('Login Response:', loginResponse);  // Agrega esta línea para depurar
             this.authService.setToken(loginResponse.access_token);
             this.authService.setId(loginResponse.user.id);
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/profile/readonly']);
           },
           error: (loginError) => {
             this.errorMessage = 'Login failed. Please try again.';

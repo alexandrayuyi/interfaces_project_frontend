@@ -11,9 +11,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  getProfile(id: string): Observable<any[]> {
+  getProfile(id: string): Observable<any> {
     const url = `${this.apiUrl}${id}`;
-    return this.http.get<any[]>(url);
+    console.log(this.http.get<any>(url));
+    return this.http.get<any>(url);
   }
 
   patchProfile(id: number, body: any): Observable<any> {

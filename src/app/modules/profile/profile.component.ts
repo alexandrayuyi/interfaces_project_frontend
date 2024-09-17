@@ -2,6 +2,7 @@ import * as L from 'leaflet';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { ApiService } from './services/api.service'; // Adjust the path as necessary
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -36,7 +37,7 @@ export class ProfileComponent {
   password: string = '';
   email: null | string = null;
 
-  constructor(private http: HttpClient, private apiService: ApiService) {}
+  constructor(private http: HttpClient, private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
     L.Icon.Default.mergeOptions({
@@ -163,5 +164,6 @@ updateProfile(id: number, updatedFields: any) {
       console.error('Error updating profile:', error);
     }
   );
+  this.router.navigate(['/profile/readonly']);
 }
 }

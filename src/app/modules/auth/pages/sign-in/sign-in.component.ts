@@ -85,7 +85,7 @@ export class SignInComponent implements OnInit {
           console.log('Token:', response.access_token);
           this.authService.setId(response.user.id);
           // Redirigir a una página protegida
-          this._router.navigate(['/profile']);
+          this._router.navigate(['/profile/readonly']);
         }
       },
       (error) => {
