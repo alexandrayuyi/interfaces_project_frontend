@@ -34,7 +34,7 @@ export class ProfileComponent {
   profilePicture: File | undefined;
   username: string = '';
   password: string = '';
-  email: string = '';
+  email: null | string = null;
 
   ngOnInit() {
     L.Icon.Default.mergeOptions({
@@ -132,7 +132,7 @@ export class ProfileComponent {
     };
 
     // Example id; replace with the actual profile id
-    const profileId = 1;
+    const profileId = 10;
 
     this.updateProfile(profileId, updatedFields);
   }
