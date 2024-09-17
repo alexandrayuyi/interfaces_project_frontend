@@ -1,6 +1,6 @@
 import * as L from 'leaflet';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { ApiService } from './services/api.service'; // Adjust the path as necessary
 
 @Component({
@@ -36,6 +36,8 @@ export class ProfileComponent {
   password: string = '';
   email: null | string = null;
 
+  constructor(private http: HttpClient, private apiService: ApiService) {}
+
   ngOnInit() {
     L.Icon.Default.mergeOptions({
       iconRetinaUrl: 'assets/images/marker-icon-2x.svg',
@@ -43,7 +45,7 @@ export class ProfileComponent {
     });
   }
 
-  constructor(private http: HttpClient, private apiService: ApiService) {}
+
 
   ngAfterViewInit() {
     this.initializeMap();
@@ -116,14 +118,14 @@ saveProfile() {
 
   if (this.firstname) updatedFields.firstname = this.firstname;
   if (this.lastname) updatedFields.lastname = this.lastname;
-  if (this.birthdate) updatedFields.birthdate = new Date(this.birthdate);
+  // Asegúrate de que birthdate sea un string en formato ISO 8601
+  if (this.birthdate) updatedFields.birthdate = new Date(this.birthdate).toISOString();
   if (this.gender) updatedFields.gender = this.gender;
   if (this.phone) updatedFields.phone = Number(this.phone);
   if (this.username) updatedFields.username = this.username;
   if (this.email) updatedFields.email = this.email;
   if (this.password) updatedFields.password = this.password;
 
-  // Construcción del objeto address
   const address: any = {};
   if (this.name) address.name = this.name;
   if (this.state) address.state = this.state;
@@ -138,7 +140,6 @@ saveProfile() {
     updatedFields.address = address;
   }
 
-  // Ejemplo de id; reemplazar con el id real del perfil
   const profileId = localStorage.getItem('userid');
 
   if (profileId) {
@@ -146,12 +147,12 @@ saveProfile() {
   } else {
     console.error('Profile ID is null or undefined.');
   }
-}
+  console.log('Sending birthdate:', this.birthdate);
 
+}
 updateProfile(id: number, updatedFields: any) {
-  // Asegúrate de que birthdate sea una instancia de Date
   if (updatedFields.birthdate && !(updatedFields.birthdate instanceof Date)) {
-    updatedFields.birthdate = new Date(updatedFields.birthdate);
+    updatedFields.birthdate = new Date(updatedFields.birthdate.toString());
   }
 
   this.apiService.patchProfile(id, updatedFields).subscribe(
