@@ -50,8 +50,11 @@
                 </label>
               </div>
             </div>
-            <div class="form-control w-full max-w-xs">
-              <app-country-select></app-country-select>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Phone Number</span>
+              </label>
+              <input type="text" placeholder="Phone Number" class="input input-bordered" />
             </div>
             <div class="form-control">
               <label class="label">
@@ -97,12 +100,10 @@
               </p-autoComplete>
               
             </div>
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text">Phone Number</span>
-              </label>
-              <input type="text" placeholder="Phone Number" class="input input-bordered" />
+            <div class="form-control w-full max-w-xs">
+              <app-country-select></app-country-select>
             </div>
+            
               <div class="form-control col-span-full">
               <div class="flex justify-center">
                 <app-button  impact="bold" shape="rounded" size="medium">Save</app-button>
