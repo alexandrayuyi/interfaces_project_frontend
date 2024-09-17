@@ -1,19 +1,29 @@
 .mt-2 {
     margin-top: 0.5rem;
   }
-  
+
   .mt-4 {
     margin-top: 1rem;
   }
-  
+
   .border-primary {
     border-color: var(--primary-color);
   }
-  
+
   .rounded {
     border-radius: 0.25rem;
   }
-  
+
   .shadow {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .btn-edit {
+    background-color: #4CAF50; /* Color de fondo verde */
+    border-color: #4CAF50; /* Color del borde verde */
+    color: white; /* Color del texto blanco */
+  }
+
+  .btn-edit:hover {
+    background-color: #45a049; /* Color de fondo más oscuro en hover */
+    border-color: #45a049; /* Color del borde más oscuro en hover */
   }
