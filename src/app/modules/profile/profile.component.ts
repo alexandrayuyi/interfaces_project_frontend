@@ -30,7 +30,7 @@ export class ProfileComponent {
   lastname: string = '';
   birthdate: Date | undefined;
   gender: string = '';
-  phoneNumber: string = '';
+  phone: string = '';
   profilePicture: File | undefined;
   username: string = '';
   password: string = '';
@@ -112,22 +112,23 @@ export class ProfileComponent {
   // Method to handle form submission
   saveProfile() {
     const updatedFields = {
-      firstname: this.firstname,
-      lastname: this.lastname,
-      birthdate: this.birthdate,
-      gender: this.gender,
-      country: this.country,
-      email: this.email,
-      password: this.password,
+      firstname: this.firstname || "",
+      lastname: this.lastname || "",
+      birthdate: this.birthdate ? new Date(this.birthdate) : null,
+      gender: this.gender || "",
+      phone: this.phone ? Number(this.phone) : null,
+      username: this.username || "",
+      email: this.email || null,
+      password: this.password || "",
       address: {
-        name: this.name,
-        state: this.state,
-        country: this.country,
-        city: this.city,
-        lat: parseFloat(this.lat),
-        lon: parseFloat(this.lon),
-        postcode: parseInt(this.postcode),
-        street: this.street
+        name: this.name || "",
+        state: this.state || "",
+        country: this.country || "",
+        city: this.city || "",
+        lat: this.lat ? parseFloat(this.lat) : null,
+        lon: this.lon ? parseFloat(this.lon) : null,
+        postcode: this.postcode ? parseInt(this.postcode) : null,
+        street: this.street || ""
       }
     };
 
@@ -142,6 +143,11 @@ export class ProfileComponent {
   }
 
   updateProfile(id: number, updatedFields: any) {
+    // Ensure birthdate is a Date instance
+    if (updatedFields.birthdate && !(updatedFields.birthdate instanceof Date)) {
+      updatedFields.birthdate = new Date(updatedFields.birthdate);
+    }
+
     this.apiService.patchProfile(id, updatedFields).subscribe(
       (response: any) => {
         console.log('Profile updated successfully:', response);
