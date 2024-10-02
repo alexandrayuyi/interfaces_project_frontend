@@ -73,6 +73,7 @@ export class ProfileComponent {
           postcode: item.address?.postcode || '',
           street: item.address?.road || ''
         }));
+        console.log('Data direction:', this.dataDirection);
         this.displayDataDirection = this.dataDirection.map(item => ({
           displayName: `${item.name || 'Unknown'} - ${item.state || 'Unknown'} - ${item.country || 'Unknown'}`,
           ...item
@@ -117,7 +118,6 @@ export class ProfileComponent {
     console.log('Selected file:', this.profilePicture);
   }
 
-  // Method to handle form submission
   saveProfile() {
     const formData = new FormData();
 
@@ -153,14 +153,14 @@ export class ProfileComponent {
     }
 
     const address = {
-      name: this.name,
+      name: this.displayDataDirection.length > 0 ? this.displayDataDirection[0].displayName : '',
       state: this.state,
       country: this.country,
       city: this.city,
       lat: this.lat,
       lon: this.lon,
       postcode: this.postcode,
-      street: this.street,
+      street: this.displayDataDirection.length > 0 ? this.displayDataDirection[0].displayName : '',
     };
 
     // Only append address if at least one field is not empty
