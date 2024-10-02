@@ -46,8 +46,6 @@ export class ProfileComponent {
     });
   }
 
-
-
   ngAfterViewInit() {
     this.initializeMap();
   }
@@ -88,17 +86,15 @@ export class ProfileComponent {
   moveMap(event: any) {
     const selected = event.value;
     if (selected && selected.lat && selected.lon && this.map) {
-    const latLng = L.latLng(selected.lat, selected.lon);
+      const latLng = L.latLng(selected.lat, selected.lon);
 
-    // Update map view to the new location and set the zoom level
-    this.map.setView(latLng, 13);
+      // Update map view to the new location and set the zoom level
+      this.map.setView(latLng, 13);
 
-    // Add a marker for the selected location and bind a popup to it
-    L.marker(latLng).addTo(this.map).bindPopup(selected.displayName).openPopup();
+      // Add a marker for the selected location and bind a popup to it
+      L.marker(latLng).addTo(this.map).bindPopup(selected.displayName).openPopup();
 
-    // Update the component variables with the selected location details
-
-    // Update the component variables with the selected location details
+      // Update the component variables with the selected location details
       this.name = selected.name;
       this.state = selected.state;
       this.country = selected.country;
@@ -111,6 +107,7 @@ export class ProfileComponent {
       console.error('Invalid selection or map is not initialized properly.');
     }
   }
+
   // Método para manejar la selección del archivo de imagen
   onFileChange(event: any) {
     const file = event.target.files[0];
@@ -119,58 +116,73 @@ export class ProfileComponent {
     }
     console.log('Selected file:', this.profilePicture);
   }
+
   // Method to handle form submission
-// Method to handle form submission
-saveProfile() {
-  const updatedFields: any = {};
-
-  if (this.firstname) updatedFields.firstname = this.firstname;
-  if (this.lastname) updatedFields.lastname = this.lastname;
-  if (this.birthdate) updatedFields.birthdate = new Date(this.birthdate).toISOString();
-  if (this.gender) updatedFields.gender = this.gender;
-  if (this.phone) updatedFields.phone = Number(this.phone);
-  if (this.username) updatedFields.username = this.username;
-  if (this.email) updatedFields.email = this.email;
-  if (this.password) updatedFields.password = this.password;
-
-  const address: any = {};
-  if (this.name) address.name = this.name;
-  if (this.state) address.state = this.state;
-  if (this.country) address.country = this.country;
-  if (this.city) address.city = this.city;
-  if (this.lat) address.lat = parseFloat(this.lat);
-  if (this.lon) address.lon = parseFloat(this.lon);
-  if (this.postcode) address.postcode = parseInt(this.postcode);
-  if (this.street) address.street = this.street;
-
-  if (Object.keys(address).length > 0) {
-    updatedFields.address = address;
-  }
-
-  const profileId = localStorage.getItem('userid');
-
-  if (profileId) {
-    this.updateProfile(Number(profileId), updatedFields);
-  } else {
-    console.error('Profile ID is null or undefined.');
-  }
-  console.log('Sending birthdate:', this.birthdate);
-
-}
-  // Método para actualizar el perfil en el backend
-  updateProfile(id: number, updatedFields: any) {
+  saveProfile() {
     const formData = new FormData();
-    // Añadir campos normales
-    for (const key in updatedFields) {
-      if (updatedFields.hasOwnProperty(key)) {
-        formData.append(key, updatedFields[key]);
+
+    if (this.firstname) {
+      formData.append('firstname', this.firstname);
+    }
+    if (this.lastname) {
+      formData.append('lastname', this.lastname);
+    }
+
+    // Convert birthdate to ISO string if it's a valid date
+    const birthdateValue = this.birthdate;
+    if (birthdateValue) {
+      const birthdate = new Date(birthdateValue);
+      if (!isNaN(birthdate.getTime())) {
+        formData.append('birthdate', birthdate.toISOString());
+      } else {
+        console.error('Invalid birthdate');
       }
     }
-    // Añadir archivo de imagen si está disponible
-    if (this.profilePicture) {
-      formData.append('imagePath', this.profilePicture);
+
+    if (this.gender) {
+      formData.append('gender', this.gender);
+    }
+    if (this.phone) {
+      formData.append('phone', this.phone.toString());
+    }
+    if (this.email) {
+      formData.append('email', this.email);
+    }
+    if (this.password) {
+      formData.append('password', this.password);
     }
 
+    const address = {
+      name: this.name,
+      state: this.state,
+      country: this.country,
+      city: this.city,
+      lat: this.lat,
+      lon: this.lon,
+      postcode: this.postcode,
+      street: this.street,
+    };
+
+    // Only append address if at least one field is not empty
+    if (Object.values(address).some(value => value)) {
+      formData.append('address', JSON.stringify(address));
+    }
+
+    if (this.profilePicture) {
+      formData.append('image', this.profilePicture);
+    }
+
+    const profileId = localStorage.getItem('userid');
+
+    if (profileId) {
+      this.updateProfile(Number(profileId), formData);
+    } else {
+      console.error('Profile ID is null or undefined.');
+    }
+    console.log('Sending birthdate:', this.birthdate);
+  }
+
+  updateProfile(id: number, formData: FormData) {
     this.apiService.patchProfile(id, formData).subscribe(
       (response: any) => {
         console.log('Perfil actualizado exitosamente:', response);
