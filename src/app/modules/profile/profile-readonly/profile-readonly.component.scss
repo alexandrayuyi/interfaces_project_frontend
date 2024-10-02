@@ -1,0 +1,11 @@
+.card-body {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 2rem;
+}
+
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}

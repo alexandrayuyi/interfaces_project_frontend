@@ -5,16 +5,18 @@
   <div class="flex grow flex-col content-start overflow-hidden bg-card">
     <!-- Header -->
     <app-navbar></app-navbar>
+
     <!-- main content -->
     <div id="main-content" class="dark:text-slate-200 scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
       <div class="mx-auto px-4 py-4 sm:px-8 lg:container">
         <router-outlet></router-outlet>
+        <h2 class="text-3xl font-bold mb-4 text-center">Profile Information</h2>
 
         <!-- Profile Information Display -->
-        <div class="card bg-base-100">
-          <div class="card-body">
-            <h2 class="card-title mb-2">Profile Information</h2>
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div class="card bg-base-100 mt-4">
+          <div class="card-body grid grid-rows-2 gap-4">
+            <!-- Sección 1: Todos los campos excepto Address y Profile Picture -->
+            <div class="row-span-1 grid grid-cols-2 gap-4">
               <div class="form-control">
                 <label class="label">
                   <span class="label-text">First Name</span>
@@ -47,12 +49,6 @@
               </div>
               <div class="form-control">
                 <label class="label">
-                  <span class="label-text">Profile Picture</span>
-                </label>
-                <img [src]="profilePicture" alt="Profile Picture" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" />
-              </div>
-              <div class="form-control">
-                <label class="label">
                   <span class="label-text">Username</span>
                 </label>
                 <p>{{ username }}</p>
@@ -65,15 +61,34 @@
               </div>
               <div class="form-control">
                 <label class="label">
+                  <span class="label-text">Timezone</span>
+                </label>
+                <p>{{ timezone }}</p>
+              </div>
+            </div>
+
+            <!-- Sección 2: Address (parte inferior izquierda) -->
+            <div class="grid grid-cols-2 gap-4">
+              <div class="form-control">
+                <label class="label">
                   <span class="label-text">Address</span>
                 </label>
                 <p>{{ street }}, {{ city }}, {{ state }}, {{ country }}, {{ postcode }}</p>
                 <div #mapContainer [ngStyle]="{ width: '100%', height: '180px' }" class="mt-2 border-2 border-primary rounded shadow"></div>
               </div>
-              <div class="form-control col-span-full">
-                <div class="flex justify-center">
-                  <app-button (click)="editProfile()" impact="bold" shape="rounded" size="medium">Edit</app-button>
-                </div>
+
+              <!-- Sección 3: Profile Picture (parte inferior derecha) -->
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Profile Picture</span>
+                </label>
+                <img [src]="profilePicture" alt="Profile Picture" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" />
+              </div>
+            </div>
+
+            <div class="form-control col-span-full">
+              <div class="flex justify-center">
+                <app-button (click)="editProfile()" impact="bold" shape="rounded" size="medium">Edit</app-button>
               </div>
             </div>
           </div>

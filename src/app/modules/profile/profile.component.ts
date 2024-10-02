@@ -36,6 +36,7 @@ export class ProfileComponent {
   username: string = '';
   password: string = '';
   email: null | string = null;
+  timezone: string = '';
 
   constructor(private http: HttpClient, private apiService: ApiService, private router: Router) {}
 
@@ -150,6 +151,9 @@ export class ProfileComponent {
     }
     if (this.password) {
       formData.append('password', this.password);
+    }
+    if (this.timezone) {
+      formData.append('timezone', this.timezone);
     }
 
     const address = {

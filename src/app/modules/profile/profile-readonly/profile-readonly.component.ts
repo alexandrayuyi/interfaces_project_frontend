@@ -11,6 +11,7 @@ interface UserProfile {
   phone: string;
   email: string;
   imagePath: string;
+  timezone: string;
   user: {
     username: string;
     password: string;
@@ -56,6 +57,7 @@ export class ProfileReadonlyComponent implements OnInit {
   username: string = '';
   password: string = '';
   email: null | string = null;
+  timezone: string = '';
 
   constructor(private router: Router, private apiService: ApiService) {}
 
@@ -76,6 +78,7 @@ export class ProfileReadonlyComponent implements OnInit {
         this.phone = profile.phone;
         this.email = profile.email;
         this.profilePicture = profile.imagePath;
+        this.timezone = profile.timezone;
         this.username = profile.user.username;
         this.password = profile.user.password;
         this.street = profile.address.street;
