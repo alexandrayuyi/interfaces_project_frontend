@@ -11,6 +11,7 @@
       <div class="mx-auto px-4 py-4 sm:px-8 lg:container">
         <router-outlet></router-outlet>
         <h2 class="text-3xl font-bold mb-4 text-center">Profile Information</h2>
+        <hr>
 
         <!-- Profile Information Display -->
         <div class="card bg-base-100 mt-4">
@@ -65,7 +66,14 @@
                 </label>
                 <p>{{ timezone }}</p>
               </div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Register date</span>
+                </label>
+                <p>{{ createdAt }}</p>
+              </div>
             </div>
+            <hr>
 
             <!-- Sección 2: Address (parte inferior izquierda) -->
             <div class="grid grid-cols-2 gap-4">
