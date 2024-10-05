@@ -16,6 +16,7 @@ interface UserProfile {
     username: string;
     password: string;
     createdAt: Date;
+    email: string;
   };
   address: {
     street: string;
@@ -78,7 +79,7 @@ export class ProfileReadonlyComponent implements OnInit {
         this.birthdate = profile.birthdate;
         this.gender = profile.gender;
         this.phone = profile.phone;
-        this.email = profile.email;
+        this.email = profile.user.email;
         this.profilePicture = profile.imagePath;
         this.timezone = profile.timezone;
         this.username = profile.user.username;
