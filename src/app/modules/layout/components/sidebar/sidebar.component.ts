@@ -17,10 +17,20 @@ import { Theme } from 'src/app/core/models/theme.model';
 })
 export class SidebarComponent implements OnInit {
   public appJson: any = packageJson;
+  theme: Theme = { mode: 'dark', color: 'base', primary: '', secondary: '', textColor: '' }; // Provide a default value
 
-  constructor(public menuService: MenuService) {}
+  constructor(public menuService: MenuService, private themeService: ThemeService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.themeService.theme$.subscribe(theme => {
+      this.theme = theme;
+      this.applyTheme();
+    });
+  }
+
+  private applyTheme() {
+    // Aplica los cambios de tema al componente
+  }
 
   public toggleSidebar() {
     this.menuService.toggleSidebar();

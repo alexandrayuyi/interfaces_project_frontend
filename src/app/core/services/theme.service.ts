@@ -1,44 +1,44 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Theme } from '../models/theme.model';
-import { effect } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  public theme = signal<Theme>({ mode: 'dark', color: 'base' });
+  private themeSubject = new BehaviorSubject<Theme>(this.loadTheme());
+  public theme$ = this.themeSubject.asObservable();
 
   constructor() {
-    this.loadTheme();
-    effect(() => {
-      this.setTheme();
-    });
+    this.setTheme();
   }
 
-  private loadTheme() {
+  private loadTheme(): Theme {
     const theme = localStorage.getItem('theme');
-    if (theme) {
-      this.theme.set(JSON.parse(theme));
-    }
+    return theme ? JSON.parse(theme) : { mode: 'dark', color: 'base', primary: '', secondary: '', textColor: '' };
   }
 
   private setTheme() {
-    localStorage.setItem('theme', JSON.stringify(this.theme()));
+    localStorage.setItem('theme', JSON.stringify(this.themeSubject.value));
     this.setThemeClass();
   }
 
   public get isDark(): boolean {
-    return this.theme().mode == 'dark';
+    return this.themeSubject.value.mode == 'dark';
   }
 
   public updateColors(colors: { primary: string; secondary: string; textColor: string }) {
-    this.theme.update((theme) => {
-      return { ...theme, ...colors };
-    });
+    const updatedTheme = { ...this.themeSubject.value, ...colors };
+    this.themeSubject.next(updatedTheme);
+    this.setTheme();
   }
 
   private setThemeClass() {
-    document.querySelector('html')!.className = this.theme().mode;
-    document.querySelector('html')!.setAttribute('data-theme', this.theme().color);
+    const theme = this.themeSubject.value;
+    document.querySelector('html')!.className = theme.mode;
+    document.querySelector('html')!.setAttribute('data-theme', theme.color);
+    document.documentElement.style.setProperty('--primary-color', theme.primary);
+    document.documentElement.style.setProperty('--secondary-color', theme.secondary);
+    document.documentElement.style.setProperty('--text-color', theme.textColor);
   }
 }

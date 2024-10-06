@@ -1,95 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { NgClass } from '@angular/common';
-import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
-import { AngularSvgIconModule } from 'angular-svg-icon';
-import { ThemeService } from '../../../../../core/services/theme.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { ThemeService } from 'src/app/core/services/theme.service';
+import { Theme } from 'src/app/core/models/theme.model';
 
 @Component({
   selector: 'app-profile-menu',
   templateUrl: './profile-menu.component.html',
-  styleUrls: ['./profile-menu.component.scss'],
-  standalone: true,
-  imports: [ClickOutsideDirective, NgClass, RouterLink, AngularSvgIconModule],
-  animations: [
-    trigger('openClose', [
-      state(
-        'open',
-        style({
-          opacity: 1,
-          transform: 'translateY(0)',
-          visibility: 'visible',
-        }),
-      ),
-      state(
-        'closed',
-        style({
-          opacity: 0,
-          transform: 'translateY(-20px)',
-          visibility: 'hidden',
-        }),
-      ),
-      transition('open => closed', [animate('0.2s')]),
-      transition('closed => open', [animate('0.2s')]),
-    ]),
-  ],
+  styleUrls: ['./profile-menu.component.scss']
 })
 export class ProfileMenuComponent implements OnInit {
-  public isOpen = false;
-  public profileMenu = [
-    {
-      title: 'Your Profile',
-      icon: './assets/icons/heroicons/outline/user-circle.svg',
-      link: '/profile/readonly',
-    },
-    {
-      title: 'Settings',
-      icon: './assets/icons/heroicons/outline/cog-6-tooth.svg',
-      link: '/config',
-    },
-    {
-      title: 'Log out',
-      icon: './assets/icons/heroicons/outline/logout.svg',
-      link: '/auth',
-    },
-  ];
+  theme: Theme = {mode:'', color:'', primary: '', secondary: '', textColor: '' }; // Provide a default value
 
-  public themeColors = [
-    {
-      name: 'green',
-      code: '#22c55e',
-    },
-    {
-      name: 'red',
-      code: '#cc0022',
-    },
-    {
-      name: 'violet',
-      code: '#6d28d9',
-    },
-  ];
+  constructor(private themeService: ThemeService) {}
 
-  // public themeMode = ['light', 'dark'];
-
-  constructor(public themeService: ThemeService) {}
-
-  ngOnInit(): void {}
-
-  public toggleMenu(): void {
-    this.isOpen = !this.isOpen;
-  }
-
-  toggleThemeMode() {
-    this.themeService.theme.update((theme) => {
-      const mode = !this.themeService.isDark ? 'dark' : 'light';
-      return { ...theme, mode: mode };
+  ngOnInit(): void {
+    this.themeService.theme$.subscribe(theme => {
+      this.theme = theme;
     });
   }
 
   toggleThemeColor(color: string) {
-    this.themeService.theme.update((theme) => {
-      return { ...theme, color: color };
-    });
+    this.themeService.updateColors({ primary: color, secondary: this.theme.secondary, textColor: this.theme.textColor });
   }
 }

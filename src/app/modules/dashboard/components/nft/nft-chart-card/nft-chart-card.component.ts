@@ -104,7 +104,7 @@ export class NftChartCardComponent implements OnInit, OnDestroy {
       let primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary');
       primaryColor = this.HSLToHex(primaryColor);
       this.chartOptions.tooltip = {
-        theme: this.themeService.theme().mode,
+        // theme: this.themeService.theme().mode,
       };
       this.chartOptions.colors = [primaryColor];
       this.chartOptions.stroke!.colors = [primaryColor];
