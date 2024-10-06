@@ -4,13 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyApp</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.0/dist/full.css" rel="stylesheet">
 </head>
 <body class="flex flex-col min-h-screen">
 
   <!-- Navbar -->
-  <nav class="bg-base-100 shadow-md">
+  <nav class="bg-primary shadow-md">
     <div class="container mx-auto px-4 py-2 flex justify-between items-center">
       <a class="text-xl font-bold" href="#">MyApp</a>
       <div>
@@ -22,7 +20,7 @@
   </nav>
 
   <!-- Banner -->
-  <section class="bg-primary text-primary-content py-16 text-center">
+  <section class="bg-primary text-primary-content mt-16 py-32 text-center">
     <div class="container mx-auto">
       <h1 class="text-4xl font-bold mb-4">Welcome to MyApp</h1>
       <p class="text-lg">Your one-stop solution for all your needs.</p>
@@ -32,9 +30,9 @@
   <!-- Cards Section -->
   <section class="py-8">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="card bg-base-100 shadow-md">
-        <figure><img src="../../../assets/images/143-400x200.jpg" alt="Card Image 1"></figure>
-        <div class="card-body">
+      <div class="card bg-primary shadow-md pb-5 rounded-md">
+        <figure><img src="../../../assets/images/143-400x200.jpg" alt="Card Image 1" class="rounded-md"></figure>
+        <div class="card-body m-5">
           <h2 class="card-title">Card Title 1</h2>
           <p>Card description goes here.</p>
           <div class="card-actions justify-end">
@@ -42,7 +40,7 @@
           </div>
         </div>
       </div>
-      <div class="card bg-base-100 shadow-md">
+      <div class="card bg-primary shadow-md">
         <figure><img src="../../../assets/images/352-400x200.jpg" alt="Card Image 2"></figure>
         <div class="card-body">
           <h2 class="card-title">Card Title 2</h2>
@@ -52,13 +50,13 @@
           </div>
         </div>
       </div>
-      <div class="card bg-base-100 shadow-md">
+      <div class="card bg-primary shadow-md">
         <figure><img src="../../../assets/images/418-400x200.jpg" alt="Card Image 3"></figure>
         <div class="card-body">
           <h2 class="card-title">Card Title 3</h2>
           <p>Card description goes here.</p>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary">Learn More</button>
+            <button class="btn ">Learn More</button>
           </div>
         </div>
       </div>
@@ -86,56 +84,9 @@
     <span *ngFor="let slide of slides; let i = index" class="dot" [ngClass]="{ 'active': activeIndex === i }" (click)="currentSlide(i + 1)"></span>
   </div>
       
-  <!-- <section class="py-8">
-    <div class="container mx-auto">
-      <div class="carousel w-full">
-        <div id="slide1" class="carousel-item relative w-full">
-          <img src="../../../assets/images/381-800x400.jpg" class="w-full" alt="Slide 1">
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a onclick="changeSlide('slide4')" class="btn btn-circle">❮</a> 
-            <a onclick="changeSlide('slide2')" class="btn btn-circle">❯</a>
-          </div>
-        </div> 
-        <div id="slide2" class="carousel-item relative w-full">
-          <img src="../../../assets/images/390-800x400.jpg" class="w-full" alt="Slide 1">
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a onclick="changeSlide('slide1')" class="btn btn-circle">❮</a> 
-            <a onclick="changeSlide('slide3')" class="btn btn-circle">❯</a>
-          </div>
-        </div> 
-        <div id="slide3" class="carousel-item relative w-full">
-          <img src="../../../assets/images/607-800x400.jpg" class="w-full" alt="Slide 1">
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a onclick="changeSlide('slide2')" class="btn btn-circle">❮</a> 
-            <a onclick="changeSlide('slide4')" class="btn btn-circle">❯</a>
-          </div>
-        </div> 
-        <div id="slide4" class="carousel-item relative w-full">
-          <img src="../../../assets/images/926-800x400.jpg" class="w-full" alt="Slide 1">
-          <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <a onclick="changeSlide('slide3')" class="btn btn-circle">❮</a> 
-            <a onclick="changeSlide('slide1')" class="btn btn-circle">❯</a>
-          </div>
-        </div> 
-      </div>
-    </div>
-  </section>
-  
-  <script>
-  function changeSlide(targetId) {
-    const carouselItems = document.querySelectorAll('.carousel-item');
-    
-    // Remove active class from all items
-    carouselItems.forEach(item => item.classList.remove('active'));
-    
-    // Find the target item and add active class
-    const targetItem = document.getElementById(targetId);
-    targetItem.classList.add('active');
-  }
-  </script> -->
 
   <!-- Footer -->
-  <footer class="bg-base-100 shadow-md mt-auto">
+  <footer class="bg-primary shadow-md mt-auto">
     <div class="container mx-auto px-4 py-4 text-center">
       <p class="text-sm">&copy; 2023 MyApp. All rights reserved.</p>
     </div>
