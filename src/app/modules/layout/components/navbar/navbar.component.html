@@ -1,4 +1,4 @@
-<div class="relative bg-background">
+<div class="relative bg-primary">
   <div class="mx-auto px-5">
     <div class="flex items-center justify-between py-3.5 md:justify-start">
       <!-- Mobile Navigation Menu Button-->
@@ -6,7 +6,7 @@
         <button
           (click)="toggleMobileMenu()"
           type="button"
-          class="inline-flex items-center justify-center rounded-md bg-muted p-2 text-muted-foreground focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary hover:bg-muted-foreground hover:text-muted"
+          class="inline-flex items-center justify-center rounded-md bg-muted p-2 text-muted focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary hover:bg-muted-foreground hover:text-muted"
           aria-expanded="false">
           <span class="sr-only">Open menu</span>
           <!-- Heroicon name: outline/menu -->
@@ -19,12 +19,12 @@
         <a class="flex items-center justify-center rounded bg-primary p-2 focus:outline-none focus:ring-1">
           <svg-icon src="assets/icons/logo.svg"></svg-icon>
         </a>
-        <b class="hidden pl-3 text-sm font-bold text-foreground sm:block"> Angular Tailwind </b>
+        <b class="hidden pl-3 text-sm font-bold text-muted sm:block"> Angular Tailwind </b>
       </div>
 
       <!-- Desktop Menu -->
       <div class="hidden space-x-10 sm:order-3 md:flex">
-        <app-navbar-menu></app-navbar-menu>
+        <!-- <app-navbar-menu></app-navbar-menu> -->
       </div>
 
       <!-- Profile menu -->

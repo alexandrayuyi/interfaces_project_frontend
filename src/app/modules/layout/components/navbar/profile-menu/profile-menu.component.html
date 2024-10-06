@@ -1,8 +1,8 @@
 <div class="mx-4 my-2">
-  <span class="text-xs font-semibold text-foreground">Color</span>
+  <span class="text-xs font-semibold text-muted">Color</span>
   <div class="mt-2 grid grid-cols-2 gap-2">
     <div *ngFor="let item of themeColors; let i = index" (click)="toggleThemeColor(item.name)"
-         class="focus-visible:ring-ring inline-flex h-8 cursor-pointer items-center justify-start whitespace-nowrap rounded-md border border-border bg-background px-3 text-xs font-medium text-muted-foreground shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 hover:bg-card hover:text-foreground">
+         class="focus-visible:ring-ring inline-flex h-8 cursor-pointer items-center justify-start whitespace-nowrap rounded-md border border-border bg-primary px-3 text-xs font-medium text-muted shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 hover:bg-card hover:text-muted">
       <span [style.backgroundColor]="item.code"
             class="mr-1 flex h-5 w-5 shrink-0 -translate-x-1 items-center justify-center rounded-full bg-rose-500"></span>
       <p class="capitalize">{{ item.name }}</p>

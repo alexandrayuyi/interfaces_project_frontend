@@ -8,119 +8,98 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-    --card: 210 40% 96%;
-    --card-foreground: 240 0% 0%;
-    --primary: 347 77% 50%;
-    --primary-foreground: 0 0% 100%;
-    --muted: 213 27% 84%;
-    --muted-foreground: 215 16% 47%;
-    --destructive: 350 100% 40%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 214 32% 91%;
+    --primary: #22c55e; // Default primary color
+    --secondary: #cc0022; // Default secondary color
+    --muted: #6d28d9; // Default muted color
   }
+  
 
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 14.9%;
-    --primary: 347 77% 50%;
-    --primary-foreground: 0 0% 100%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --destructive: 350 100% 40%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-  }
+  // :root[data-theme='violet'] {
+  //   --primary: 262.1 83.3% 57.8%;
+  // }
 
-  :root[data-theme='violet'] {
-    --primary: 262.1 83.3% 57.8%;
-  }
+  // .dark[data-theme='violet'] {
+  //   --background: 224 71.4% 4.1%;
+  //   --foreground: 210 20% 98%;
+  //   --card: 222 47% 7%;
+  //   --card-foreground: 210 20% 98%;
+  //   --primary: 263.4 70% 50.4%;
+  //   --primary-foreground: 210 20% 98%;
+  //   --muted: 215 27.9% 16.9%;
+  //   --muted-foreground: 217.9 10.6% 64.9%;
+  //   --destructive: 350 100% 40%;
+  //   --destructive-foreground: 210 20% 98%;
+  //   --border: 215 27.9% 16.9%;
+  // }
 
-  .dark[data-theme='violet'] {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
-    --card: 222 47% 7%;
-    --card-foreground: 210 20% 98%;
-    --primary: 263.4 70% 50.4%;
-    --primary-foreground: 210 20% 98%;
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
-    --destructive: 350 100% 40%;
-    --destructive-foreground: 210 20% 98%;
-    --border: 215 27.9% 16.9%;
-  }
+  // :root[data-theme='red'] {
+  //   --primary: 350 100% 40%;
+  // }
 
-  :root[data-theme='red'] {
-    --primary: 350 100% 40%;
-  }
+  // .dark[data-theme='red'] {
+  //   --primary: 350 100% 40%;
+  //   --primary-foreground: 0 85.7% 97.3%;
+  // }
 
-  .dark[data-theme='red'] {
-    --primary: 350 100% 40%;
-    --primary-foreground: 0 85.7% 97.3%;
-  }
+  // :root[data-theme='blue'] {
+  //   --primary: 221.2 83.2% 53.3%;
+  // }
 
-  :root[data-theme='blue'] {
-    --primary: 221.2 83.2% 53.3%;
-  }
+  // .dark[data-theme='blue'] {
+  //   --background: 222.2 84% 4.9%;
+  //   --foreground: 210 40% 98%;
+  //   --card: 222 47% 7%;
+  //   --card-foreground: 210 40% 98%;
+  //   --primary: 217.2 91.2% 59.8%;
+  //   --primary-foreground: 222.2 47.4% 11.2%;
+  //   --muted: 217.2 32.6% 17.5%;
+  //   --muted-foreground: 215 20.2% 65.1%;
+  //   --destructive: 350 100% 40%;
+  //   --destructive-foreground: 210 40% 98%;
+  //   --border: 217.2 32.6% 17.5%;
+  // }
 
-  .dark[data-theme='blue'] {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 7%;
-    --card-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --destructive: 350 100% 40%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-  }
+  // :root[data-theme='orange'] {
+  //   --primary: 24.6 95% 53.1%;
+  // }
 
-  :root[data-theme='orange'] {
-    --primary: 24.6 95% 53.1%;
-  }
+  // .dark[data-theme='orange'] {
+  //   --background: 20 14.3% 4.1%;
+  //   --foreground: 60 9.1% 97.8%;
+  //   --card: 24 10% 7%;
+  //   --card-foreground: 60 9.1% 97.8%;
+  //   --primary: 20.5 90.2% 48.2%;
+  //   --primary-foreground: 60 9.1% 97.8%;
+  //   --muted: 12 6.5% 15.1%;
+  //   --muted-foreground: 24 5.4% 63.9%;
+  //   --border: 12 6.5% 15.1%;
+  // }
 
-  .dark[data-theme='orange'] {
-    --background: 20 14.3% 4.1%;
-    --foreground: 60 9.1% 97.8%;
-    --card: 24 10% 7%;
-    --card-foreground: 60 9.1% 97.8%;
-    --primary: 20.5 90.2% 48.2%;
-    --primary-foreground: 60 9.1% 97.8%;
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
-    --border: 12 6.5% 15.1%;
-  }
+  // :root[data-theme='yellow'] {
+  //   --primary: 47.9 95.8% 53.1%;
+  // }
 
-  :root[data-theme='yellow'] {
-    --primary: 47.9 95.8% 53.1%;
-  }
+  // .dark[data-theme='yellow'] {
+  //   --background: 20 14.3% 4.1%;
+  //   --foreground: 60 9.1% 97.8%;
+  //   --card: 24 10% 7%;
+  //   --card-foreground: 60 9.1% 97.8%;
+  //   --primary: 47.9 95.8% 53.1%;
+  //   --primary-foreground: 26 83.3% 14.1%;
+  //   --muted: 12 6.5% 15.1%;
+  //   --muted-foreground: 24 5.4% 63.9%;
+  //   --destructive-foreground: 60 9.1% 97.8%;
+  //   --border: 12 6.5% 15.1%;
+  // }
 
-  .dark[data-theme='yellow'] {
-    --background: 20 14.3% 4.1%;
-    --foreground: 60 9.1% 97.8%;
-    --card: 24 10% 7%;
-    --card-foreground: 60 9.1% 97.8%;
-    --primary: 47.9 95.8% 53.1%;
-    --primary-foreground: 26 83.3% 14.1%;
-    --muted: 12 6.5% 15.1%;
-    --muted-foreground: 24 5.4% 63.9%;
-    --destructive-foreground: 60 9.1% 97.8%;
-    --border: 12 6.5% 15.1%;
-  }
+  // :root[data-theme='green'] {
+  //   --primary: 142.1 76.2% 36.3%;
+  // }
 
-  :root[data-theme='green'] {
-    --primary: 142.1 76.2% 36.3%;
-  }
-
-  .dark[data-theme='green'] {
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
-  }
+  // .dark[data-theme='green'] {
+  //   --primary: 142.1 70.6% 45.3%;
+  //   --primary-foreground: 144.9 80.4% 10%;
+  // }
 
   [type='text'],
   [type='email'],
@@ -137,12 +116,12 @@
   [multiple],
   textarea,
   select {
-    @apply w-full rounded-md border border-border bg-background px-3 py-3 text-xs text-foreground placeholder-muted-foreground focus:z-10 focus:border-primary focus:outline-none focus:ring-primary;
+    @apply w-full rounded-md border-muted bg-primary px-3 py-3 text-xs text-muted placeholder-muted focus:z-10 focus:border-primary focus:outline-none focus:ring-primary;
   }
 
   [type='checkbox'],
   [type='radio'] {
-    @apply h-4 w-4 rounded border-border bg-background text-primary focus:ring-2 focus:ring-primary;
+    @apply h-4 w-4 rounded border-muted bg-primary text-muted focus:ring-2 focus:ring-primary;
   }
 }
 
@@ -156,6 +135,50 @@
   }
 }
 
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent; /* Fondo transparente */
+  border: 1px solid var(--muted); /* Borde personalizado */
+  color: var(--muted); /* Color del texto */
+
+  /* Personalización de la flecha en navegadores que permiten cambiarla */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23" + colorMutedHex + "'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px; /* Espacio para la flecha */
+}
+
+/* Para navegadores como Internet Explorer */
+select::-ms-expand {
+  display: none; /* Oculta la flecha predeterminada en IE */
+}
+
+/* Controla la altura y el tamaño de la flecha */
+select {
+  padding: 8px; /* Ajusta el padding según tus necesidades */
+  font-size: 16px; /* Ajusta el tamaño del texto */
+}
+
+[type='color'] {
+  appearance: none;
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  border: none;  // Sin borde externo
+  background-color: var(--primary);  // Color personalizado
+
+  // Estilos para navegadores basados en WebKit (Chrome, Safari)
+  &::-webkit-color-swatch {
+    border: none;  // Sin borde interno en Chrome/Safari
+    background-color: var(--primary);
+  }
+
+  &::-webkit-color-swatch-wrapper {
+    border: none;  // Sin borde envolvente
+  }
+}
+
 /** Scroll bar **/
 @supports selector(::-webkit-scrollbar) {
   .supports-scrollbars\: pr-2 {
@@ -165,3 +188,66 @@
 
 /** Plugins **/
 @import './assets/styles/apexchart.scss';
+
+
+/* Estilos generales para el input de tipo 'file' */
+input[type="file"] {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 0.875rem; /* text-sm */
+  color: var(--muted); /* Color del texto */
+  background-color: var(--primary); /* Fondo personalizado */
+  border: 1px solid var(--muted); /* Borde personalizado */
+  border-radius: 0.5rem; /* Border radius personalizado */
+  cursor: pointer;
+  outline: none; /* Sin borde al hacer focus */
+
+  /* Aplica cuando está en focus */
+  &:focus {
+    border-color: var(--primary); /* Color del borde al hacer focus */
+    box-shadow: 0 0 0 2px var(--primary); /* Añadir un pequeño glow en el focus */
+  }
+
+  /* Elimina el estilo por defecto en navegadores */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Personaliza el botón de selección de archivo */
+input[type="file"]::file-selector-button {
+  background-color: var(--muted); /* Fondo del botón */
+  color: var(--primary); /* Texto del botón */
+  border: 1px solid var(--muted); /* Borde del botón */
+  border-radius: 0.375rem; /* Border radius del botón */
+  cursor: pointer;
+
+  /* Aplica cuando el botón está en hover */
+  &:hover {
+    background-color: var(--primary); /* Cambiar fondo al hacer hover */
+    color: var(--muted); /* Cambiar el texto al hacer hover */
+  }
+
+  /* Aplica cuando el botón está en focus */
+  &:focus {
+    outline: none;
+    border-color: var(--primary); /* Color del borde en focus */
+    box-shadow: 0 0 0 2px var(--primary); /* Glow en focus */
+  }
+}
+
+/* Si no hay soporte para ::file-selector-button, usa esta aproximación */
+input[type="file"]::-webkit-file-upload-button {
+  background-color: var(--muted); /* Fondo del botón */
+  color: var(--primary); /* Texto del botón */
+  border: 1px solid var(--muted); /* Borde del botón */
+  border-radius: 0.375rem;
+  cursor: pointer;
+
+  /* Cambia el estilo en hover */
+  &:hover {
+    background-color: var(--primary); /* Cambia el fondo al hacer hover */
+    color: var(--muted); /* Cambia el texto */
+  }
+}

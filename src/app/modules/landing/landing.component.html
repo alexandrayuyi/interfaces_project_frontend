@@ -5,25 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyApp</title>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen bg-secondary">
 
   <!-- Navbar -->
   <nav class="bg-primary shadow-md">
     <div class="container mx-auto px-4 py-2 flex justify-between items-center">
-      <a class="text-xl font-bold" href="#">MyApp</a>
+      <a class="text-xl text-muted font-bold" href="#">MyApp</a>
       <div>
-        <a class="btn btn-ghost" href="#">Home</a>
-        <a class="btn btn-ghost" href="#">Profile</a>
-        <a class="btn btn-ghost" href="#">Settings</a>
+        <a class="btn btn-ghost text-muted" href="#">Home</a>
+        <a class="btn btn-ghost text-muted" href="#">Profile</a>
+        <a class="btn btn-ghost text-muted" href="#">Settings</a>
       </div>
     </div>
   </nav>
 
   <!-- Banner -->
-  <section class="bg-primary text-primary-content mt-16 py-32 text-center">
+  <section class="bg-primary text-muted mt-16 py-32 text-center">
     <div class="container mx-auto">
-      <h1 class="text-4xl font-bold mb-4">Welcome to MyApp</h1>
-      <p class="text-lg">Your one-stop solution for all your needs.</p>
+      <h1 class="text-4xl font-bold mb-4 text-muted">Welcome to MyApp</h1>
+      <p class="text-lg text-muted">Your one-stop solution for all your needs.</p>
     </div>
   </section>
 
@@ -33,30 +33,30 @@
       <div class="card bg-primary shadow-md pb-5 rounded-md">
         <figure><img src="../../../assets/images/143-400x200.jpg" alt="Card Image 1" class="rounded-md"></figure>
         <div class="card-body m-5">
-          <h2 class="card-title">Card Title 1</h2>
-          <p>Card description goes here.</p>
+          <h2 class="card-title text-muted">Card Title 1</h2>
+          <p class="text-muted">Card description goes here.</p>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary">Learn More</button>
+            <button class="btn btn-primary text-muted">Learn More</button>
           </div>
         </div>
       </div>
       <div class="card bg-primary shadow-md">
         <figure><img src="../../../assets/images/352-400x200.jpg" alt="Card Image 2"></figure>
         <div class="card-body">
-          <h2 class="card-title">Card Title 2</h2>
-          <p>Card description goes here.</p>
+          <h2 class="card-title text-muted">Card Title 2</h2>
+          <p class="text-muted">Card description goes here.</p>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary">Learn More</button>
+            <button class="btn btn-primary text-muted">Learn More</button>
           </div>
         </div>
       </div>
       <div class="card bg-primary shadow-md">
         <figure><img src="../../../assets/images/418-400x200.jpg" alt="Card Image 3"></figure>
         <div class="card-body">
-          <h2 class="card-title">Card Title 3</h2>
-          <p>Card description goes here.</p>
+          <h2 class="card-title text-muted">Card Title 3</h2>
+          <p class="text-muted">Card description goes here.</p>
           <div class="card-actions justify-end">
-            <button class="btn ">Learn More</button>
+            <button class="btn text-muted">Learn More</button>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
     <div *ngFor="let slide of slides; let i = index" class="mySlides fade" [ngClass]="{ 'active': activeIndex === i }" [style.display]="activeIndex === i ? 'block' : 'none'">
       <div class="numbertext">{{ i + 1 }} / {{ slides.length }}</div>
       <img [src]="slide.imageSrc" style="width:100%">
-      <div class="text">{{ slide.caption }}</div>
+      <div class="text-muted text">{{ slide.caption }}</div>
     </div>
   
     <!-- Next/prev buttons -->
@@ -80,9 +80,9 @@
   <br>
   
   <!-- Dots/bullets -->
-  <div style="text-align:center">
+  <!-- <div style="text-align:center">
     <span *ngFor="let slide of slides; let i = index" class="dot" [ngClass]="{ 'active': activeIndex === i }" (click)="currentSlide(i + 1)"></span>
-  </div>
+  </div> -->
       
 
   <!-- Footer -->

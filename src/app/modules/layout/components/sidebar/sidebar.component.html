@@ -1,6 +1,6 @@
 <nav
   [ngClass]="menuService.showSideBar ? 'w-52 xl:w-64' : 'w-[70px]'"
-  class="scrollbar-thumb-rounded scrollbar-track-rounded hidden h-full flex-col justify-between overflow-auto bg-background pt-3 transition-all duration-300 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-card lg:flex">
+  class="scrollbar-thumb-rounded scrollbar-track-rounded hidden h-full flex-col justify-between overflow-auto bg-primary pt-3 transition-all duration-300 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-card lg:flex">
   <div class="px-4">
     <!-- Logo -->
     <div class="relative h-10">
@@ -10,13 +10,13 @@
           class="flex cursor-pointer items-center justify-center rounded bg-primary p-2 focus:outline-none focus:ring-1">
           <svg-icon src="assets/icons/logo.svg"> </svg-icon>
         </a>
-        <b class="ml-1 pl-2 text-sm font-bold text-foreground">
+        <b class="ml-1 pl-2 text-sm font-bold text-muted">
           {{ appJson.displayName }}
         </b>
       </div>
       <button
         (click)="toggleSidebar()"
-        class="absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded text-muted-foreground/50 transition-all duration-200 focus:outline-none hover:text-muted-foreground"
+        class="absolute top-2 right-2 flex h-5 w-5 items-center justify-center rounded text-muted transition-all duration-200 focus:outline-none hover:text-muted"
         [ngClass]="{ 'rotate-180': !menuService.showSideBar }">
         <svg-icon src="assets/icons/heroicons/solid/chevron-double-left.svg"> </svg-icon>
       </button>
@@ -33,17 +33,17 @@
 
   <div class="mx-4 my-4 space-y-1">
     <!-- Version -->
-    <a
+    <!-- <a
       target="_blank"
       href="https://github.com/luciano-work/angular-tailwind"
       class="group flex h-9 cursor-pointer items-center justify-start rounded p-2 hover:bg-card">
       <svg-icon
         src="assets/icons/heroicons/outline/information-circle.svg"
-        [svgClass]="'h-5 w-5 text-muted-foreground/50'">
+        [svgClass]="'h-5 w-5 text-muted/50'">
       </svg-icon>
 
       <div class="ml-3 truncate text-[10px] font-semibold tracking-wide focus:outline-none">
-        <span class="rounded-lg bg-primary/10 px-2 font-semibold text-primary">v{{ appJson.version }}</span>
+        <span class="rounded-lg bg-primary/10 px-2 font-semibold text-muted">v{{ appJson.version }}</span>
       </div>
 
       <div class="fixed w-full" *ngIf="!menuService.showSideBar">
@@ -52,6 +52,6 @@
           v{{ appJson.version }}
         </span>
       </div>
-    </a>
+    </a> -->
   </div>
 </nav>

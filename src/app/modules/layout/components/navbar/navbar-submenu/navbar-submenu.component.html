@@ -1,4 +1,4 @@
-<ul #submenuRef class="mt-2 space-y-0.5 rounded-md bg-background py-3 shadow-custom">
+<ul #submenuRef class="mt-2 space-y-0.5 rounded-md bg-primary py-3 shadow-custom">
   <li class="flex font-semibold" *ngFor="let item of submenu">
     <!-- Condition -->
     <ng-container
@@ -10,11 +10,11 @@
     <ng-template #parentMenu let-item="item">
       <button
         [routerLink]="item.route"
-        routerLinkActive="text-primary"
+        routerLinkActive="text-muted"
         [routerLinkActiveOptions]="{ exact: true }"
-        class="mx-3 flex w-full items-center justify-between rounded-md py-2 px-2 text-xs font-semibold text-muted-foreground hover:bg-card hover:text-foreground">
+        class="mx-3 flex w-full items-center justify-between rounded-md py-2 px-2 text-xs font-semibold text-muted hover:bg-card hover:text-muted">
         <div class="flex items-center justify-start">
-          <span class="mr-2 text-muted-foreground/50" *ngIf="item.icon">
+          <span class="mr-2 text-muted/50" *ngIf="item.icon">
             <svg-icon src="{{ item.icon }}" [svgClass]="'h-5 w-5'"> </svg-icon>
           </span>
           <span class="ml-1">{{ item.label }}</span>
@@ -26,9 +26,9 @@
     <ng-template #childMenu let-item="item">
       <div class="dropdown relative flex w-full">
         <button
-          class="mx-3 flex w-full items-center justify-between rounded-md py-2 px-2 text-xs font-semibold text-muted-foreground hover:bg-card hover:text-foreground">
+          class="mx-3 flex w-full items-center justify-between rounded-md py-2 px-2 text-xs font-semibold text-muted hover:bg-card hover:text-muted">
           <div class="flex items-center justify-start">
-            <span class="mr-2 text-muted-foreground/50" *ngIf="item.icon">
+            <span class="mr-2 text-muted/50" *ngIf="item.icon">
               <svg-icon src="{{ item.icon }}" [svgClass]="'h-5 w-5'"> </svg-icon>
             </span>
             <span class="ml-1">{{ item.label }}</span>
@@ -36,7 +36,7 @@
           <span>
             <svg-icon
               src="assets/icons/heroicons/solid/chevron-right.svg"
-              [svgClass]="'h-5 w-5 text-text-muted-foreground/50'">
+              [svgClass]="'h-5 w-5 text-text-muted/50'">
             </svg-icon>
           </span>
         </button>

@@ -8,7 +8,7 @@ import { Theme } from 'src/app/core/models/theme.model';
   styleUrls: ['./profile-menu.component.scss']
 })
 export class ProfileMenuComponent implements OnInit {
-  theme: Theme = {mode:'', color:'', primary: '', secondary: '', textColor: '' }; // Provide a default value
+  theme: Theme = {mode:'', color:'', primary: '', secondary: '', muted: '' }; // Provide a default value
 
   constructor(private themeService: ThemeService) {}
 
@@ -19,6 +19,6 @@ export class ProfileMenuComponent implements OnInit {
   }
 
   toggleThemeColor(color: string) {
-    this.themeService.updateColors({ primary: color, secondary: this.theme.secondary, textColor: this.theme.textColor });
+    this.themeService.updateColors({ primary: color, secondary: this.theme.secondary, muted: this.theme.muted });
   }
 }

@@ -3,5 +3,5 @@ export interface Theme {
   color: string;
   primary: string;
   secondary: string;
-  textColor: string;
+  muted: string;
 }

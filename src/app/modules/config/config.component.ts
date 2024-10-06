@@ -5,45 +5,37 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 @Component({
   selector: 'app-config',
   templateUrl: './config.component.html',
-  styleUrls: ['./config.component.scss'] // Ensure this is 'styleUrls'
+  styleUrls: ['./config.component.scss']
 })
 export class ConfigComponent implements OnInit {
-  colorForm: FormGroup; // Declare the FormGroup
+  colorForm: FormGroup;
 
   constructor(private fb: FormBuilder, private themeService: ThemeService) {
-    // Initialize the form in the constructor
     this.colorForm = this.fb.group({
-      color1: ['#22c55e'], // Initial value for primary color
-      color2: ['#cc0022'], // Initial value for secondary color
-      color3: ['#6d28d9'], // Initial value for text color
-      titleFont: [null], // Placeholder for font file input
-      paragraphFont: [null], // Placeholder for font file input
-      paragraphSize: [12] // Default paragraph size
+      color1: ['#ffffff'], // Default color
+      color2: ['#000000'],
+      color3: ['#ff0000'],
+      titleFont: [null],
+      paragraphFont: [null],
+      paragraphSize: [16],
     });
   }
 
-  ngOnInit(): void {
-    // Subscribe to changes in the form and update theme colors
-    this.colorForm.valueChanges.subscribe(values => {
-      this.updateThemeColors(values);
+  ngOnInit() {
+    this.colorForm.get('color1')?.valueChanges.subscribe((color) => {
+      this.themeService.updateColors({ primary: color, secondary: this.colorForm.get('color2')?.value, muted: this.colorForm.get('color3')?.value });
+    });
+  
+    this.colorForm.get('color2')?.valueChanges.subscribe((color) => {
+      this.themeService.updateColors({ primary: this.colorForm.get('color1')?.value, secondary: color, muted: this.colorForm.get('color3')?.value });
+    });
+  
+    this.colorForm.get('color3')?.valueChanges.subscribe((color) => {
+      this.themeService.updateColors({ primary: this.colorForm.get('color1')?.value, secondary: this.colorForm.get('color2')?.value, muted: color });
     });
   }
 
-  updateThemeColors(colors: { color1: string; color2: string; color3: string }) {
-    // Update theme colors dynamically
-    this.themeService.updateColors({
-      primary: colors.color1,
-      secondary: colors.color2,
-      textColor: colors.color3
-    });
-  }
-
-  onSubmit(): void {
-    if (this.colorForm.valid) {
-      console.log('Form submitted with values:', this.colorForm.value);
-      // Save changes, handle font files, etc.
-    } else {
-      console.log('Form is invalid');
-    }
+  onSubmit() {
+    // Handle form submission if needed
   }
 }

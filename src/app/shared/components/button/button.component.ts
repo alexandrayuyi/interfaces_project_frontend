@@ -36,12 +36,12 @@ export class ButtonComponent implements OnInit {
 
   impactClasses: Record<ButtonProps['tone'], Record<ButtonProps['impact'], string>> = {
     primary: {
-      bold: 'bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-primary',
-      light: 'bg-primary/20 text-primary hover:bg-primary/30 focus-visible:ring-primary',
-      none: 'bg-transparent text-primary hover:bg-primary/10 focus-visible:ring-primary',
+      bold: 'bg-muted text-primary hover:bg-primary/90 focus-visible:ring-primary',
+      light: 'bg-primary/20 text-muted hover:bg-primary/30 focus-visible:ring-primary',
+      none: 'bg-transparent text-muted hover:bg-primary/10 focus-visible:ring-primary',
     },
     danger: {
-      bold: 'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive',
+      bold: 'bg-destructive text-muted hover:bg-destructive/90 focus-visible:ring-destructive',
       light: 'bg-destructive/20 text-destructive hover:bg-destructive/30 focus-visible:ring-destructive',
       none: 'bg-transparent text-destructive hover:bg-destructive/10 focus-visible:ring-destructive',
     },
@@ -56,14 +56,14 @@ export class ButtonComponent implements OnInit {
       none: 'bg-transparent text-yellow-600 hover:bg-yellow-500/10 focus-visible:ring-yellow-500',
     },
     info: {
-      bold: 'bg-violet-500 text-white hover:bg-violet-600 focus-visible:ring-violet-500',
-      light: 'bg-violet-500/20 text-violet-600 hover:bg-violet-500/30 focus-visible:ring-violet-500',
-      none: 'bg-transparent text-violet-600 hover:bg-violet-500/10 focus-visible:ring-violet-500',
+      bold: 'bg-violet-500 text-muted hover:bg-violet-600 focus-visible:ring-violet-500',
+      light: 'bg-violet-500/20 text-muted hover:bg-violet-500/30 focus-visible:ring-violet-500',
+      none: 'bg-transparent text-muted hover:bg-violet-500/10 focus-visible:ring-violet-500',
     },
     light: {
-      bold: 'bg-muted text-muted-foreground hover:bg-muted/90 focus-visible:ring-muted',
-      light: 'bg-muted/20 text-muted-foreground hover:bg-muted focus-visible:ring-muted',
-      none: 'bg-transparent text-muted-foreground hover:bg-muted focus-visible:ring-muted',
+      bold: 'bg-muted text-muted hover:bg-muted/90 focus-visible:ring-muted',
+      light: 'bg-muted/20 text-muted hover:bg-muted focus-visible:ring-muted',
+      none: 'bg-transparent text-muted hover:bg-muted focus-visible:ring-muted',
     },
   };
 
