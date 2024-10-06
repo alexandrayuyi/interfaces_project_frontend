@@ -5,51 +5,52 @@
     <div class="flex grow flex-col content-start overflow-hidden bg-card">
       <!-- Header -->
       <app-navbar></app-navbar>
-      <!-- main content -->
+      
+      <!-- Main content -->
       <div
         id="main-content"
         class="scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
         <div class="mx-auto px-4 py-4 sm:px-8 lg:container">
           <router-outlet></router-outlet>
           <div class="container mx-auto p-4">
-            <form>
+            <form [formGroup]="colorForm" (ngSubmit)="onSubmit()">
               <div class="mb-4">
-                <label for="color1" class="block ">Color 1 (60%)</label>
+                <label for="color1" class="block">Color 1 (60%)</label>
                 <input type="color" id="color1" formControlName="color1" class="mt-1 block w-full">
               </div>
-          
+              
               <div class="mb-4">
-                <label for="color2" class="block ">Color 2 (30%)</label>
+                <label for="color2" class="block">Color 2 (30%)</label>
                 <input type="color" id="color2" formControlName="color2" class="mt-1 block w-full">
               </div>
-          
+              
               <div class="mb-4">
-                <label for="color3" class="block ">Color 3 (10%)</label>
+                <label for="color3" class="block">Color 3 (10%)</label>
                 <input type="color" id="color3" formControlName="color3" class="mt-1 block w-full">
               </div>
-          
+              
               <div class="mb-4">
-                <label for="titleFont" class="block ">Fuente para Títulos</label>
+                <label for="titleFont" class="block">Fuente para Títulos</label>
                 <input type="file" id="titleFont" formControlName="titleFont" accept=".ttf" class="mt-1 block w-full">
               </div>
-          
+              
               <div class="mb-4">
-                <label for="paragraphFont" class="block ">Fuente para párrafos</label>
+                <label for="paragraphFont" class="block">Fuente para Párrafos</label>
                 <input type="file" id="paragraphFont" formControlName="paragraphFont" accept=".ttf" class="mt-1 block w-full">
               </div>
-          
+              
               <div class="mb-4">
-                <label for="paragraphSize" class="block ">Tamaño para párrafos</label>
+                <label for="paragraphSize" class="block">Tamaño para Párrafos</label>
                 <input type="number" id="paragraphSize" formControlName="paragraphSize" class="mt-1 block w-full">
               </div>
-          
+              
               <button type="submit" class="bg-primary text-primary-content px-4 py-2 rounded">Submit</button>
             </form>
           </div>
-            </div>
         </div>
+      </div>
   
-      <!-- footer -->
+      <!-- Footer -->
       <app-footer></app-footer>
   
       <!-- Bottom bar -->
