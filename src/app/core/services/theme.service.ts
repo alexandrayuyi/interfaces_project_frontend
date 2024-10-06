@@ -31,6 +31,12 @@ export class ThemeService {
     return this.theme().mode == 'dark';
   }
 
+  public updateColors(colors: { primary: string; secondary: string; textColor: string }) {
+    this.theme.update((theme) => {
+      return { ...theme, ...colors };
+    });
+  }
+
   private setThemeClass() {
     document.querySelector('html')!.className = this.theme().mode;
     document.querySelector('html')!.setAttribute('data-theme', this.theme().color);

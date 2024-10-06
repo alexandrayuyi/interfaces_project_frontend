@@ -72,7 +72,7 @@ export class Menu {
         {
           icon: 'assets/icons/heroicons/outline/cog.svg',
           label: 'Settings',
-          route: '/settings',
+          route: '/config',
         },
         {
           icon: 'assets/icons/heroicons/outline/folder.svg',
