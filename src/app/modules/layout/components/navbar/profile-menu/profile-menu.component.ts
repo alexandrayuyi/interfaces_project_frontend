@@ -46,7 +46,7 @@ export class ProfileMenuComponent implements OnInit {
     {
       title: 'Settings',
       icon: './assets/icons/heroicons/outline/cog-6-tooth.svg',
-      link: '/settings',
+      link: '/config',
     },
     {
       title: 'Log out',
@@ -57,24 +57,8 @@ export class ProfileMenuComponent implements OnInit {
 
   public themeColors = [
     {
-      name: 'base',
-      code: '#e11d48',
-    },
-    {
-      name: 'yellow',
-      code: '#f59e0b',
-    },
-    {
       name: 'green',
       code: '#22c55e',
-    },
-    {
-      name: 'blue',
-      code: '#3b82f6',
-    },
-    {
-      name: 'orange',
-      code: '#ea580c',
     },
     {
       name: 'red',
@@ -86,7 +70,7 @@ export class ProfileMenuComponent implements OnInit {
     },
   ];
 
-  public themeMode = ['light', 'dark'];
+  // public themeMode = ['light', 'dark'];
 
   constructor(public themeService: ThemeService) {}
 
