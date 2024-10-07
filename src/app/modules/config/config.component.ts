@@ -12,9 +12,9 @@ export class ConfigComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private themeService: ThemeService) {
     this.colorForm = this.fb.group({
-      color1: ['#ffffff'], // Default color
-      color2: ['#000000'],
-      color3: ['#ff0000'],
+      color1: ['#87C09D'], // Default color
+      color2: ['#DEFCEA'],
+      color3: ['#000200'],
       titleFont: [null],
       paragraphFont: [null],
       paragraphSize: [16],
