@@ -12,9 +12,9 @@
     <div class="container mx-auto px-4 py-2 flex justify-between items-center">
       <a class="text-xl text-muted font-bold" href="#">MyApp</a>
       <div>
-        <a class="btn btn-ghost text-muted" href="#">Home</a>
-        <a class="btn btn-ghost text-muted" href="#">Profile</a>
-        <a class="btn btn-ghost text-muted" href="#">Settings</a>
+        <a class="btn btn-ghost mr-8 font-semibold text-muted" href="#">Home</a>
+        <a class="btn btn-ghost mr-8 font-semibold text-muted" href="#">Profile</a>
+        <a class="btn btn-ghost mr-8 font-semibold text-muted" href="#">Settings</a>
       </div>
     </div>
   </nav>
@@ -32,31 +32,33 @@
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
       <div class="card bg-primary shadow-md shadow-primary pb-5 rounded-md">
         <figure><img src="../../../assets/images/143-400x200.jpg" alt="Card Image 1" class="rounded-md"></figure>
-        <div class="card-body m-5">
-          <h2 class="card-title text-muted">Card Title 1</h2>
-          <p class="text-muted">Card description goes here.</p>
+        <div class="card-body mx-5">
+          <h2 class="font-bold text-muted my-2">Card Title 1</h2>
+          <p class="text-muted mb-10">Card description goes here.</p>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary text-muted">Learn More</button>
+            <app-button type="submit" impact="bold" shape="rounded" size="medium">Learn More</app-button>
+            
           </div>
         </div>
       </div>
-      <div class="card bg-primary shadow-md shadow-primary">
+      <div class="card bg-primary shadow-md shadow-primary pb-5 rounded-md">
         <figure><img src="../../../assets/images/352-400x200.jpg" alt="Card Image 2"></figure>
-        <div class="card-body">
-          <h2 class="card-title text-muted">Card Title 2</h2>
-          <p class="text-muted">Card description goes here.</p>
+        <div class="card-body mx-5">
+          <h2 class="font-bold text-muted my-2">Card Title 2</h2>
+          <p class="text-muted mb-10">Card description goes here.</p>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary text-muted">Learn More</button>
+            <app-button type="submit" impact="bold" shape="rounded" size="medium">Learn More</app-button>
+            
           </div>
         </div>
       </div>
-      <div class="card bg-primary shadow-md shadow-primary">
+      <div class="card bg-primary shadow-md shadow-primary pb-5 rounded-md">
         <figure><img src="../../../assets/images/418-400x200.jpg" alt="Card Image 3"></figure>
-        <div class="card-body">
-          <h2 class="card-title text-muted">Card Title 3</h2>
-          <p class="text-muted">Card description goes here.</p>
-          <div class="card-actions justify-end">
-            <button class="btn text-muted">Learn More</button>
+        <div class="card-body mx-5">
+          <h2 class="font-bold text-muted my-2">Card Title 3</h2>
+          <p class="text-muted mb-10">Card description goes here.</p>
+          <div class="card-actions justify-end mr-8">
+            <app-button type="submit" impact="bold" shape="rounded" size="medium">Learn More</app-button>
           </div>
         </div>
       </div>
