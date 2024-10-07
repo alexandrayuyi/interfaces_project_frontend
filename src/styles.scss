@@ -135,30 +135,50 @@
   }
 }
 
+/* Hide the calendar icon in Chrome, Safari, and Edge */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Hide the calendar icon in Firefox */
+input[type="date"]::-moz-calendar-picker-indicator {
+  display: none;
+}
+
+/* Hide the calendar icon in Internet Explorer */
+input[type="date"]::-ms-clear {
+  display: none;
+}
+
 select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-color: transparent; /* Fondo transparente */
-  border: 1px solid var(--muted); /* Borde personalizado */
-  color: var(--muted); /* Color del texto */
-
-  /* Personalización de la flecha en navegadores que permiten cambiarla */
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23" + colorMutedHex + "'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  padding-right: 30px; /* Espacio para la flecha */
+  background-color: var(--primary); /* Custom background color */
+  border: 1px solid var(--muted); /* Custom border color */
+  color: var(--muted); /* Custom text color */
+  padding-right: 30px; /* Space for the arrow */
+  font-size: 16px; /* Adjust the font size */
+  padding: 8px; /* Adjust the padding as needed */
+  background-image: none; /* Remove default arrow */
 }
 
-/* Para navegadores como Internet Explorer */
+/* For Internet Explorer */
 select::-ms-expand {
-  display: none; /* Oculta la flecha predeterminada en IE */
+  display: none; /* Hides the arrow in IE */
 }
 
-/* Controla la altura y el tamaño de la flecha */
-select {
-  padding: 8px; /* Ajusta el padding según tus necesidades */
-  font-size: 16px; /* Ajusta el tamaño del texto */
+/* For Firefox */
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 var(--muted);
+}
+
+/* For WebKit browsers */
+select::-webkit-inner-spin-button,
+select::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 [type='color'] {
