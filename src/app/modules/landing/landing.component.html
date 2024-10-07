@@ -71,7 +71,8 @@
     <div *ngFor="let slide of slides; let i = index" class="mySlides fade" [ngClass]="{ 'active': activeIndex === i }" [style.display]="activeIndex === i ? 'block' : 'none'">
       <div class="numbertext">{{ i + 1 }} / {{ slides.length }}</div>
       <img [src]="slide.imageSrc" style="width:100%">
-      <div class="text-muted text">{{ slide.caption }}</div>
+      <!-- <div class="text-muted text">{{ slide.caption }}</div> -->
+
     </div>
   
     <!-- Next/prev buttons -->
@@ -90,7 +91,7 @@
   <!-- Footer -->
   <footer class="bg-primary text-muted shadow-md shadow-primary mt-auto">
     <div class="container mx-auto px-4 py-4 text-center">
-      <p class="text-sm font-semibold">&copy; 2023 MyApp. All rights reserved.</p>
+      <p class="text-sm font-semibold">&copy; 2024 MyApp. All rights reserved.</p>
     </div>
   </footer>
 
