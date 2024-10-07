@@ -18,7 +18,7 @@ import { Theme } from 'src/app/core/models/theme.model';
     ],
 })
 export class NavbarComponent implements OnInit {
-  theme: Theme = { mode: 'dark', color: 'base', primary: '', secondary: '', muted: '' }; // Provide a default value
+  theme: Theme = { mode: 'dark', color: 'base', primary: '', secondary: '', muted: '', h1Size: 16, h2Size: 12, pSize: 10 }; // Provide a default value
   constructor(private menuService: MenuService, private themeService: ThemeService) {}
 
   ngOnInit(): void {

@@ -1,11 +1,11 @@
 <div class="flex h-screen w-full overflow-hidden">
     <!-- Sidebar -->
     <app-sidebar></app-sidebar>
-  
+
     <div class="flex grow flex-col content-start overflow-hidden bg-card">
       <!-- Header -->
       <app-navbar></app-navbar>
-      
+
       <!-- Main content -->
       <div
         id="main-content"
@@ -20,42 +20,45 @@
                     <label for="color1" class="block">Color 1 (60%)</label>
                     <input type="color" id="color1" formControlName="color1" class="border-2 border-primary mt-1 block w-full">
                   </div>
-                  
+
                   <div class="mb-4">
                     <label for="color2" class="block">Color 2 (30%)</label>
                     <input type="color" id="color2" formControlName="color2" class="border-2 border-secondary mt-1 block w-full">
                   </div>
-                  
+
                   <div class="mb-4">
                     <label for="color3" class="block">Color 3 (10%)</label>
                     <input type="color" id="color3" formControlName="color3" class="border-2 border-muted mt-1 block w-full">
                   </div>
-          
+
                 <!-- <div class="mb-4">
                   <label for="titleFont" class="block">Font for titles</label>
                   <input type="file" id="titleFont" formControlName="titleFont" accept=".ttf" (change)="onFontChange('title', $event)" class="mt-1 block w-full">
                 </div>
-          
+
                 <div class="mb-4">
                   <label for="paragraphFont" class="block">Font for paragraphs</label>
                   <input type="file" id="paragraphFont" formControlName="paragraphFont" accept=".ttf" (change)="onFontChange('paragraph', $event)" class="mt-1 block w-full">
                 </div> -->
-          
+
                 <div class="mb-4">
                   <label for="paragraphSize" class="block">Size for paragraphs</label>
                   <input type="number" id="paragraphSize" formControlName="paragraphSize" class="mt-1 block w-full">
                 </div>
-          
+
                 <app-button impact="bold" shape="rounded" size="medium">Save</app-button>
               </form>
+              <h1 class="dynamic-h1 text-blue-500 font-bold">Este es un título H1</h1>
+              <h2 class="dynamic-h2 text-red-500 font-semibold">Este es un título H2</h2>
+              <p class="dynamic-p text-gray-600">Este es un párrafo</p>
             </div>
           </div>
         </div>
       </div>
-  
+
       <!-- Footer -->
       <app-footer></app-footer>
-  
+
       <!-- Bottom bar -->
       <!-- <app-bottom-navbar></app-bottom-navbar> -->
     </div>

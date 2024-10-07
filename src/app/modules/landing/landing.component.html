@@ -14,7 +14,7 @@
       <div>
         <a class="btn btn-ghost text-muted" href="#">Home</a>
         <a class="btn btn-ghost text-muted" href="#">Profile</a>
-        <a class="btn btn-ghost text-muted" href="#">Settings</a>
+        <a class="btn btn-ghost text-muted" href="/config">Settings</a>
       </div>
     </div>
   </nav>
@@ -71,19 +71,19 @@
       <img [src]="slide.imageSrc" style="width:100%">
       <div class="text-muted text">{{ slide.caption }}</div>
     </div>
-  
+
     <!-- Next/prev buttons -->
     <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
     <a class="next" (click)="plusSlides(1)">&#10095;</a>
   </div>
-  
+
   <br>
-  
+
   <!-- Dots/bullets -->
   <!-- <div style="text-align:center">
     <span *ngFor="let slide of slides; let i = index" class="dot" [ngClass]="{ 'active': activeIndex === i }" (click)="currentSlide(i + 1)"></span>
   </div> -->
-      
+
 
   <!-- Footer -->
   <footer class="bg-primary text-muted shadow-md shadow-primary mt-auto">

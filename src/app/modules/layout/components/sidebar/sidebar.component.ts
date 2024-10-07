@@ -17,7 +17,7 @@ import { Theme } from 'src/app/core/models/theme.model';
 })
 export class SidebarComponent implements OnInit {
   public appJson: any = packageJson;
-  theme: Theme = { mode: 'dark', color: 'base', primary: '', secondary: '', muted: '' }; // Provide a default value
+  theme: Theme = { mode: 'dark', color: 'base', primary: '', secondary: '', muted: '', h1Size: 16, h2Size: 12, pSize: 10 }; // Provide a default value
 
   constructor(public menuService: MenuService, private themeService: ThemeService) {}
 

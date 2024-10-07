@@ -4,4 +4,7 @@ export interface Theme {
   primary: string;
   secondary: string;
   muted: string;
+  h1Size: number;
+  h2Size: number;
+  pSize: number;
 }
