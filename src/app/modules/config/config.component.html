@@ -15,7 +15,10 @@
           <div class="mx-auto px-4 sm:px-8 lg:container">
             <router-outlet></router-outlet>
             <div class="container mx-auto p-4">
-              <form [formGroup]="colorForm" (ngSubmit)="onSubmit()">
+              <form [formGroup]="colorForm" (ngSubmit)="onSubmit()" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div></div>
+                <h1>Styles Configuration</h1>
+                <div></div>
                 <div class="mb-4">
                     <label for="color1" class="block">Color 1 (60%)</label>
                     <input type="color" id="color1" formControlName="color1" class="border-2 border-primary mt-1 block w-full">
@@ -63,7 +66,7 @@
                   <label class="">Font for paragrahps</label>
                   <input type="file" id="pFont" formControlName="pFont" accept=".ttf" (change)="onFileSelected($event)" class="mt-1 block" />
                 </div>
-
+<div></div>
                 <app-button (buttonClick)="onResetTheme()" impact="bold" shape="rounded" size="medium">Reset</app-button>
               </form>
               <!-- <h1 class="dynamic-h1 font-sans text-blue-500 font-bold">Este es un título H1</h1>
