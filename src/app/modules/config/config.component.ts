@@ -10,7 +10,8 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 export class ConfigComponent implements OnInit {
   colorForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private themeService: ThemeService) {
+  constructor(private fb: FormBuilder, private themeService:
+    ThemeService) {
     this.colorForm = this.fb.group({
       color1: ['#87C09D'], // Default color
       color2: ['#DEFCEA'],
@@ -38,38 +39,21 @@ export class ConfigComponent implements OnInit {
     });
     // Subscribe to changes in font sizes
     this.colorForm.get('h1Size')?.valueChanges.subscribe((size) => {
-      this.themeService.updateFontSizes({ h1Size: size, h2Size: this.colorForm.get('h2Size')?.value, pSize: this.colorForm.get('pSize')?.value });
+      this.themeService.updateFontSizes({ h1Size: this.colorForm.get('h1Size')?.value, h2Size: this.colorForm.get('h2Size')?.value, pSize: this.colorForm.get('pSize')?.value });
     });
 
     this.colorForm.get('h2Size')?.valueChanges.subscribe((size) => {
-      this.themeService.updateFontSizes({ h1Size: this.colorForm.get('h1Size')?.value, h2Size: size, pSize: this.colorForm.get('pSize')?.value });
+      this.themeService.updateFontSizes({ h1Size: this.colorForm.get('h1Size')?.value, h2Size: this.colorForm.get('h2Size')?.value, pSize: this.colorForm.get('pSize')?.value });
     });
 
-    this.colorForm.get('pSize')?.valueChanges.subscribe((size) => {
-      this.themeService.updateFontSizes({ h1Size: this.colorForm.get('h1Size')?.value, h2Size: this.colorForm.get('h2Size')?.value, pSize: size });
-    });
-
-
-    this.colorForm.get('titleFont')?.valueChanges.subscribe((h1Size) => {
-      this.themeService.updateFontSizes({
-        h1Size,
-        h2Size: this.colorForm.get('paragraphFont')?.value,
-        pSize: this.colorForm.get('paragraphSize')?.value,
-      });
-    });
-
-    this.colorForm.get('paragraphFont')?.valueChanges.subscribe((h2Size) => {
-      this.themeService.updateFontSizes({
-        h1Size: this.colorForm.get('titleFont')?.value,
-        h2Size,
-        pSize: this.colorForm.get('paragraphSize')?.value,
-      });
-    });
+    // this.colorForm.get('pSize')?.valueChanges.subscribe((size) => {
+    //   this.themeService.updateFontSizes({ h1Size: this.colorForm.get('h1Size')?.value, h2Size: this.colorForm.get('h2Size')?.value, pSize: size });
+    // });
 
     this.colorForm.get('paragraphSize')?.valueChanges.subscribe((pSize) => {
       this.themeService.updateFontSizes({
-        h1Size: this.colorForm.get('titleFont')?.value,
-        h2Size: this.colorForm.get('paragraphFont')?.value,
+        h1Size: this.colorForm.get('h1Size')?.value,
+        h2Size: this.colorForm.get('h2Size')?.value,
         pSize,
       });
     });
