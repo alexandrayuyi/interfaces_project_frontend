@@ -12,6 +12,7 @@ import { ButtonComponent } from "../../shared/components/button/button.component
 
 
 
+
 @NgModule({
   declarations: [ConfigComponent],
   imports: [

@@ -15,7 +15,7 @@ export class FontService {
     }
 
     if (pFontUrl) {
-      this.applyFont(pFontUrl, 'MiFuenteParrafos', '.dynamic-p, body');
+      this.applyFont(pFontUrl, 'MiFuenteParrafos', '.dynamic-p, body, a, button');
     }
   }
 

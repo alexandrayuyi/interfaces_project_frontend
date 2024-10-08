@@ -81,7 +81,7 @@ export class ConfigComponent implements OnInit {
           this.applyFont(fontUrl, 'MiFuenteTitulos', '.dynamic-h1, .dynamic-h2, h2, h1');
         } else if (fontType === 'pFont') {
           localStorage.setItem('pFontUrl', fontUrl);
-          this.applyFont(fontUrl, 'MiFuenteParrafos', '.dynamic-p, body');
+          this.applyFont(fontUrl, 'MiFuenteParrafos', '.dynamic-p, body, a, p, span, button, .paragraph');
         }
       };
 

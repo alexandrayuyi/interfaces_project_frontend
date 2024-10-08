@@ -36,7 +36,7 @@ export class ButtonComponent implements OnInit {
 
   impactClasses: Record<ButtonProps['tone'], Record<ButtonProps['impact'], string>> = {
     primary: {
-      bold: 'bg-muted text-primary hover:bg-primary/90 focus-visible:ring-primary',
+      bold: 'dynamic-h2 bg-muted text-primary hover:bg-primary/90 focus-visible:ring-primary',
       light: 'bg-primary/20 text-muted hover:bg-primary/30 focus-visible:ring-primary',
       none: 'bg-transparent text-muted hover:bg-primary/10 focus-visible:ring-primary',
     },

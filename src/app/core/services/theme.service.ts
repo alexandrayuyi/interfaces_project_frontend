@@ -17,6 +17,7 @@ export class ThemeService {
     const defaultTheme: Theme = { mode: 'dark', color: 'base', primary: '87C09D', secondary: 'DEFCEA', muted: '000200', h1Size: 32, h2Size: 24, pSize: 16 };
     this.themeSubject.next(defaultTheme);
     this.setTheme();
+    this.setThemeClass();
   }
 
   private loadTheme(): Theme {
