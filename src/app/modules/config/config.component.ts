@@ -13,15 +13,15 @@ export class ConfigComponent implements OnInit {
   constructor(private fb: FormBuilder, private themeService:
     ThemeService) {
     this.colorForm = this.fb.group({
-      color1: ['#87C09D'], // Default color
+      // Default color
       color2: ['#DEFCEA'],
       color3: ['#000200'],
       titleFont: [null],
       paragraphFont: [null],
       paragraphSize: [16],
-      h1Size: [20], // Default h1 size
-      h2Size: [24], // Default h2 size
-      pSize: [16],  // Default p size
+      h1Size: [localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')!).h1Size : 24], // Default h1 size
+      h2Size: [localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')!).h2Size : 20], // Default h2 size
+      pSize: [localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')!).pSize : 16],  // Default p size
     });
   }
 

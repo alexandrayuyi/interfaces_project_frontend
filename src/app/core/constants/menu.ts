@@ -76,8 +76,8 @@ export class Menu {
         },
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
-          label: 'Animations',
-          route: '/settings',
+          label: 'Profile',
+          route: '/profile/readonly',
         },
         {
           icon: 'assets/icons/heroicons/outline/cog.svg',
