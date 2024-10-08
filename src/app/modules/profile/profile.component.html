@@ -84,7 +84,13 @@
               <label class="label">
                 <span class="label-text">Address</span>
               </label>
-              <div #mapContainer [ngStyle]="{ width: '100%', height: '180px' }" class="mt-2 border-2 border-primary rounded shadow"></div>
+              <div #mapContainer [ngStyle]="{ 
+                width: '100%', 
+                height: '180px', 
+                borderColor: 'var(--primary)', 
+                backgroundColor: 'var(--secondary)', 
+                color: 'var(--primary)' 
+              }"  class="mt-2 border-2 border-primary rounded shadow bg-primary text-primary"></div>
               <p-autoComplete
                 [(ngModel)]="query"
                 name="location"

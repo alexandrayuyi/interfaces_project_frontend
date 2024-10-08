@@ -45,6 +45,30 @@
     font-size: var(--p-size);
   }
 
+  .leaflet-control-zoom{
+    background-color: var(--primary);
+    border: none !important;
+    box-shadow: 0 4px 6px var(--primary);
+    color: var(--muted);
+    cursor: pointer;
+    font-size: var(--p-size);
+    transition: background-color 0.3s;
+    z-index: 1000;
+
+  }
+  
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out {
+    color: var(--muted) !important;
+    background-color: var(--primary) !important;
+    border: none !important;
+  }
+  
+  .leaflet-control-zoom-in:hover,
+  .leaflet-control-zoom-out:hover {
+    background-color: var(--secondary) !important;
+  }
+
   // :root[data-theme='violet'] {
   //   --primary: 262.1 83.3% 57.8%;
   // }
