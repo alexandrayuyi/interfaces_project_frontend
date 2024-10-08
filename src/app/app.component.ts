@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { ResponsiveHelperComponent } from './shared/components/responsive-helper/responsive-helper.component';
 import { NgxSonnerToaster } from 'ngx-sonner';
+import { FontService } from './core/services/font.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,7 +13,12 @@ import { NgxSonnerToaster } from 'ngx-sonner';
   imports: [NgClass, RouterOutlet, ResponsiveHelperComponent, NgxSonnerToaster],
 })
 export class AppComponent {
+
   title = 'Angular Tailwind';
 
-  constructor(public themeService: ThemeService) {}
+  constructor(public themeService: ThemeService, private fontService: FontService) {}
+  ngOnInit() {
+    // Cargar las fuentes al iniciar la aplicación
+    this.fontService.loadFonts();
+  }
 }

@@ -35,10 +35,12 @@
 
   .dynamic-h1 {
     font-size: var(--h1-size);
+    font-family: var(--font-family, 'Roboto, sans-serif') !important; /* Asegúrate de que esté definido para aplicar la fuente */
   }
 
   .dynamic-h2 {
     font-size: var(--h2-size);
+    font-family: var(--font-family, 'Roboto, sans-serif') !important; /* Asegúrate de que esté definido para aplicar la fuente */
   }
 
   .dynamic-p {
@@ -56,14 +58,14 @@
     z-index: 1000;
 
   }
-  
+
   .leaflet-control-zoom-in,
   .leaflet-control-zoom-out {
     color: var(--muted) !important;
     background-color: var(--primary) !important;
     border: none !important;
   }
-  
+
   .leaflet-control-zoom-in:hover,
   .leaflet-control-zoom-out:hover {
     background-color: var(--secondary) !important;
