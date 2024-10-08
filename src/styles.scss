@@ -184,7 +184,7 @@ select {
   border: 1px solid var(--muted); /* Custom border color */
   color: var(--muted); /* Custom text color */
   padding-right: 30px; /* Space for the arrow */
-  font-size: 16px; /* Adjust the font size */
+  // font-size: 16px; /* Adjust the font size */
   padding: 8px; /* Adjust the padding as needed */
   background-image: none; /* Remove default arrow */
 }
@@ -241,7 +241,7 @@ input[type="file"] {
   display: block;
   width: 100%;
   padding: 8px;
-  font-size: 0.875rem; /* dynamic-p */
+  font-size: var(--p-size); /* Tamaño de fuente */
   color: var(--muted); /* Color del texto */
   background-color: var(--primary); /* Fondo personalizado */
   border: 1px solid var(--muted); /* Borde personalizado */
