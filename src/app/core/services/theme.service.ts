@@ -13,9 +13,15 @@ export class ThemeService {
     this.setTheme();
   }
 
+  resetTheme() {
+    const defaultTheme: Theme = { mode: 'dark', color: 'base', primary: '87C09D', secondary: 'DEFCEA', muted: '000200', h1Size: 32, h2Size: 24, pSize: 16 };
+    this.themeSubject.next(defaultTheme);
+    this.setTheme();
+  }
+
   private loadTheme(): Theme {
     const theme = localStorage.getItem('theme');
-    return theme ? JSON.parse(theme) : { mode: 'dark', color: 'base', primary: '', secondary: '', muted: '', h1Size: '32px', h2Size: '24px', pSize: '16px' };
+    return theme ? JSON.parse(theme) : { mode: 'dark', color: 'base', primary: '87C09D', secondary: 'DEFCEA', muted: '000200', h1Size: '32px', h2Size: '24px', pSize: '16px' };
   }
 
   private setTheme() {
@@ -46,9 +52,9 @@ export class ThemeService {
   // document.querySelector('html')!.setAttribute('data-theme', theme.color);
 
    // Update CSS variables
-    document.documentElement.style.setProperty('--primary', theme.primary || '#22c55e'); // Fallback to default
-    document.documentElement.style.setProperty('--secondary', theme.secondary || '#cc0022'); // Fallback to default
-    document.documentElement.style.setProperty('--muted', theme.muted || '#6d28d9'); // Fallback to default
+    document.documentElement.style.setProperty('--primary', theme.primary || '#87C09D'); // Fallback to default
+    document.documentElement.style.setProperty('--secondary', theme.secondary || '#DEFCEA'); // Fallback to default
+    document.documentElement.style.setProperty('--muted', theme.muted || '#000200'); // Fallback to default
 
     // Actualizar las variables de tamaño de fuente en CSS
     document.documentElement.style.setProperty('--h1-size', `${theme.h1Size}px`);

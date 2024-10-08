@@ -79,6 +79,23 @@ export class ConfigComponent implements OnInit {
     }
   }
 
+  onResetTheme() {
+    // Reset theme to default
+    this.themeService.resetTheme();
+
+    // Reset form to default values
+    this.colorForm.reset({
+      color1: '#87C09D',
+      color2: '#DEFCEA',
+      color3: '#000200',
+      h1Size: 32,
+      h2Size: 24,
+      pSize: 16,
+      titleFont: null,
+      paragraphFont: null,
+    });
+  }
+
   onSubmit() {
     // Handle form submission if needed
   }
