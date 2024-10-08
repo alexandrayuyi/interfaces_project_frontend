@@ -70,19 +70,19 @@ export class Menu {
       separator: false,
       items: [
         {
-          icon: 'assets/icons/heroicons/outline/cog.svg',
-          label: 'Settings',
-          route: '/config',
-        },
-        {
           icon: 'assets/icons/heroicons/outline/folder.svg',
-          label: 'Videos',
-          route: '/settings',
+          label: 'Home',
+          route: '/landing',
         },
         {
           icon: 'assets/icons/heroicons/outline/cube.svg',
           label: 'Animations',
           route: '/settings',
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/cog.svg',
+          label: 'Settings',
+          route: '/config',
         },
         // {
         //   icon: 'assets/icons/heroicons/outline/bell.svg',
