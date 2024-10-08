@@ -29,6 +29,10 @@
     font-size: var(--p-size);  // Fallback to 16px
   }
 
+  label {
+    font-weight: 500;
+  }
+
   .dynamic-h1 {
     font-size: var(--h1-size);
   }
