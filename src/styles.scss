@@ -24,7 +24,7 @@
     font-size: var(--h2-size, 24px); // Fallback to 24px
   }
 
-  p {
+  p, a, label, span, div {
     font-size: var(--p-size, 16px);  // Fallback to 16px
   }
 
@@ -142,7 +142,7 @@
   [multiple],
   textarea,
   select {
-    @apply w-full rounded-md border-muted bg-primary px-3 py-3 text-xs text-muted placeholder-muted focus:z-10 focus:border-primary focus:outline-none focus:ring-primary;
+    @apply w-full rounded-md border-muted bg-primary px-3 py-3 dynamic-p text-muted placeholder-muted focus:z-10 focus:border-primary focus:outline-none focus:ring-primary;
   }
 
   [type='checkbox'],
@@ -241,7 +241,7 @@ input[type="file"] {
   display: block;
   width: 100%;
   padding: 8px;
-  font-size: 0.875rem; /* text-sm */
+  font-size: 0.875rem; /* dynamic-p */
   color: var(--muted); /* Color del texto */
   background-color: var(--primary); /* Fondo personalizado */
   border: 1px solid var(--muted); /* Borde personalizado */

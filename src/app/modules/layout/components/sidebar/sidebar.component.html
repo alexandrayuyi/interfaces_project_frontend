@@ -10,7 +10,7 @@
           class="flex cursor-pointer items-center justify-center rounded bg-primary p-2 focus:outline-none focus:ring-1">
           <svg-icon src="assets/icons/logo.svg"> </svg-icon>
         </a>
-        <b class="ml-1 pl-2 text-sm font-bold text-muted">
+        <b class="ml-1 pl-2 dynamic-p font-bold text-muted">
           {{ appJson.displayName }}
         </b>
       </div>
@@ -24,7 +24,7 @@
 
     <!-- Separator -->
     <div class="pt-3">
-      <hr class="border-dashed border-muted" />
+      <!-- <hr class="border-dashed border-muted" /> -->
     </div>
 
     <!-- Menu Items -->
@@ -48,7 +48,7 @@
 
       <div class="fixed w-full" *ngIf="!menuService.showSideBar">
         <span
-          class="z-1 absolute left-12 -top-4 w-auto min-w-max origin-left scale-0 rounded-md bg-foreground p-2 text-xs font-bold text-background shadow-md transition-all duration-200 group-hover:scale-100">
+          class="z-1 absolute left-12 -top-4 w-auto min-w-max origin-left scale-0 rounded-md bg-foreground p-2 dynamic-p font-bold text-background shadow-md transition-all duration-200 group-hover:scale-100">
           v{{ appJson.version }}
         </span>
       </div>

@@ -1,6 +1,6 @@
 <div class="pt-4" *ngFor="let menu of menuService.pagesMenu">
   <div class="mx-1 mb-2 flex items-center justify-between">
-    <small class="text-xs font-semibold text-muted">
+    <small class="dynamic-p font-semibold text-muted">
       {{ menu.group }}
     </small>
   </div>
@@ -30,7 +30,7 @@
             <a
               routerLinkActive="text-muted"
               (click)="closeMenu()"
-              class="ml-10 truncate text-xs font-semibold tracking-wide focus:outline-none">
+              class="ml-10 truncate dynamic-p font-semibold tracking-wide focus:outline-none">
               {{ item.label }}
             </a>
           </div>
@@ -39,7 +39,7 @@
         <!-- Workaround:: Disable routerLink -->
         <ng-template #childMenu let-item="item">
           <div class="flex h-9 cursor-pointer items-center justify-start rounded hover:bg-card">
-            <a class="ml-10 truncate text-xs font-semibold tracking-wide focus:outline-none">
+            <a class="ml-10 truncate dynamic-p font-semibold tracking-wide focus:outline-none">
               {{ item.label }}
             </a>
           </div>

@@ -10,7 +10,7 @@
     <div id="main-content" class=" dark:text-muted scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
       <div class="mx-auto px-4 py-4 sm:px-8 lg:container">
         <router-outlet></router-outlet>
-        <h2 class="text-3xl font-bold mb-4 text-center">Profile Information</h2>
+        <h2 class="dynamic-h2 font-bold mb-4 text-center">Profile Information</h2>
 
         <!-- Profile Information Display -->
         <div class=" mt-4">
@@ -88,7 +88,7 @@
                 <label class="label">
                   <span class="label-text">Profile Picture</span>
                 </label>
-                <img [src]="profilePicture" alt="Profile Picture" class="block w-full text-sm text-muted border rounded-lg cursor-pointer bg-primary focus:outline-none" />
+                <img [src]="profilePicture" alt="Profile Picture" class="block w-full dynamic-p text-muted border rounded-lg cursor-pointer bg-primary focus:outline-none" />
               </div>
             </div> -->
 

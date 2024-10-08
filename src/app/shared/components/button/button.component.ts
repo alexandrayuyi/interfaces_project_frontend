@@ -68,7 +68,7 @@ export class ButtonComponent implements OnInit {
   };
 
   sizeClasses: Record<ButtonProps['size'], string> = {
-    small: 'px-3 py-1 text-xs',
+    small: 'px-3 py-1 dynamic-p',
     medium: 'px-5 py-2 dynamic-p',
     large: 'px-7 py-2.5 text-lg',
   };

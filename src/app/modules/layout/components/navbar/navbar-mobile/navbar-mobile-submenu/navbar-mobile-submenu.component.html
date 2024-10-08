@@ -17,14 +17,14 @@
             [routerLink]="sub.route"
             routerLinkActive="text-muted"
             [routerLinkActiveOptions]="{ exact: true }"
-            class="inline-block w-full px-4 py-2 text-xs font-semibold">
+            class="inline-block w-full px-4 py-2 dynamic-p font-semibold">
             {{ sub.label }}
           </a>
         </ng-template>
 
         <!-- Child Menu -->
         <ng-template #childMenu let-sub="sub">
-          <a class="inline-block w-full cursor-pointer px-4 py-2 text-xs font-semibold">
+          <a class="inline-block w-full cursor-pointer px-4 py-2 dynamic-p font-semibold">
             {{ sub.label }}
           </a>
           <button
