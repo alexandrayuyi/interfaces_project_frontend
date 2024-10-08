@@ -59,19 +59,19 @@
 
                 <div class="mb-4">
                   <label class="">Font for titles</label>
-                  <input type="file" id="hFont" formControlName="hFont" accept=".ttf" (change)="onFileSelected($event, 'h')" class="mt-1 block" />
+                  <input type="file" id="hFont" formControlName="hFont" accept=".ttf" (change)="onFileSelected($event, 'hFont')" class="mt-1 block" />
                 </div>
 
                 <div class="mb-4">
                   <label class="">Font for paragrahps</label>
-                  <input type="file" id="pFont" formControlName="pFont" accept=".ttf" (change)="onFileSelected($event, 'p')" class="mt-1 block" />
+                  <input type="file" id="pFont" formControlName="pFont" accept=".ttf" (change)="onFileSelected($event, 'pFont')" class="mt-1 block" />
                 </div>
-<div></div>
+                <div></div>
                 <app-button (buttonClick)="onResetTheme()" impact="bold" shape="rounded" size="medium">Reset</app-button>
               </form>
-              <h1 class="dynamic-h1 font-sans text-blue-500 font-bold">Este es un título H1</h1>
-              <h2 class="dynamic-h2 font-sans text-red-500 font-semibold">Este es un título H2</h2>
-              <p class="dynamic-p font-sans text-gray-600">Este es un párrafo</p>
+              <h1 class="font-sans text-blue-500 ">Este es un título H1</h1>
+              <h2 class="font-sans text-red-500 ">Este es un título H2</h2>
+              <p class="font-sans text-gray-600">Este es un párrafo</p>
             </div>
           </div>
         </div>

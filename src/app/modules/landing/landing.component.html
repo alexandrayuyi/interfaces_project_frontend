@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyApp</title>
 </head>
-<body class="flex flex-col min-h-screen bg-secondary">
+<body class="flex flex-col min-h-screen bg-secondary landing-page">
 
   <!-- Navbar -->
   <nav class="bg-primary shadow-md shadow-primary">
@@ -20,10 +20,10 @@
   </nav>
 
   <!-- Banner -->
-  <section class="bg-primary text-muted mt-16 py-32 text-center">
+  <section class="bg-primary mt-16 py-32 text-center">
     <div class="container mx-auto">
-      <h1 class="dynamic-h1 font-bold mb-4 text-muted font-title">Welcome to MyApp</h1>
-      <p class="text-muted dynamic-h2">Your one-stop solution for all your needs.</p>
+      <h1 class="dynamic-h1 mb-4">Welcome to MyApp</h1>
+      <h2 class="dynamic-h2">Your one-stop solution for all your needs.</h2>
     </div>
   </section>
 
@@ -34,29 +34,29 @@
         <figure><img src="../../../assets/images/143-400x200.jpg" alt="Card Image 1" class="rounded-md"></figure>
         <div class="card-body mx-5">
           <h2 class="font-bold text-muted my-2">Card Title 1</h2>
-          <p class="text-muted mb-10">Card description goes here.</p>
+          <p class="dynamic-p text-muted mb-10">Card description goes here.</p>
           <div class="card-actions justify-end">
             <app-button type="submit" impact="bold" shape="rounded" size="medium">Learn More</app-button>
-
           </div>
         </div>
       </div>
+
       <div class="card bg-primary shadow-md shadow-primary pb-5 rounded-md">
         <figure><img src="../../../assets/images/352-400x200.jpg" class="rounded-md" alt="Card Image 2"></figure>
         <div class="card-body mx-5">
-          <h2 class="font-bold text-muted my-2">Card Title 2</h2>
-          <p class="text-muted mb-10">Card description goes here.</p>
+          <h2 class="dynamic-h2 font-bold text-muted my-2">Card Title 2</h2>
+          <p class="dynamic-p text-muted mb-10">Card description goes here.</p>
           <div class="card-actions justify-end">
             <app-button type="submit" impact="bold" shape="rounded" size="medium">Learn More</app-button>
-
           </div>
         </div>
       </div>
+
       <div class="card bg-primary shadow-md shadow-primary pb-5 rounded-md">
         <figure><img src="../../../assets/images/418-400x200.jpg" class="rounded-md" alt="Card Image 3"></figure>
         <div class="card-body mx-5">
-          <h2 class="font-bold text-muted my-2">Card Title 3</h2>
-          <p class="text-muted mb-10">Card description goes here.</p>
+          <h2 class="dynamic-h2 font-bold text-muted my-2">Card Title 3</h2>
+          <p class="dynamic-p text-muted mb-10">Card description goes here.</p>
           <div class="card-actions justify-end mr-8">
             <app-button type="submit" impact="bold" shape="rounded" size="medium">Learn More</app-button>
           </div>
@@ -65,28 +65,10 @@
     </div>
   </section>
 
-   <!-- Photo Gallery/Carousel -->
-
-   <div class="slideshow-container">
-    <div *ngFor="let slide of slides; let i = index" class="mySlides fade" [ngClass]="{ 'active': activeIndex === i }" [style.display]="activeIndex === i ? 'block' : 'none'">
-      <div class="numbertext">{{ i + 1 }} / {{ slides.length }}</div>
-      <img [src]="slide.imageSrc" style="width:100%">
-      <!-- <div class="text-muted text">{{ slide.caption }}</div> -->
-
-    </div>
-
-    <!-- Next/prev buttons -->
-    <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
-    <a class="next" (click)="plusSlides(1)">&#10095;</a>
+  <!-- Photo Gallery/Carousel -->
+  <div class="slideshow-container">
+    <!-- Add your carousel slides here -->
   </div>
-
-  <br>
-
-  <!-- Dots/bullets -->
-  <!-- <div style="text-align:center">
-    <span *ngFor="let slide of slides; let i = index" class="dot" [ngClass]="{ 'active': activeIndex === i }" (click)="currentSlide(i + 1)"></span>
-  </div> -->
-
 
   <!-- Footer -->
   <footer class="bg-primary text-muted shadow-md shadow-primary mt-auto">

@@ -60,6 +60,7 @@ export class ThemeService {
     document.documentElement.style.setProperty('--h1-size', `${theme.h1Size}px`);
     document.documentElement.style.setProperty('--h2-size', `${theme.h2Size}px`);
     document.documentElement.style.setProperty('--p-size', `${theme.pSize}px`);
+    document.documentElement.style.setProperty('--font-family', 'MiFuenteTitulos, sans-serif'); // Roboto como fallback
 
    console.log('Updated CSS Variables:', {
      primary: theme.primary,
@@ -68,6 +69,7 @@ export class ThemeService {
      h1Size: theme.h1Size,
      h2Size: theme.h2Size,
      pSize: theme.pSize,
+     fontFamily: 'Roboto, sans-serif', // Log para depurar la fuente
    });
   }
 

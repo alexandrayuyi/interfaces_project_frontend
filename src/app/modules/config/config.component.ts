@@ -25,6 +25,18 @@ export class ConfigComponent implements OnInit {
 
 
   ngOnInit() {
+    const hFontUrl = localStorage.getItem('hFontUrl');
+    const pFontUrl = localStorage.getItem('pFontUrl');
+
+    if (hFontUrl) {
+      this.applyFont(hFontUrl, 'MiFuenteTitulos', '.dynamic-h1, .dynamic-h2, h1, h2');
+    }
+
+    if (pFontUrl) {
+      this.applyFont(pFontUrl, 'MiFuenteParrafos', '.dynamic-p, body');
+    }
+
+
     this.colorForm.get('color1')?.valueChanges.subscribe((color) => {
       this.themeService.updateColors({ primary: color, secondary: this.colorForm.get('color2')?.value, muted: this.colorForm.get('color3')?.value });
     });
@@ -55,7 +67,7 @@ export class ConfigComponent implements OnInit {
   }
 
 
-  onFileSelected(event: any, type: 'h' | 'p') {
+  onFileSelected(event: any, fontType: string) {
     const file = event.target.files[0];
 
     if (file) {
@@ -64,32 +76,29 @@ export class ConfigComponent implements OnInit {
       reader.onload = (e: any) => {
         const fontUrl = e.target.result;
 
-        if (type === 'h') {
-          // Almacenar la fuente de los títulos en localStorage
+        if (fontType === 'hFont') {
           localStorage.setItem('hFontUrl', fontUrl);
-          this.applyFontToElements('MiFuenteTitulos', fontUrl, ['h1', 'h2']);
-        } else {
-          // Almacenar la fuente de los párrafos en localStorage
+          this.applyFont(fontUrl, 'MiFuenteTitulos', '.dynamic-h1, .dynamic-h2, h2, h1');
+        } else if (fontType === 'pFont') {
           localStorage.setItem('pFontUrl', fontUrl);
-          this.applyFontToElements('MiFuenteParrafos', fontUrl, ['p', 'span', 'div']);
+          this.applyFont(fontUrl, 'MiFuenteParrafos', '.dynamic-p, body');
         }
       };
 
-      reader.readAsDataURL(file);  // Lee el archivo como Data URL
+      reader.readAsDataURL(file); // Lee el archivo como Data URL
     }
   }
 
-  applyFontToElements(fontName: string, fontUrl: string, elements: string[]) {
+  applyFont(fontUrl: string, fontName: string, selector: string) {
     const newFont = new FontFace(fontName, `url(${fontUrl})`);
 
     newFont.load().then((loadedFont) => {
       (document.fonts as any).add(loadedFont);
 
+      // Aplica la fuente a los elementos con la clase especificada
+      const elements = document.querySelectorAll(selector);
       elements.forEach((element) => {
-        const tags = document.getElementsByTagName(element);
-        for (let i = 0; i < tags.length; i++) {
-          (tags[i] as HTMLElement).style.fontFamily = `${fontName}, sans-serif`;
-        }
+        (element as HTMLElement).style.fontFamily = `${fontName}, sans-serif`;
       });
     });
   }
@@ -105,8 +114,8 @@ export class ConfigComponent implements OnInit {
       h1Size: 32,
       h2Size: 24,
       pSize: 16,
-      titleFont: null,
-      paragraphFont: null,
+      hFont: null,
+      pFont: null,
     });
   }
 
