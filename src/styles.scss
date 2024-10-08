@@ -17,15 +17,16 @@
   }
 
   h1 {
-    font-size: var(--h1-size, 100spx); // Fallback to 32px
+    font-size: var(--h1-size); // Fallback to 32px
+
   }
 
   h2 {
-    font-size: var(--h2-size, 24px); // Fallback to 24px
+    font-size: var(--h2-size); // Fallback to 24px
   }
 
   p, a, label, span, div {
-    font-size: var(--p-size, 16px);  // Fallback to 16px
+    font-size: var(--p-size);  // Fallback to 16px
   }
 
   .dynamic-h1 {

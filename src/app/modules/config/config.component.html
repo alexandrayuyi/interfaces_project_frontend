@@ -10,9 +10,9 @@
       <div
         id="main-content"
         class="bg-secondary text-muted scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
-        <div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+        <div class="mx-auto px-4 sm:px-8 lg:container">
           <router-outlet></router-outlet>
-          <div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+          <div class="mx-auto px-4 sm:px-8 lg:container">
             <router-outlet></router-outlet>
             <div class="container mx-auto p-4">
               <form [formGroup]="colorForm" (ngSubmit)="onSubmit()">
@@ -32,8 +32,8 @@
                   </div>
 
                 <!-- <div class="mb-4">
-                  <label for="titleFont" class="block">Font for titles</label>
-                  <input type="file" id="titleFont" formControlName="titleFont" accept=".ttf" (change)="onFontChange('title', $event)" class="mt-1 block w-full">
+                  <label for="hFont" class="block">Font for titles</label>
+                  <input type="file" id="hFont" formControlName="hFont" accept=".ttf" (change)="onFontChange('title', $event)" class="mt-1 block w-full">
                 </div>
 
                 <div class="mb-4">
@@ -43,28 +43,32 @@
 
                 <div class="mb-4">
                   <label for="h1Size" class="block">Size for H1</label>
-                  <input type="number" min="14" max='50' id="h1Size" formControlName="h1Size" class="mt-1 block w-full">
+                  <input type="number" min="36" max='50' id="h1Size" formControlName="h1Size" class="mt-1 block w-full">
                 </div>
                 <div class="mb-4">
                   <label for="h2Size" class="block">Size for H2</label>
-                  <input type="number" min="14" max='50' id="h2Size" formControlName="h2Size" class="mt-1 block w-full">
+                  <input type="number" min="24" max='36' id="h2Size" formControlName="h2Size" class="mt-1 block w-full">
                 </div>
                 <div class="mb-4">
                   <label for="pSize" class="block">Size for paragraphs</label>
-                  <input type="number" min="14" max='50' id="pSize" formControlName="pSize" class="mt-1 block w-full">
+                  <input type="number" min="14" max='24' id="pSize" formControlName="pSize" class="mt-1 block w-full">
                 </div>
 
                 <div class="mb-4">
-                  <h1 class="dynamic-h1 font-sans font-bold">Cargar fuente personalizada</h1>
+                  <label class="">Font for titles</label>
+                  <input type="file" id="hFont" formControlName="hFont" accept=".ttf" (change)="onFileSelected($event)" class="mt-1 block" />
+                </div>
 
-                  <input type="file" id="titleFont" formControlName="titleFont" accept=".ttf" (change)="onFileSelected($event)" class="mt-1 block" />
+                <div class="mb-4">
+                  <label class="">Font for paragrahps</label>
+                  <input type="file" id="pFont" formControlName="pFont" accept=".ttf" (change)="onFileSelected($event)" class="mt-1 block" />
                 </div>
 
                 <app-button impact="bold" shape="rounded" size="medium">Save</app-button>
               </form>
-              <h1 class="dynamic-h1 font-sans text-blue-500 font-bold">Este es un título H1</h1>
+              <!-- <h1 class="dynamic-h1 font-sans text-blue-500 font-bold">Este es un título H1</h1>
               <h2 class="dynamic-h2 font-sans text-red-500 font-semibold">Este es un título H2</h2>
-              <p class="dynamic-p font-sans text-gray-600">Este es un párrafo</p>
+              <p class="dynamic-p font-sans text-gray-600">Este es un párrafo</p> -->
             </div>
           </div>
         </div>
