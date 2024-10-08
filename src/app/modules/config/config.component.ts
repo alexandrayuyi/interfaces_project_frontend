@@ -54,7 +54,8 @@ export class ConfigComponent implements OnInit {
 
   }
 
-  onFileSelected(event: any) {
+
+  onFileSelected(event: any, type: 'h' | 'p') {
     const file = event.target.files[0];
 
     if (file) {
@@ -63,22 +64,35 @@ export class ConfigComponent implements OnInit {
       reader.onload = (e: any) => {
         const fontUrl = e.target.result;
 
-        // Guarda la URL de la fuente en localStorage
-        localStorage.setItem('fontUrl', fontUrl);
-
-        // Crea un nuevo @font-face para la fuente cargada
-        const newFont = new FontFace('MiFuente', `url(${fontUrl})`);
-
-        // Cargar y aplicar la nueva fuente
-        newFont.load().then((loadedFont) => {
-          (document.fonts as any).add(loadedFont);
-          document.body.style.fontFamily = 'MiFuente, sans-serif';
-        });
+        if (type === 'h') {
+          // Almacenar la fuente de los títulos en localStorage
+          localStorage.setItem('hFontUrl', fontUrl);
+          this.applyFontToElements('MiFuenteTitulos', fontUrl, ['h1', 'h2']);
+        } else {
+          // Almacenar la fuente de los párrafos en localStorage
+          localStorage.setItem('pFontUrl', fontUrl);
+          this.applyFontToElements('MiFuenteParrafos', fontUrl, ['p', 'span', 'div']);
+        }
       };
+
       reader.readAsDataURL(file);  // Lee el archivo como Data URL
     }
   }
 
+  applyFontToElements(fontName: string, fontUrl: string, elements: string[]) {
+    const newFont = new FontFace(fontName, `url(${fontUrl})`);
+
+    newFont.load().then((loadedFont) => {
+      (document.fonts as any).add(loadedFont);
+
+      elements.forEach((element) => {
+        const tags = document.getElementsByTagName(element);
+        for (let i = 0; i < tags.length; i++) {
+          (tags[i] as HTMLElement).style.fontFamily = `${fontName}, sans-serif`;
+        }
+      });
+    });
+  }
   onResetTheme() {
     // Reset theme to default
     this.themeService.resetTheme();
