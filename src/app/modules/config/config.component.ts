@@ -10,8 +10,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 export class ConfigComponent implements OnInit {
   colorForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private themeService:
-    ThemeService) {
+  constructor(private fb: FormBuilder, private themeService: ThemeService) {
     this.colorForm = this.fb.group({
       color1: [localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')!).primary : ['#87C09D']],
       color2: [localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')!).secondary : ['#DEFCEA']],
@@ -53,6 +52,31 @@ export class ConfigComponent implements OnInit {
       });
     });
 
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        const fontUrl = e.target.result;
+
+        // Guarda la URL de la fuente en localStorage
+        localStorage.setItem('fontUrl', fontUrl);
+
+        // Crea un nuevo @font-face para la fuente cargada
+        const newFont = new FontFace('MiFuente', `url(${fontUrl})`);
+
+        // Cargar y aplicar la nueva fuente
+        newFont.load().then((loadedFont) => {
+          (document.fonts as any).add(loadedFont);
+          document.body.style.fontFamily = 'MiFuente, sans-serif';
+        });
+      };
+      reader.readAsDataURL(file);  // Lee el archivo como Data URL
+    }
   }
 
   onSubmit() {

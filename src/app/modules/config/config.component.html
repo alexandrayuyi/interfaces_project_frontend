@@ -54,11 +54,17 @@
                   <input type="number" min="14" max='50' id="pSize" formControlName="pSize" class="mt-1 block w-full">
                 </div>
 
+                <div class="mb-4">
+                  <h1 class="dynamic-h1 font-sans font-bold">Cargar fuente personalizada</h1>
+
+                  <input type="file" id="titleFont" formControlName="titleFont" accept=".ttf" (change)="onFileSelected($event)" class="mt-1 block" />
+                </div>
+
                 <app-button impact="bold" shape="rounded" size="medium">Save</app-button>
               </form>
-              <h1 class="dynamic-h1 text-blue-500 font-bold">Este es un título H1</h1>
-              <h2 class="dynamic-h2 text-red-500 font-semibold">Este es un título H2</h2>
-              <p class="dynamic-p text-gray-600">Este es un párrafo</p>
+              <h1 class="dynamic-h1 font-sans text-blue-500 font-bold">Este es un título H1</h1>
+              <h2 class="dynamic-h2 font-sans text-red-500 font-semibold">Este es un título H2</h2>
+              <p class="dynamic-p font-sans text-gray-600">Este es un párrafo</p>
             </div>
           </div>
         </div>

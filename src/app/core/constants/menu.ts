@@ -66,7 +66,7 @@ export class Menu {
     //   ],
     // },
     {
-      group: 'Config',
+      group: 'Pages',
       separator: false,
       items: [
         {

@@ -27,7 +27,7 @@
   p {
     font-size: var(--p-size, 16px);  // Fallback to 16px
   }
-  
+
   .dynamic-h1 {
     font-size: var(--h1-size);
   }
@@ -298,5 +298,5 @@ input[type="file"]::-webkit-file-upload-button {
   }
 
 
- 
+
 }
