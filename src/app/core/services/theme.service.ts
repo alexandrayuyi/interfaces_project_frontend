@@ -41,7 +41,6 @@ export class ThemeService {
   }
 
   public updateFontSizes(sizes: { h1Size: number; h2Size: number; pSize: number }) {
-    // Guardamos los tamaños en el localStorage u otro almacenamiento local si es necesario
     const updatedTheme = { ...this.themeSubject.value, ...sizes };
     this.themeSubject.next(updatedTheme);
     this.setTheme();
