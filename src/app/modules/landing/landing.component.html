@@ -67,9 +67,25 @@
 
   <!-- Photo Gallery/Carousel -->
   <div class="slideshow-container">
-    <!-- Add your carousel slides here -->
+    <div *ngFor="let slide of slides; let i = index" class="mySlides fade" [ngClass]="{ 'active': activeIndex === i }" [style.display]="activeIndex === i ? 'block' : 'none'">
+      <div class="numbertext">{{ i + 1 }} / {{ slides.length }}</div>
+      <img [src]="slide.imageSrc" style="width:100%">
+      <!-- <div class="text-muted text">{{ slide.caption }}</div> -->
+
+    </div>
+
+    <!-- Next/prev buttons -->
+    <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+    <a class="next" (click)="plusSlides(1)">&#10095;</a>
   </div>
 
+  <br>
+
+  <!-- Dots/bullets -->
+  <!-- <div style="text-align:center">
+    <span *ngFor="let slide of slides; let i = index" class="dot" [ngClass]="{ 'active': activeIndex === i }" (click)="currentSlide(i + 1)"></span>
+  </div> -->
+  
   <!-- Footer -->
   <footer class="bg-primary text-muted shadow-md shadow-primary mt-auto">
     <div class="container mx-auto px-4 py-4 text-center">
