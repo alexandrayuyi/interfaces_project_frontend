@@ -13,7 +13,7 @@
       <router-outlet></router-outlet>
 
       <!-- Profile Information Form -->
-      <div class="card bg-base-100 text-muted">
+      <div class="text-muted">
         <div class="card-body">
           <h2 class="dynamic-h1 mb-2">Edit Profile Information</h2>
           <form class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" (ngSubmit)="saveProfile()">
@@ -21,19 +21,19 @@
               <label class="label">
                 <span class="label-text">First Name</span>
               </label>
-              <input [(ngModel)]="firstname" name="firstname" type="text" placeholder="First Name" class="input input-bordered" />
+              <input [(ngModel)]="firstname" name="firstname" type="text" placeholder="First Name" class="input input-bordered" (keydown)="handleEvent(0,0)" (mouseenter)="handleEvent(0,1)" (click)="handleEvent(0,4)" (focus)="handleFocus(0)"/>
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text">Last Name</span>
               </label>
-              <input [(ngModel)]="lastname" name="lastname" type="text" placeholder="Last Name" class="input input-bordered" />
+              <input [(ngModel)]="lastname" name="lastname" type="text" placeholder="Last Name" class="input input-bordered" (keydown)="handleEvent(1,0)" (mouseenter)="handleEvent(1,1)" (click)="handleEvent(1,4)" (focus)="handleFocus(1)" />
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text">Birthdate</span>
               </label>
-              <input [(ngModel)]="birthdate" name="birthdate" type="date" class="input input-bordered" />
+              <input [(ngModel)]="birthdate" name="birthdate" type="date" class="input input-bordered" (keydown)="handleEvent(2,0)" (mouseenter)="handleEvent(2,1)" (click)="handleEvent(2,4)" (focus)="handleFocus(2)"/>
             </div>
             <div class="form-control">
               <label class="label">
@@ -41,11 +41,11 @@
               </label>
               <div class="flex space-x-10">
                 <label class="radio">
-                  <input [(ngModel)]="gender" name="gender" type="radio" value="femenine" class="radio-radio" />
+                  <input [(ngModel)]="gender" name="gender" type="radio" value="femenine" class="radio-radio" (click)="handleEvent(3,4)" (mouseenter)="handleEvent(3,1)" (focus)="handleFocus(3)"/>
                   <span class="radio-text">Femenine</span>
                 </label>
                 <label class="radio">
-                  <input [(ngModel)]="gender" name="gender" type="radio" value="masculine" class="radio-radio" />
+                  <input [(ngModel)]="gender" name="gender" type="radio" value="masculine" class="radio-radio" (click)="handleEvent(3,4)" (mouseenter)="handleEvent(3,1)" (focus)="handleFocus(3)"/>
                   <span class="radio-text">Masculine</span>
                 </label>
               </div>
@@ -54,35 +54,35 @@
               <label class="label">
                 <span class="label-text">Phone Number</span>
               </label>
-              <input [(ngModel)]="phone" name="phone" type="text" placeholder="Phone Number" class="input input-bordered" />
+              <input [(ngModel)]="phone" name="phone" type="text" placeholder="Phone Number" class="input input-bordered" (keydown)="handleEvent(4,0)" (mouseenter)="handleEvent(4,1)" (click)="handleEvent(4,4)" (focus)="handleFocus(4)"/>
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text">Profile Picture</span>
               </label>
-              <input [(ngModel)]="profilePicture" name="profilePicture" type="file" accept="image/*" class="block w-full dynamic-p text-muted border bg-primary rounded-lg cursor-pointer focus:outline-none" />
+              <input [(ngModel)]="profilePicture" name="profilePicture" type="file" accept="image/*" class="block w-full dynamic-p text-muted border bg-primary rounded-lg cursor-pointer focus:outline-none" (click)="handleEvent(5,4)" (mouseenter)="handleEvent(5,1)" (focus)="handleFocus(5)"/>
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text">Username</span>
               </label>
-              <input [(ngModel)]="username" name="username" type="text" placeholder="Username" class="input input-bordered" />
+              <input [(ngModel)]="username" name="username" type="text" placeholder="Username" class="input input-bordered" (keydown)="handleEvent(6,0)" (mouseenter)="handleEvent(6,1)" (click)="handleEvent(6,4)" (focus)="handleFocus(6)"/>
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text">Password</span>
               </label>
-              <input [(ngModel)]="password" name="password" type="password" placeholder="Password" class="input input-bordered" />
+              <input [(ngModel)]="password" name="password" type="password" placeholder="Password" class="input input-bordered" (keydown)="handleEvent(7,0)" (mouseenter)="handleEvent(7,1)" (click)="handleEvent(7,4)" (focus)="handleFocus(7)"/>
             </div>
             <div class="form-control">
               <label class="label">
                 <span class="label-text">Email</span>
               </label>
-              <input [(ngModel)]="email" name="email" type="email" placeholder="Email" class="input input-bordered" />
+              <input [(ngModel)]="email" name="email" type="email" placeholder="Email" class="input input-bordered" (keydown)="handleEvent(8,0)" (mouseenter)="handleEvent(8,1)" (click)="handleEvent(8,4)" (focus)="handleFocus(8)"/>
             </div>
             <div class="form-control">
               <label class="label">
-                <span class="label-text">Address</span>
+                <span class="label-text">Location</span>
               </label>
               <div #mapContainer [ngStyle]="{
                 width: '100%',
@@ -90,7 +90,7 @@
                 borderColor: 'var(--primary)',
                 backgroundColor: 'var(--secondary)',
                 color: 'var(--primary)'
-              }"  class="mt-2 border-2 border-primary rounded shadow bg-primary text-primary"></div>
+              }"  class="mt-2 border-2 border-primary rounded shadow bg-primary text-primary" (dragend)="handleEvent(9,6)" (scroll)="handleEvent(9,5)" (mouseenter)="handleEvent(9,1)" (click)="handleEvent(9,4)" (focus)="handleFocus(9)"></div>
               <p-autoComplete
                 [(ngModel)]="query"
                 name="location"
@@ -100,7 +100,8 @@
                 placeholder="Search for a location"
                 field="displayName"
                 [dropdown]="true"
-                class="mt-4">
+                class="mt-4"
+                (click)="handleEvent(9,4)" (mouseenter)="handleEvent(9,1)" (keydown)="handleAutocompleteSelection(9)" (focus)="handleFocus(9)">
               </p-autoComplete>
             </div>
 
@@ -108,7 +109,12 @@
               <label class="label">
                 <span class="label-text">Timezone</span>
               </label>
-              <select [(ngModel)]="timezone" name="timezone" class="text-muted">
+              <select [(ngModel)]="timezone" name="timezone" class="text-muted"
+              (click)="handleEvent(10,4)"
+                (mouseenter)="handleEvent(10,1)"
+                (keydown)="handleAutocompleteSelection(10)"
+                (scroll)="handleEvent(10,5)"
+                (focus)="handleFocus(10)">
                 <option value="UTC-12:00">UTC-12:00</option>
                 <option value="UTC-11:00">UTC-11:00</option>
                 <option value="UTC-10:00">UTC-10:00</option>
@@ -137,12 +143,28 @@
               </select>
             </div>
 
-            <!-- <div class="form-control w-full max-w-xs">
-              <app-country-select></app-country-select>
-            </div> -->
-            <div class="form-control col-span-full">
+            <div class="form-control w-full max-w-xs">
+              <label class="label">
+                <span class="label-text">Country of nationality</span>
+              </label>
+              <p-autoComplete 
+                [(ngModel)]="query2"
+                name="Nationality" 
+                [suggestions]="displayDataDirection2"
+                (completeMethod)="search2($event)"
+                placeholder="Search for your country"
+                field="displayName"
+                class="mt-4"
+                (click)="handleEvent(11,4)"
+                (mouseenter)="handleEvent(11,1)"
+                (keydown)="handleAutocompleteSelection(11)"
+                (scroll)="handleEvent(11,5)"
+                (focus)="handleFocus(11)">
+              </p-autoComplete>
+            </div>
+            <div class="form-control col-span-full pt-16">
               <div class="flex justify-center">
-                <app-button type="submit" impact="bold" shape="rounded" size="medium">Save</app-button>
+                <app-button type="submit" impact="bold" shape="rounded" size="medium" (focus)="handleFocus(12)" (mouseenter)="handleEvent(12,1)" (click)="handleSaveClick()">Save</app-button>
               </div>
             </div>
           </form>
@@ -151,74 +173,29 @@
     </div>
 
 
-    <!-- <table class="table-auto w-full border-collapse border border-gray-300">
+    <table class="table-auto w-full border-collapse border border-gray-300">
       <thead>
         <tr>
-          <th class="border border-gray-300 px-4 py-2">Operador</th>
-          <th class="border border-gray-300 px-4 py-2">Acción</th>
-          <th class="border border-gray-300 px-4 py-2">Tiempo (seg)</th>
-          <th class="border border-gray-300 px-4 py-2">Contador</th>
+          <th class="border border-muted px-4 py-2">Field</th>
+          <th class="border border-muted px-4 py-2">K</th>
+          <th class="border border-muted px-4 py-2">P</th>
+          <th class="border border-muted px-4 py-2">H</th>
+          <th class="border border-muted px-4 py-2">M</th>
+          <th class="border border-muted px-4 py-2">B</th>
+          <th class="border border-muted px-4 py-2">Scrolling</th>
+          <th class="border border-muted px-4 py-2">D</th>
+          <th class="border border-muted px-4 py-2">R</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="border border-gray-300 px-4 py-2">K</td>
-          <td class="border border-gray-300 px-4 py-2">Presionar una tecla</td>
-          <td class="border border-gray-300 px-4 py-2">0.2</td>
-          <td class="border border-gray-300 px-4 py-2">0</td>
-        </tr>
-        <tr>
-          <td class="border border-gray-300 px-4 py-2">P</td>
-          <td class="border border-gray-300 px-4 py-2">Señalar o apuntar con un dispositivo de entrada</td>
-          <td class="border border-gray-300 px-4 py-2">1.1</td>
-          <td class="border border-gray-300 px-4 py-2">0</td>
-        </tr>
-        <tr>
-          <td class="border border-gray-300 px-4 py-2">H</td>
-          <td class="border border-gray-300 px-4 py-2">Mover la mano de un dispositivo de entrada a otro</td>
-          <td class="border border-gray-300 px-4 py-2">0.4</td>
-          <td class="border border-gray-300 px-4 py-2">0</td>
-        </tr>
-        <tr>
-          <td class="border border-gray-300 px-4 py-2">M</td>
-          <td class="border border-gray-300 px-4 py-2">Pensar en qué hacer a continuación</td>
-          <td class="border border-gray-300 px-4 py-2">1.2</td>
-          <td class="border border-gray-300 px-4 py-2">0</td>
-        </tr>
-        <tr>
-          <td class="border border-gray-300 px-4 py-2">B</td>
-          <td class="border border-gray-300 px-4 py-2">Presionar Mouse</td>
-          <td class="border border-gray-300 px-4 py-2">0.1</td>
-          <td class="border border-gray-300 px-4 py-2">0</td>
-        </tr>
-        <tr>
-          <td class="border border-gray-300 px-4 py-2">Date-Picker</td>
-          <td class="border border-gray-300 px-4 py-2">Entrada fecha tipo Date-Picker</td>
-          <td class="border border-gray-300 px-4 py-2">6.81</td>
-          <td class="border border-gray-300 px-4 py-2">0</td>
-        </tr>
-        <tr>
-          <td class="border border-gray-300 px-4 py-2">Scrolling</td>
-          <td class="border border-gray-300 px-4 py-2">Mover scroll</td>
-          <td class="border border-gray-300 px-4 py-2">3.96</td>
-          <td class="border border-gray-300 px-4 py-2">0</td>
-        </tr>
-        <tr>
-          <td class="border border-gray-300 px-4 py-2">D</td>
-          <td class="border border-gray-300 px-4 py-2">Dibujar</td>
-          <td class="border border-gray-300 px-4 py-2">1.2</td>
-          <td class="border border-gray-300 px-4 py-2">0</td>
-        </tr>
-        <tr>
-          <td class="border border-gray-300 px-4 py-2">R</td>
-          <td class="border border-gray-300 px-4 py-2">Tiempo de Respuesta del Sistema</td>
-          <td class="border border-gray-300 px-4 py-2">t</td>
-          <td class="border border-gray-300 px-4 py-2">0</td>
+        <tr *ngFor="let row of counters; let i = index">
+          <td class="border border-muted px-4 py-2">{{ fields[i] }}</td>
+          <td class="border border-muted px-4 py-2" *ngFor="let counter of row; let j = index">
+            <button (click)="incrementCounter(i, j)">{{ counter }}</button>
+          </td>
         </tr>
       </tbody>
     </table>
-  </div> -->
-
 
 
     <!-- footer -->
