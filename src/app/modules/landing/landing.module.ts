@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingComponent } from './landing.component';
+import { Tangram3dComponent } from './components/tangram3d/tangram3d.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { LandingComponent } from './landing.component';
   imports: [
     ButtonComponent,
     CommonModule,
-    LandingRoutingModule
+    LandingRoutingModule,
+    Tangram3dComponent
   ]
 })
 export class LandingModule { }
