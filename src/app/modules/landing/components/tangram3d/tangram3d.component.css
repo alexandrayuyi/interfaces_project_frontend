@@ -4,9 +4,9 @@
 }
 .scene{
 	transform: 
-	rotateX(0deg)
+	rotateX(70deg)
 		rotateY(0deg)
-			   rotateZ(0deg);
+			   rotateZ(-50deg);
 	width: 200px;
 	height: 200px;
 	transform-origin: center;
