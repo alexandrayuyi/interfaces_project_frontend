@@ -70,22 +70,26 @@
                 </div>
                 <div class="mb-4">
                 </div>
+
                 <div class="mb-1 flex justify-center">
-                  <app-button type="button" class="btn btn-primary mr-2" (buttonClick)="onSubmit()">Save</app-button>
-                </div>
-                <div class="mb-4">
-                </div>
-                <div class="mb-1 flex justify-center">
-                </div>
-                <div class="mb-1 flex justify-center">
-                  <app-button type="button" class="btn btn-secondary" shape="rounded" (buttonClick)="onResetTheme()">Reset</app-button>
                 </div>
                 <!-- <app-button (buttonClick)="Send()" impact="bold" shape="rounded" size="medium">Save</app-button> -->
               </form>
-              <div class="mb-4">
+              <div class="mb-1 flex justify-center">
+                <app-button type="button" class="btn btn-primary mr-2" (buttonClick)="onSubmit()">Save</app-button>
               </div>
+              <!-- Mensaje de éxito o error -->
+              <div *ngIf="successmsg" class="text-center mt-4">
+                <span class="p-2 bg-green-100 text-green-800 rounded">{{ successmsg }}</span>
+              </div>
+
+              <div class="mb-4"></div>
               <div class="mb-1 flex justify-center">
                 <app-button type="button" (click)="onLoad()">Load from DB</app-button>
+              </div>
+              <div class="mb-4"></div>
+              <div class="mb-1 flex justify-center">
+                <app-button type="button" class="btn btn-secondary" shape="rounded" (buttonClick)="onResetTheme()">Reset</app-button>
               </div>
             </div>
           </div>

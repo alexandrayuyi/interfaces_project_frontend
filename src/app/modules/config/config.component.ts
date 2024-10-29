@@ -13,6 +13,7 @@ import { of } from 'rxjs';
 })
 export class ConfigComponent implements OnInit {
   colorForm: FormGroup;
+  successmsg: string = '';
   private isSaved = false;
 
   constructor(
@@ -115,10 +116,21 @@ export class ConfigComponent implements OnInit {
     this.saveTemporaryConfig();
   }
 
-  onSubmit() {
-    this.saveConfig();
-    console.log('Está aqui')
-    window.location.reload();
+  async onSubmit() {
+    console.log("aqui");
+    try {
+      await this.saveConfig();
+      this.successmsg = 'Theme saved'
+      // window.location.reload();
+    } catch (error) {
+      console.error('Error saving config', error);
+    } finally {
+      console.log('Config saved');
+      setTimeout(() => {
+        this.onLoad();
+      }, 300);
+      // this.onLoad();
+    }
   }
 
   onLoad(){
