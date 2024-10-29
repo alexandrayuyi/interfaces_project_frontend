@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Theme } from '../models/theme.model';
 
 @Injectable({
@@ -8,80 +9,95 @@ import { Theme } from '../models/theme.model';
 export class ThemeService {
   private themeSubject = new BehaviorSubject<Theme>(this.loadTheme());
   public theme$ = this.themeSubject.asObservable();
+  private userId = Number(localStorage.getItem('userid'));
 
-  constructor() {
-    this.setTheme();
+  constructor(private http: HttpClient) {
+  }
+
+  loadThemeFromDatabase(userId: number) {
+    return this.http.get(`http://localhost:5000/api/v1/config/${userId}`);
   }
 
   resetTheme() {
-    const defaultTheme: Theme = { mode: 'dark', color: 'base', primary: '87C09D', secondary: 'DEFCEA', muted: '000200', h1Size: 32, h2Size: 24, pSize: 16 };
-    this.themeSubject.next(defaultTheme);
-    this.setTheme();
-    this.setThemeClass();
+    this.updateColors({ primary: '#87C09D', secondary: '#DEFCEA', muted: '#000200' });
+    this.updateFontSizes({ h1Size: 32, h2Size: 24, pSize: 16 });
+  }
+
+
+  public setThemeClass() {
+
+    const theme = this.themeSubject.value;
+
+    document.documentElement.style.setProperty('--primary', theme.primary || '#87C09D');
+    document.documentElement.style.setProperty('--secondary', theme.secondary || '#DEFCEA');
+    document.documentElement.style.setProperty('--muted', theme.muted || '#000200');
+    document.documentElement.style.setProperty('--h1-size', `${theme.h1Size}px`);
+    document.documentElement.style.setProperty('--h2-size', `${theme.h2Size}px`);
+    document.documentElement.style.setProperty('--p-size', `${theme.pSize}px`);
+    document.documentElement.style.setProperty('--font-family', 'MiFuenteTitulos, sans-serif');
   }
 
   private loadTheme(): Theme {
     const theme = localStorage.getItem('theme');
-    return theme ? JSON.parse(theme) : { mode: 'dark', color: 'base', primary: '87C09D', secondary: 'DEFCEA', muted: '000200', h1Size: '32px', h2Size: '24px', pSize: '16px' };
+    return theme ? JSON.parse(theme) : {
+      mode: 'dark',
+      color: 'base',
+      primary: '87C09D',
+      secondary: 'DEFCEA',
+      muted: '000200',
+      h1Size: '32px',
+      h2Size: '24px',
+      pSize: '16px'
+    };
   }
 
-  private setTheme() {
-    localStorage.setItem('theme', JSON.stringify(this.themeSubject.value));
-    this.setThemeClass();
+  updateColors(theme: { primary: string, secondary: string, muted: string }) {
+    document.documentElement.style.setProperty('--primary', theme.primary);
+    document.documentElement.style.setProperty('--secondary', theme.secondary);
+    document.documentElement.style.setProperty('--muted', theme.muted);
   }
 
-  public get isDark(): boolean {
-    return this.themeSubject.value.mode == 'dark';
+  updateFontSizes(sizes: { h1Size: number, h2Size: number, pSize: number }) {
+    document.documentElement.style.setProperty('--h1-size', `${sizes.h1Size}px`);
+    document.documentElement.style.setProperty('--h2-size', `${sizes.h2Size}px`);
+    document.documentElement.style.setProperty('--p-size', `${sizes.pSize}px`);
   }
 
-  public updateColors(colors: { primary: string; secondary: string; muted: string }) {
-    const updatedTheme = { ...this.themeSubject.value, ...colors };
-    this.themeSubject.next(updatedTheme);
-    this.setTheme();
+  applyTheme(theme: any) {
+    // Aplicar colores
+    this.updateColors({
+      primary: theme.color1 || '#87C09D',
+      secondary: theme.color2 || '#DEFCEA',
+      muted: theme.color3 || '#000200',
+    });
+
+    // Aplicar tamaños de fuentes
+    this.updateFontSizes({
+      h1Size: parseInt(theme.h1size) || 32,
+      h2Size: parseInt(theme.h2size) || 24,
+      pSize: parseInt(theme.psize) || 16,
+    });
+
+    // Aplicar fuentes personalizadas (si están configuradas)
+    if (localStorage.getItem('hFontUrl')) {
+      this.applyFont(localStorage.getItem('hFontUrl')!, 'MiFuenteTitulos', '.dynamic-h1, .dynamic-h2, h2, h1');
+    }
+
+    if (localStorage.getItem('pFontUrl')) {
+      this.applyFont(localStorage.getItem('pFontUrl')!, 'MiFuenteParrafos', '.dynamic-p, body, a, p, span, button, .paragraph');
+    }
   }
+  applyFont(fontUrl: string, fontName: string, selector: string) {
+    const newFont = new FontFace(fontName, `url(${fontUrl})`);
 
-  public updateFontSizes(sizes: { h1Size: number; h2Size: number; pSize: number }) {
-    const updatedTheme = { ...this.themeSubject.value, ...sizes };
-    this.themeSubject.next(updatedTheme);
-    this.setTheme();
-  }
+    newFont.load().then((loadedFont) => {
+      (document.fonts as any).add(loadedFont);
 
-  private setThemeClass() {
-    const theme = this.themeSubject.value;
-  // document.querySelector('html')!.className = theme.mode;
-  // document.querySelector('html')!.setAttribute('data-theme', theme.color);
-
-   // Update CSS variables
-    document.documentElement.style.setProperty('--primary', theme.primary || '#87C09D'); // Fallback to default
-    document.documentElement.style.setProperty('--secondary', theme.secondary || '#DEFCEA'); // Fallback to default
-    document.documentElement.style.setProperty('--muted', theme.muted || '#000200'); // Fallback to default
-
-    // Actualizar las variables de tamaño de fuente en CSS
-    document.documentElement.style.setProperty('--h1-size', `${theme.h1Size}px`);
-    document.documentElement.style.setProperty('--h2-size', `${theme.h2Size}px`);
-    document.documentElement.style.setProperty('--p-size', `${theme.pSize}px`);
-    document.documentElement.style.setProperty('--font-family', 'MiFuenteTitulos, sans-serif'); // Roboto como fallback
-
-   console.log('Updated CSS Variables:', {
-     primary: theme.primary,
-     secondary: theme.secondary,
-     muted: theme.muted,
-     h1Size: theme.h1Size,
-     h2Size: theme.h2Size,
-     pSize: theme.pSize,
-     fontFamily: 'Roboto, sans-serif', // Log para depurar la fuente
-   });
-  }
-
-  public getPrimaryColor(): string {
-    return this.themeSubject.value.primary || '#22c55e'; // Default
-  }
-
-  public getSecondaryColor(): string {
-    return this.themeSubject.value.secondary || '#cc0022'; // Default
-  }
-
-  public getMutedColor(): string {
-    return this.themeSubject.value.muted || '#6d28d9'; // Default
+      // Aplica la fuente a los elementos con la clase especificada
+      const elements = document.querySelectorAll(selector);
+      elements.forEach((element) => {
+        (element as HTMLElement).style.fontFamily = `${fontName}, sans-serif`;
+      });
+    });
   }
 }

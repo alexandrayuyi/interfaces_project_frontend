@@ -66,9 +66,27 @@
                   <label class="">Font for paragrahps</label>
                   <input type="file" id="pFont" formControlName="pFont" accept=".ttf" (change)="onFileSelected($event, 'pFont')" class="mt-1 block" />
                 </div>
-                <div></div>
+                <div class="mb-4">
+                </div>
+                <div class="mb-4">
+                </div>
+                <div class="mb-1 flex justify-center">
+                  <app-button type="button" class="btn btn-primary mr-2" (buttonClick)="onSubmit()">Save</app-button>
+                </div>
+                <div class="mb-4">
+                </div>
+                <div class="mb-1 flex justify-center">
+                </div>
+                <div class="mb-1 flex justify-center">
+                  <app-button type="button" class="btn btn-secondary" shape="rounded" (buttonClick)="onResetTheme()">Reset</app-button>
+                </div>
                 <!-- <app-button (buttonClick)="Send()" impact="bold" shape="rounded" size="medium">Save</app-button> -->
               </form>
+              <div class="mb-4">
+              </div>
+              <div class="mb-1 flex justify-center">
+                <app-button type="button" (click)="onLoad()">Load from DB</app-button>
+              </div>
             </div>
           </div>
         </div>

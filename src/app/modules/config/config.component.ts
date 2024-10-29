@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ThemeService } from 'src/app/core/services/theme.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-config',
@@ -9,8 +13,14 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 })
 export class ConfigComponent implements OnInit {
   colorForm: FormGroup;
+  private isSaved = false;
 
-  constructor(private fb: FormBuilder, private themeService: ThemeService) {
+  constructor(
+    private fb: FormBuilder,
+    private themeService: ThemeService,
+    private http: HttpClient,
+    private router: Router
+  ) {
     this.colorForm = this.fb.group({
       color1: [localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')!).primary : ['#87C09D']],
       color2: [localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')!).secondary : ['#DEFCEA']],
@@ -23,50 +33,100 @@ export class ConfigComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
-    const hFontUrl = localStorage.getItem('hFontUrl');
-    const pFontUrl = localStorage.getItem('pFontUrl');
-
-    if (hFontUrl) {
-      this.applyFont(hFontUrl, 'MiFuenteTitulos', '.dynamic-h1, .dynamic-h2, h1, h2');
-    }
-
-    if (pFontUrl) {
-      this.applyFont(pFontUrl, 'MiFuenteParrafos', '.dynamic-p, body');
-    }
-
-
-    this.colorForm.get('color1')?.valueChanges.subscribe((color) => {
-      this.themeService.updateColors({ primary: color, secondary: this.colorForm.get('color2')?.value, muted: this.colorForm.get('color3')?.value });
+    const userId = Number(localStorage.getItem('userid'));
+    this.http.get(`http://localhost:5000/api/v1/config/${userId}`).pipe(
+      catchError(error => {
+        if (error.status === 401) {
+          this.router.navigate(['/auth']);
+        }
+        return of(null); // Return a null observable to complete the stream
+      })
+    ).subscribe((config: any) => {
+      if (config) {
+        this.colorForm.patchValue({
+          color1: config.color1 || '#87C09D',
+          color2: config.color2 || '#DEFCEA',
+          color3: config.color3 || '#000200',
+          h1Size: parseInt(config.h1size) || 32,
+          h2Size: parseInt(config.h2size) || 24,
+          pSize: parseInt(config.psize) || 16,
+        });
+        // Aplicar inmediatamente el tema después de cargar los valores del backend
+        this.themeService.updateColors({
+          primary: config.color1,
+          secondary: config.color2,
+          muted: config.color3,
+        });
+        this.themeService.updateFontSizes({
+          h1Size: parseInt(config.h1size),
+          h2Size: parseInt(config.h2size),
+          pSize: parseInt(config.psize)
+        });
+        // Guardamos en localStorage
+        localStorage.setItem('theme', JSON.stringify(config));
+      }
     });
+
+    this.subscribeToFormChanges();
+  }
+
+  subscribeToFormChanges() {
+    // Suscripciones a cambios de colores
+    this.colorForm.get('color1')?.valueChanges.subscribe((color) => {
+      this.themeService.updateColors({
+        primary: color,
+        secondary: this.colorForm.get('color2')?.value,
+        muted: this.colorForm.get('color3')?.value,
+      });
+      this.saveTemporaryConfig();
+    });
+
     this.colorForm.get('color2')?.valueChanges.subscribe((color) => {
-      this.themeService.updateColors({ primary: this.colorForm.get('color1')?.value, secondary: color, muted: this.colorForm.get('color3')?.value });
+      this.themeService.updateColors({
+        primary: this.colorForm.get('color1')?.value,
+        secondary: color,
+        muted: this.colorForm.get('color3')?.value,
+      });
+      this.saveTemporaryConfig();
     });
 
     this.colorForm.get('color3')?.valueChanges.subscribe((color) => {
-      this.themeService.updateColors({ primary: this.colorForm.get('color1')?.value, secondary: this.colorForm.get('color2')?.value, muted: color });
-    });
-    // Subscribe to changes in font sizes
-    this.colorForm.get('h1Size')?.valueChanges.subscribe((size) => {
-      this.themeService.updateFontSizes({ h1Size: this.colorForm.get('h1Size')?.value, h2Size: this.colorForm.get('h2Size')?.value, pSize: this.colorForm.get('pSize')?.value });
-    });
-
-    this.colorForm.get('h2Size')?.valueChanges.subscribe((size) => {
-      this.themeService.updateFontSizes({ h1Size: this.colorForm.get('h1Size')?.value, h2Size: this.colorForm.get('h2Size')?.value, pSize: this.colorForm.get('pSize')?.value });
-    });
-
-    this.colorForm.get('pSize')?.valueChanges.subscribe((size) => {
-      this.themeService.updateFontSizes({
-        h1Size: this.colorForm.get('h1Size')?.value,
-        h2Size: this.colorForm.get('h2Size')?.value,
-        pSize: this.colorForm.get('pSize')?.value,
+      this.themeService.updateColors({
+        primary: this.colorForm.get('color1')?.value,
+        secondary: this.colorForm.get('color2')?.value,
+        muted: color,
       });
+      this.saveTemporaryConfig();
     });
 
+    // Suscribirse a los cambios en el tamaño de fuente
+    this.colorForm.get('h1Size')?.valueChanges.subscribe(() => this.updateFontSizes());
+    this.colorForm.get('h2Size')?.valueChanges.subscribe(() => this.updateFontSizes());
+    this.colorForm.get('pSize')?.valueChanges.subscribe(() => this.updateFontSizes());
   }
 
+  updateFontSizes() {
+    this.themeService.updateFontSizes({
+      h1Size: this.colorForm.get('h1Size')?.value,
+      h2Size: this.colorForm.get('h2Size')?.value,
+      pSize: this.colorForm.get('pSize')?.value,
+    });
+    this.saveTemporaryConfig();
+  }
 
+  onSubmit() {
+    this.saveConfig();
+    console.log('Está aqui')
+    window.location.reload();
+  }
+
+  onLoad(){
+    console.log("loading...")
+    window.location.reload();
+  }
+
+  // Función para aplicar una fuente personalizada
   onFileSelected(event: any, fontType: string) {
     const file = event.target.files[0];
 
@@ -83,6 +143,7 @@ export class ConfigComponent implements OnInit {
           localStorage.setItem('pFontUrl', fontUrl);
           this.applyFont(fontUrl, 'MiFuenteParrafos', '.dynamic-p, body, a, p, span, button, .paragraph');
         }
+        this.saveTemporaryConfig();
       };
 
       reader.readAsDataURL(file); // Lee el archivo como Data URL
@@ -102,11 +163,9 @@ export class ConfigComponent implements OnInit {
       });
     });
   }
-  onResetTheme() {
-    // Reset theme to default
-    this.themeService.resetTheme();
 
-    // Reset form to default values
+  onResetTheme() {
+    this.themeService.resetTheme();
     this.colorForm.reset({
       color1: '#87C09D',
       color2: '#DEFCEA',
@@ -117,9 +176,48 @@ export class ConfigComponent implements OnInit {
       hFont: null,
       pFont: null,
     });
+    this.saveConfig();
   }
 
-  onSubmit() {
-    // Handle form submission if needed
+  saveConfig() {
+    const userId = Number(localStorage.getItem('userid'));
+    const currentConfig = JSON.parse(localStorage.getItem('theme') || '{}');
+    const config = {
+      color1: this.colorForm.get('color1')?.value,
+      color2: this.colorForm.get('color2')?.value,
+      color3: this.colorForm.get('color3')?.value,
+      h1size: `${this.colorForm.get('h1Size')?.value}px`,
+      h2size: `${this.colorForm.get('h2Size')?.value}px`,
+      psize: `${this.colorForm.get('pSize')?.value}px`,
+      fonttitle: localStorage.getItem('hFontUrl') ? 'MiFuenteTitulos' : null,
+      fontp: localStorage.getItem('pFontUrl') ? 'MiFuenteParrafos' : null,
+      userId: userId
+    };
+
+    this.http.post('http://localhost:5000/api/v1/config/', config).subscribe(response => {
+      console.log('Config saved', response);
+      this.isSaved = true;
+      localStorage.setItem('theme', JSON.stringify(config));
+    }, error => {
+      console.error('Error saving config', error);
+    });
+  }
+
+  saveTemporaryConfig() {
+    const userId = Number(localStorage.getItem('userid'));
+
+    const tempConfig = {
+      color1: this.colorForm.get('color1')?.value,
+      color2: this.colorForm.get('color2')?.value,
+      color3: this.colorForm.get('color3')?.value,
+      h1size: `${this.colorForm.get('h1Size')?.value}px`,
+      h2size: `${this.colorForm.get('h2Size')?.value}px`,
+      psize: `${this.colorForm.get('pSize')?.value}px`,
+      fonttitle: localStorage.getItem('hFontUrl') ? 'MiFuenteTitulos' : null,
+      fontp: localStorage.getItem('pFontUrl') ? 'MiFuenteParrafos' : null,
+      userId: userId
+    };
+
+    localStorage.setItem('theme', JSON.stringify(tempConfig));
   }
 }
