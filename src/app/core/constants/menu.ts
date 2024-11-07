@@ -70,12 +70,12 @@ export class Menu {
       separator: false,
       items: [
         {
-          icon: 'assets/icons/heroicons/outline/folder.svg',
+          icon: 'assets/icons/heroicons/outline/cursor-click.svg',
           label: 'Home',
           route: '/landing',
         },
         {
-          icon: 'assets/icons/heroicons/outline/cube.svg',
+          icon: 'assets/icons/heroicons/outline/user-circle.svg',
           label: 'Profile',
           route: '/profile/readonly',
         },
@@ -84,6 +84,16 @@ export class Menu {
           label: 'Settings',
           route: '/config',
         },
+        {
+            icon: 'assets/icons/heroicons/outline/folder.svg',
+            label: 'Multimedia',
+            route: '/multimedia',
+        },
+        {
+          icon: 'assets/icons/heroicons/outline/information-circle.svg',
+          label: 'User Guide',
+          route: '/user-guide',
+      },
         // {
         //   icon: 'assets/icons/heroicons/outline/bell.svg',
         //   label: 'Notifications',
