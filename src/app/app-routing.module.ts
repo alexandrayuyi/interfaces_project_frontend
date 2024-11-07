@@ -41,6 +41,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'multimedia',
+    loadChildren: () => import('./modules/multimedia/multimedia.module').then(m => m.MultimediaModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: '**',
     redirectTo: 'errors/404'
   },
