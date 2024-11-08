@@ -1,27 +1,50 @@
 <div class="flex h-screen w-full overflow-hidden">
-    <!-- Sidebar -->
-    <app-sidebar></app-sidebar>
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
 
-    <div class="flex grow flex-col content-start overflow-hidden bg-card">
-      <!-- Header -->
-      <app-navbar></app-navbar>
+  <div class="flex grow flex-col content-start overflow-hidden bg-card">
+    <!-- Header -->
+    <app-navbar></app-navbar>
 
-      <!-- Main content -->
-      <div
-        id="main-content"
-        class="bg-secondary text-muted scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
-        <div class="mx-auto px-4 sm:px-8 lg:container">
-<div>
-    <h1>Multimedia</h1>
-    <button (click)="navigateTo('images')">Images</button>
-    <button (click)="navigateTo('audios')">Audios</button>
-    <button (click)="navigateTo('video')">Video</button>
-    <button (click)="navigateTo('pdf')">PDF</button>
-    <button (click)="navigateTo('terms-and-conditions')">Terms and Conditions</button>
-  </div>
-</div>
+    <!-- Main content -->
+    <div
+      id="main-content"
+      class="bg-secondary text-muted scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
+      <div class="mx-auto px-4 sm:px-8 lg:container">
+        <div class="text-center">
+          <h1 class="w-full mb-2 dynamic-h2">Multimedia</h1>
+          <p class="w-full mb-4 dynamic-p">Select the type of multimedia you want to upload</p>
+          <select (change)="onSelectChange($event)" [value]="selectedPage" class="w-40">
+            <option value="images">Images</option>
+            <option value="audios">Audios</option>
+            <option value="video">Video</option>
+            <option value="pdf">PDF</option>
+            <option value="terms-and-conditions">Terms and Conditions</option>
+          </select>
         </div>
-        <!-- Footer -->
-      <app-footer></app-footer>
+        <div *ngIf="selectedPage === 'images'">
+          <h2>Upload Images</h2>
+          <input type="file" accept="image/*" multiple>
+        </div>
+        <div *ngIf="selectedPage === 'audios'">
+          <h2>Upload Audios</h2>
+          <input type="file" accept="audio/*" multiple>
+        </div>
+        <div *ngIf="selectedPage === 'video'">
+          <h2>Upload Video</h2>
+          <input type="file" accept="video/*">
+        </div>
+        <div *ngIf="selectedPage === 'pdf'">
+          <h2>Upload PDF</h2>
+          <input type="file" accept="application/pdf">
+        </div>
+        <div *ngIf="selectedPage === 'terms-and-conditions'">
+          <h2>Enter Terms and Conditions</h2>
+          <textarea rows="10" cols="50"></textarea>
+        </div>
+      </div>
     </div>
+    <!-- Footer -->
+    <app-footer></app-footer>
+  </div>
 </div>

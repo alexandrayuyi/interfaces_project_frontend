@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from '../layout/components/sidebar/sidebar.component';
 import { NavbarComponent } from '../layout/components/navbar/navbar.component';
@@ -26,9 +26,19 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
 })
 export class MultimediaComponent {
-  constructor(private router: Router) {}
+  selectedPage: string = '';
 
-  navigateTo(page: string) {
-    this.router.navigate([`/multimedia/${page}`]);
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.url.subscribe(url => {
+      const path = url[0]?.path || '';
+      this.selectedPage = path;
+    });
+  }
+
+  onSelectChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedPage = selectElement.value;
   }
 }
