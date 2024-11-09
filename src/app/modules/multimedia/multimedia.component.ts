@@ -47,6 +47,7 @@ export class MultimediaComponent {
   }
 
   onImageChange(event: Event): void {
+    this.selectedImages = [];
     const input = event.target as HTMLInputElement;
     if (input.files) {
       for (let i = 0; i < input.files.length; i++) {
