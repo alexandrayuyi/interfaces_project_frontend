@@ -9,7 +9,10 @@ import { BottomNavbarComponent } from "../layout/components/bottom-navbar/bottom
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { ReactiveFormsModule } from '@angular/forms';
 
-
+export interface SelectedImage {
+  name: string;
+  dataUrl: string;
+}
 @Component({
   selector: 'app-multimedia',
   templateUrl: './multimedia.component.html',
@@ -26,13 +29,14 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
 })
 export class MultimediaComponent {
-  selectedPage: string = '';
+  selectedPage: string = 'images'; // Default selection
+  selectedImages: SelectedImage[] = [];
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.url.subscribe(url => {
-      const path = url[0]?.path || '';
+      const path = url[0]?.path || 'images';
       this.selectedPage = path;
     });
   }
@@ -40,5 +44,28 @@ export class MultimediaComponent {
   onSelectChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedPage = selectElement.value;
+  }
+
+  onImageChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      for (let i = 0; i < input.files.length; i++) {
+        const file = input.files[i];
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.selectedImages.push({
+            name: file.name,
+            dataUrl: e.target.result
+          });
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  }
+
+  generateNewName(originalName: string): string {
+    const timestamp = new Date().getTime();
+    const extension = originalName.split('.').pop();
+    return `${timestamp}.${extension}`;
   }
 }

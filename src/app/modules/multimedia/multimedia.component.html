@@ -14,7 +14,7 @@
         <div class="text-center">
           <h1 class="w-full mb-2 dynamic-h2">Multimedia</h1>
           <p class="w-full mb-4 dynamic-p">Select the type of multimedia you want to upload</p>
-          <select (change)="onSelectChange($event)" [value]="selectedPage" class="w-40">
+          <select (change)="onSelectChange($event)" [value]="selectedPage" class="w-44">
             <option value="images">Images</option>
             <option value="audios">Audios</option>
             <option value="video">Video</option>
@@ -24,11 +24,61 @@
         </div>
         <div *ngIf="selectedPage === 'images'">
           <h2>Upload Images</h2>
-          <input type="file" accept="image/*" multiple>
+          
+          <form class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <input type="file" accept=".jpg,.jpeg,.png,.gif" multiple (change)="onImageChange($event)">
+            </div>
+              
+              <table class="table-auto border-separate border border-muted">
+                <thead class="border border-muted">
+                  <tr class="border border-muted">
+                    <th class="border border-muted">Original Name</th>
+                    <th class="border border-muted">Miniature</th>
+                    <th class="border border-muted">New Name</th>
+                  </tr>
+                </thead>
+                <tbody class="border border-muted">
+                  <tr *ngFor="let image of selectedImages" class="border border-muted">
+                    <td class="border border-muted">{{ image.name }}</td>
+                    <td class="border border-muted">
+                      <img [src]="image.dataUrl" alt="Miniature" width="50">
+                    </td>
+                    <td class="border border-muted">{{ generateNewName(image.name) }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </form>
+          
         </div>
         <div *ngIf="selectedPage === 'audios'">
           <h2>Upload Audios</h2>
-          <input type="file" accept="audio/*" multiple>
+          <form class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="grid-cols-1">
+              <input type="file" accept="audio/*">
+              <input type="file" accept="audio/*">
+              <input type="file" accept="audio/*">
+            </div>
+            <table class="table-auto">
+              <thead>
+                <tr>
+                  <th>Original Name</th>
+                  <th>Miniature</th>
+                  <th>New Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let image of selectedImages">
+                  <td>{{ image.name }}</td>
+                  <td>
+                    <img [src]="image.dataUrl" alt="Miniature" width="50">
+                  </td>
+                  <td>{{ generateNewName(image.name) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+          
         </div>
         <div *ngIf="selectedPage === 'video'">
           <h2>Upload Video</h2>
