@@ -1,0 +1,27 @@
+<div class="flex h-screen w-full overflow-hidden">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+
+    <div class="flex grow flex-col content-start overflow-hidden bg-card">
+      <!-- Header -->
+      <app-navbar></app-navbar>
+
+      <!-- Main content -->
+      <div
+        id="main-content"
+        class="bg-secondary text-muted scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted">
+        <div class="mx-auto px-4 sm:px-8 lg:container">
+            <div class="container p-4 text-center">
+              <h1 class="w-full mb-2 dynamic-h2">User Guide</h1>
+              <pdf-viewer src="https://pdfobject.com/pdf/sample.pdf" [original-size]="false" [fit-to-page]="true" style="width: full; height: 500px;" class="m-auto"></pdf-viewer>
+            </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <app-footer></app-footer>
+
+      <!-- Bottom bar -->
+      <!-- <app-bottom-navbar></app-bottom-navbar> -->
+    </div>
+  </div>

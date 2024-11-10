@@ -46,6 +46,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'user-guide',
+    loadChildren: () => import('./modules/user-guide/user-guide.module').then(m => m.UserGuideModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: '**',
     redirectTo: 'errors/404'
   },
