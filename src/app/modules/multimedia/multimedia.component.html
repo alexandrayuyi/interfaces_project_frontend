@@ -29,6 +29,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <input type="file" accept=".jpg,.jpeg,.png,.gif" multiple (change)="onImageChange($event)">
+                <p *ngIf="imageValidationMessage" class="text-red-500">{{ imageValidationMessage }}</p>
               </div>
                 
                 <table class="table-auto border-separate border border-muted">

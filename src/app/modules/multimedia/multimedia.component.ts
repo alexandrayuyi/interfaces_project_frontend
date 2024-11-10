@@ -48,6 +48,7 @@ export class MultimediaComponent {
   selectedImages: SelectedImage[] = [];
   selectedAudios: SelectedAudio[] = [];
   selectedPDF: SelectedPDF | null = null;
+  imageValidationMessage: string = '';
   audioValidationMessage: string = '';
 
   constructor(private router: Router, private route: ActivatedRoute) {}
@@ -68,16 +69,36 @@ export class MultimediaComponent {
     this.selectedImages = [];
     const input = event.target as HTMLInputElement;
     if (input.files) {
-      for (let i = 0; i < input.files.length; i++) {
-        const file = input.files[i];
+      this.imageValidationMessage = '';
+      const files = Array.from(input.files);
+      let valid = true;
+
+      files.forEach(file => {
         const reader = new FileReader();
         reader.onload = (e: any) => {
-          this.selectedImages.push({
-            name: file.name,
-            dataUrl: e.target.result
-          });
+          const img = new Image();
+          img.onload = () => {
+            const aspectRatio = img.width / img.height;
+            if (aspectRatio !== 2 / 1) {
+              valid = false;
+              this.imageValidationMessage = 'All images must have a 2:1 aspect ratio.';
+            }
+            else{
+              this.imageValidationMessage = '';
+              this.selectedImages.push({
+                name: file.name,
+                dataUrl: e.target.result
+              });
+            }
+            
+          };
+          img.src = e.target.result;
         };
         reader.readAsDataURL(file);
+      });
+
+      if (!valid) {
+        this.selectedImages = [];
       }
     }
   }
