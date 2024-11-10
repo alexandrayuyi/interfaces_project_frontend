@@ -48,6 +48,7 @@ export class MultimediaComponent {
   selectedImages: SelectedImage[] = [];
   selectedAudios: SelectedAudio[] = [];
   selectedPDF: SelectedPDF | null = null;
+  audioValidationMessage: string = '';
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -87,23 +88,31 @@ export class MultimediaComponent {
     return `${timestamp}.${extension}`;
   }
   
-  onAudioChange(event: Event, index: number): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const audio = new Audio(e.target.result);
-        audio.onloadedmetadata = () => {
-          this.selectedAudios[index] = {
-            file,
-            name: this.generateNewName(file.name),
-            duration: this.formatDuration(audio.duration),
-            dataUrl: e.target.result
+  onAudioChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files) {
+      if (inputElement.files.length !== 3) {
+        this.audioValidationMessage = 'Please select exactly three audio files.';
+        this.selectedAudios = [];
+      } else {
+        this.audioValidationMessage = '';
+        this.selectedAudios = [];
+        Array.from(inputElement.files).forEach(file => {
+          const reader = new FileReader();
+          reader.onload = (e: any) => {
+            const audio = new Audio(e.target.result);
+            audio.onloadedmetadata = () => {
+              this.selectedAudios.push({
+                file,
+                name: this.generateNewName(file.name),
+                duration: this.formatDuration(audio.duration),
+                dataUrl: e.target.result
+              });
+            };
           };
-        };
-      };
-      reader.readAsDataURL(file);
+          reader.readAsDataURL(file);
+        });
+      }
     }
   }
 

@@ -60,9 +60,8 @@
           <form>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div class="grid-cols-1">
-                  <input type="file" accept=".mp3,.wav,.ogg" (change)="onAudioChange($event,0)">
-                  <input type="file" accept=".mp3,.wav,.ogg" (change)="onAudioChange($event,1)">
-                  <input type="file" accept=".mp3,.wav,.ogg" (change)="onAudioChange($event,2)">
+                  <input type="file" accept=".mp3,.wav,.ogg" multiple (change)="onAudioChange($event)">
+                  <p *ngIf="audioValidationMessage" class="text-red-500">{{ audioValidationMessage }}</p>
               </div>
               <table class="table-auto border-separate border border-muted">
                 <thead class="border border-muted">
@@ -73,14 +72,11 @@
                   </tr>
                 </thead>
                 <tbody class="border border-muted">
-                  <tr *ngFor="let audio of selectedAudios; let i = index" class="border border-muted">
+                  <tr *ngFor="let audio of selectedAudios" class="border border-muted">
                     <td class="border border-muted">{{ audio.name }}</td>
                     <td class="border border-muted">{{ audio.duration }}</td>
                     <td class="border border-muted">
-                      <audio controls>
-                        <source [src]="audio.dataUrl" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                      </audio>
+                      <audio [src]="audio.dataUrl" controls></audio>
                     </td>
                   </tr>
                 </tbody>
