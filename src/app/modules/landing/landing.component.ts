@@ -20,8 +20,10 @@ export class LandingComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     ($('.responsive') as any).slick({
-      dots: true,
+      dots: false,
+      arrows: false,
       infinite: false,
+      autoplay: true,
       speed: 300,
       slidesToShow: 3,
       slidesToScroll: 3,
@@ -32,7 +34,9 @@ export class LandingComponent implements AfterViewInit {
             slidesToShow: 3,
             slidesToScroll: 3,
             infinite: true,
-            dots: true
+            arrows: false,
+            autoplay: true,
+            dots: false
           }
         },
         {

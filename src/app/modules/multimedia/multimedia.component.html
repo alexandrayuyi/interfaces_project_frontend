@@ -61,7 +61,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div class="grid-cols-1">
                   <input type="file" accept=".mp3,.wav,.ogg" multiple (change)="onAudioChange($event)">
-                  <p *ngIf="audioValidationMessage" class="text-red-500">{{ audioValidationMessage }}</p>
+                  <p *ngIf="audioValidationMessage" class="text-muted">{{ audioValidationMessage }}</p>
               </div>
               <table class="table-auto border-separate border border-muted">
                 <thead class="border border-muted">
