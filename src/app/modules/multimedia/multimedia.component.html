@@ -25,58 +25,70 @@
         <div *ngIf="selectedPage === 'images'">
           <h2>Upload Images</h2>
           
-          <form class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div>
-              <input type="file" accept=".jpg,.jpeg,.png,.gif" multiple (change)="onImageChange($event)">
+          <form>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <input type="file" accept=".jpg,.jpeg,.png,.gif" multiple (change)="onImageChange($event)">
+              </div>
+                
+                <table class="table-auto border-separate border border-muted">
+                  <thead class="border border-muted">
+                    <tr class="border border-muted">
+                      <th class="border border-muted">Original Name</th>
+                      <th class="border border-muted">Miniature</th>
+                      <th class="border border-muted">New Name</th>
+                    </tr>
+                  </thead>
+                  <tbody class="border border-muted">
+                    <tr *ngFor="let image of selectedImages" class="border border-muted">
+                      <td class="border border-muted">{{ image.name }}</td>
+                      <td class="border border-muted">
+                        <img [src]="image.dataUrl" alt="Miniature" width="50">
+                      </td>
+                      <td class="border border-muted">{{ generateNewName(image.name) }}</td>
+                    </tr>
+                  </tbody>
+                </table>
             </div>
-              
-              <table class="table-auto border-separate border border-muted">
-                <thead class="border border-muted">
-                  <tr class="border border-muted">
-                    <th class="border border-muted">Original Name</th>
-                    <th class="border border-muted">Miniature</th>
-                    <th class="border border-muted">New Name</th>
-                  </tr>
-                </thead>
-                <tbody class="border border-muted">
-                  <tr *ngFor="let image of selectedImages" class="border border-muted">
-                    <td class="border border-muted">{{ image.name }}</td>
-                    <td class="border border-muted">
-                      <img [src]="image.dataUrl" alt="Miniature" width="50">
-                    </td>
-                    <td class="border border-muted">{{ generateNewName(image.name) }}</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="mt-4 text-center">
+              <button type="button" class="dynamic-h2" (click)="saveImages()">Save</button>
+            </div>
           </form>
-          
         </div>
         <div *ngIf="selectedPage === 'audios'">
           <h2>Upload Audios</h2>
-          <form class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div class="grid-cols-1">
-              <input type="file" accept="audio/*">
-              <input type="file" accept="audio/*">
-              <input type="file" accept="audio/*">
+          <form>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div class="grid-cols-1">
+                  <input type="file" accept=".mp3,.wav,.ogg" (change)="onAudioChange($event,0)">
+                  <input type="file" accept=".mp3,.wav,.ogg" (change)="onAudioChange($event,1)">
+                  <input type="file" accept=".mp3,.wav,.ogg" (change)="onAudioChange($event,2)">
+              </div>
+              <table class="table-auto border-separate border border-muted">
+                <thead class="border border-muted">
+                  <tr class="border border-muted">
+                    <th class="border border-muted">Name</th>
+                    <th class="border border-muted">Duration</th>
+                    <th class="border border-muted">Play</th>
+                  </tr>
+                </thead>
+                <tbody class="border border-muted">
+                  <tr *ngFor="let audio of selectedAudios; let i = index" class="border border-muted">
+                    <td class="border border-muted">{{ audio.name }}</td>
+                    <td class="border border-muted">{{ audio.duration }}</td>
+                    <td class="border border-muted">
+                      <audio controls>
+                        <source [src]="audio.dataUrl" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                      </audio>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <table class="table-auto">
-              <thead>
-                <tr>
-                  <th>Original Name</th>
-                  <th>Miniature</th>
-                  <th>New Name</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let image of selectedImages">
-                  <td>{{ image.name }}</td>
-                  <td>
-                    <img [src]="image.dataUrl" alt="Miniature" width="50">
-                  </td>
-                  <td>{{ generateNewName(image.name) }}</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="mt-4 text-center">
+              <button type="button" class="dynamic-h2" (click)="saveAudios()">Save</button>
+            </div>
           </form>
           
         </div>
@@ -86,7 +98,21 @@
         </div>
         <div *ngIf="selectedPage === 'pdf'">
           <h2>Upload PDF</h2>
-          <input type="file" accept="application/pdf">
+          <form>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div class="grid-cols-1">
+                <input (change)="onPDFChange($event)" type="file" accept="application/pdf" >
+                <div class="mt-4 text-center">
+                  <button type="button" class="dynamic-h2" (click)="savePDF()">Save</button>
+                </div>
+              </div>
+              <div *ngIf="selectedPDF">
+                <pdf-viewer [src]="selectedPDF.dataUrl" [original-size]="false" [fit-to-page]="true" style="width: 400px; height: 450px;" class="m-auto"></pdf-viewer>
+              </div>
+            </div>
+            
+          </form>
+          
         </div>
         <div *ngIf="selectedPage === 'terms-and-conditions'">
           <h2>Enter Terms and Conditions</h2>

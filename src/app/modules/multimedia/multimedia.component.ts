@@ -8,11 +8,25 @@ import { LayoutModule } from '../layout/layout.module';
 import { BottomNavbarComponent } from "../layout/components/bottom-navbar/bottom-navbar.component";
 import { ButtonComponent } from "../../shared/components/button/button.component";
 import { ReactiveFormsModule } from '@angular/forms';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 export interface SelectedImage {
   name: string;
   dataUrl: string;
 }
+
+interface SelectedAudio {
+  file: File;
+  name: string;
+  duration: string;
+  dataUrl: string;
+}
+
+interface SelectedPDF {
+  name: string;
+  dataUrl: string;
+}
+
 @Component({
   selector: 'app-multimedia',
   templateUrl: './multimedia.component.html',
@@ -25,12 +39,15 @@ export interface SelectedImage {
     NavbarComponent,
     FooterComponent,
     BottomNavbarComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PdfViewerModule
   ],
 })
 export class MultimediaComponent {
   selectedPage: string = 'images'; // Default selection
   selectedImages: SelectedImage[] = [];
+  selectedAudios: SelectedAudio[] = [];
+  selectedPDF: SelectedPDF | null = null;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
@@ -68,5 +85,61 @@ export class MultimediaComponent {
     const timestamp = new Date().getTime();
     const extension = originalName.split('.').pop();
     return `${timestamp}.${extension}`;
+  }
+  
+  onAudioChange(event: Event, index: number): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const audio = new Audio(e.target.result);
+        audio.onloadedmetadata = () => {
+          this.selectedAudios[index] = {
+            file,
+            name: this.generateNewName(file.name),
+            duration: this.formatDuration(audio.duration),
+            dataUrl: e.target.result
+          };
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  formatDuration(duration: number): string {
+    const minutes = Math.floor(duration / 60);
+    const seconds = Math.floor(duration % 60);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  }
+
+  onPDFChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      const file = inputElement.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.selectedPDF = {
+          name: file.name,
+          dataUrl: e.target.result
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  saveImages() {
+    // Implement your save logic here
+    console.log('Images saved:', this.selectedImages);
+  }
+
+  saveAudios() {
+    // Implement your save logic here
+    console.log('Audios saved:', this.selectedAudios);
+  }
+
+  savePDF() {
+    // Implement your save logic here
+    console.log('PDF saved');
   }
 }
