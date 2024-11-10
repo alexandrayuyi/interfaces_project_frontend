@@ -49,6 +49,7 @@
     "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
     "ng-apexcharts": "^1.7.1",
+    "ng2-pdf-viewer": "^10.3.4",
     "ngx-sonner": "^2.0.1",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.10",
