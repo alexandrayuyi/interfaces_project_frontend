@@ -10,9 +10,13 @@ import { ButtonComponent } from "../../shared/components/button/button.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
-export interface SelectedImage {
+interface SelectedImage {
   name: string;
   dataUrl: string;
+  size: number;
+  width: number;
+  height: number;
+  extension: string;
 }
 
 interface SelectedAudio {
@@ -82,15 +86,17 @@ export class MultimediaComponent {
             if (aspectRatio !== 2 / 1) {
               valid = false;
               this.imageValidationMessage = 'All images must have a 2:1 aspect ratio.';
-            }
-            else{
+            } else {
               this.imageValidationMessage = '';
               this.selectedImages.push({
                 name: file.name,
-                dataUrl: e.target.result
+                dataUrl: e.target.result,
+                size: file.size,
+                width: img.width,
+                height: img.height,
+                extension: file.name.split('.').pop() || ''
               });
             }
-            
           };
           img.src = e.target.result;
         };

@@ -29,7 +29,7 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <input type="file" accept=".jpg,.jpeg,.png,.gif" multiple (change)="onImageChange($event)">
-                <p *ngIf="imageValidationMessage" class="text-red-500">{{ imageValidationMessage }}</p>
+                <p *ngIf="imageValidationMessage" class="text-muted">{{ imageValidationMessage }}</p>
               </div>
                 
                 <table class="table-auto border-separate border border-muted">
@@ -38,6 +38,10 @@
                       <th class="border border-muted">Original Name</th>
                       <th class="border border-muted">Miniature</th>
                       <th class="border border-muted">New Name</th>
+                      <th class="border border-muted">Size (KB)</th>
+                      <th class="border border-muted">Width</th>
+                      <th class="border border-muted">Height</th>
+                      <th class="border border-muted">File Extension</th>
                     </tr>
                   </thead>
                   <tbody class="border border-muted">
@@ -47,6 +51,10 @@
                         <img [src]="image.dataUrl" alt="Miniature" width="50">
                       </td>
                       <td class="border border-muted">{{ generateNewName(image.name) }}</td>
+                      <td class="border border-muted">{{ (image.size / 1024).toFixed(2) }}</td>
+                      <td class="border border-muted">{{ image.width }}</td>
+                      <td class="border border-muted">{{ image.height }}</td>
+                      <td class="border border-muted">{{ image.extension }}</td>
                     </tr>
                   </tbody>
                 </table>
