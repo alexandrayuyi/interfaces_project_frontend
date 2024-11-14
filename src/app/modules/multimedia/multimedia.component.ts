@@ -31,6 +31,18 @@ interface SelectedPDF {
   dataUrl: string;
 }
 
+interface SelectedVideo {
+  name: string;
+  dataUrl: string;
+  duration: string;
+  format: string;
+}
+
+interface SelectedSubtitle {
+  name: string;
+  dataUrl: string;
+}
+
 @Component({
   selector: 'app-multimedia',
   templateUrl: './multimedia.component.html',
@@ -52,6 +64,8 @@ export class MultimediaComponent {
   selectedImages: SelectedImage[] = [];
   selectedAudios: SelectedAudio[] = [];
   selectedPDF: SelectedPDF | null = null;
+  selectedVideo: SelectedVideo | null = null;
+  selectedSubtitle: SelectedSubtitle | null = null;
   imageValidationMessage: string = '';
   audioValidationMessage: string = '';
 
@@ -109,10 +123,49 @@ export class MultimediaComponent {
     }
   }
 
+  deleteImage(image: SelectedImage): void {
+    this.selectedImages = this.selectedImages.filter(i => i !== image);
+  }
+
   generateNewName(originalName: string): string {
     const timestamp = new Date().getTime();
     const extension = originalName.split('.').pop();
     return `${timestamp}.${extension}`;
+  }
+
+  onVideoChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      const file = inputElement.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const video = document.createElement('video');
+        video.src = e.target.result;
+        video.onloadedmetadata = () => {
+          this.selectedVideo = {
+            name: file.name,
+            dataUrl: e.target.result,
+            duration: this.formatDuration(video.duration),
+            format: file.type
+          };
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  onSubtitleChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files && inputElement.files.length > 0) {
+      const file = inputElement.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.selectedSubtitle = {
+          name: file.name,
+          dataUrl: e.target.result
+        };
+      };
+      reader.readAsDataURL(file);
+    }
   }
   
   onAudioChange(event: Event) {
@@ -178,4 +231,13 @@ export class MultimediaComponent {
     // Implement your save logic here
     console.log('PDF saved');
   }
+
+  saveVideo() {
+    if (this.selectedSubtitle) {
+      console.log('Video and subtitles saved:', this.selectedVideo, this.selectedSubtitle);
+    } else {
+      console.log('Video saved:', this.selectedVideo);
+    }
+  }
+
 }

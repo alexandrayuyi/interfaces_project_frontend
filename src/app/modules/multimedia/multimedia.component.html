@@ -24,7 +24,7 @@
         </div>
         <div *ngIf="selectedPage === 'images'">
           <h2>Upload Images</h2>
-          
+          <p>Select them in the order you want them to appear</p>
           <form>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
@@ -42,6 +42,7 @@
                       <th class="border border-muted">Width</th>
                       <th class="border border-muted">Height</th>
                       <th class="border border-muted">File Extension</th>
+                      <th class="border border-muted">Action</th>
                     </tr>
                   </thead>
                   <tbody class="border border-muted">
@@ -55,6 +56,8 @@
                       <td class="border border-muted">{{ image.width }}</td>
                       <td class="border border-muted">{{ image.height }}</td>
                       <td class="border border-muted">{{ image.extension }}</td>
+                      <td class="border border-muted">
+                        <button type="button" class="dynamic-h2" (click)="deleteImage(image)">Delete</button>
                     </tr>
                   </tbody>
                 </table>
@@ -66,6 +69,7 @@
         </div>
         <div *ngIf="selectedPage === 'audios'">
           <h2>Upload Audios</h2>
+          <p>Select them in the order you want them to appear</p>
           <form>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div class="grid-cols-1">
@@ -99,7 +103,34 @@
         </div>
         <div *ngIf="selectedPage === 'video'">
           <h2>Upload Video</h2>
-          <input type="file" accept="video/*">
+          <form>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div class="grid-cols-1">
+                <input type="file" accept=".mp4" (change)="onVideoChange($event)">
+                <p>Subtitles (optional)</p>
+                <input type="file" accept=".str" (change)="onSubtitleChange($event)">
+              </div>
+              <table class="table-auto border-separate border border-muted">
+                <thead class="border border-muted">
+                  <tr class="border border-muted">
+                    <th class="border border-muted">Name</th>
+                    <th class="border border-muted">Duration</th>
+                    <th class="border border-muted">format</th>
+                  </tr>
+                </thead>
+                <tbody class="border border-muted">
+                  <tr class="border border-muted">
+                    <td class="border border-muted">{{ selectedVideo?.name }}</td>
+                    <td class="border border-muted">{{ selectedVideo?.duration }}</td>
+                    <td class="border border-muted">{{ selectedVideo?.format }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-4 text-center">
+              <button type="button" class="dynamic-h2" (click)="saveVideo()">Save</button>
+            </div>
+          </form>
         </div>
         <div *ngIf="selectedPage === 'pdf'">
           <h2>Upload PDF</h2>
