@@ -69,11 +69,11 @@
         </div>
         <div *ngIf="selectedPage === 'audios'">
           <h2>Upload Audios</h2>
-          <p>Select them in the order you want them to appear</p>
+          <p>They will appear in the same order as in the table</p>
           <form>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div class="grid-cols-1">
-                  <input type="file" accept=".mp3,.wav,.ogg" multiple (change)="onAudioChange($event)">
+                  <input type="file" accept=".mp3,.wav,.ogg" (change)="onAudioChange($event)">
                   <p *ngIf="audioValidationMessage" class="text-muted">{{ audioValidationMessage }}</p>
               </div>
               <table class="table-auto border-separate border border-muted">
@@ -82,6 +82,7 @@
                     <th class="border border-muted">Name</th>
                     <th class="border border-muted">Duration</th>
                     <th class="border border-muted">Play</th>
+                    <th class="border border-muted">Action</th>
                   </tr>
                 </thead>
                 <tbody class="border border-muted">
@@ -91,6 +92,8 @@
                     <td class="border border-muted">
                       <audio [src]="audio.dataUrl" controls></audio>
                     </td>
+                    <td class="border border-muted">
+                      <button type="button" class="dynamic-h2" (click)="deleteAudio(audio)">Delete</button>
                   </tr>
                 </tbody>
               </table>

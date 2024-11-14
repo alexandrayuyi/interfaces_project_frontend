@@ -200,12 +200,10 @@ export class MultimediaComponent {
   onAudioChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files) {
-      if (inputElement.files.length !== 3) {
-        this.audioValidationMessage = 'Please select exactly three audio files.';
-        this.selectedAudios = [];
+      if (this.selectedAudios.length === 3) {
+        this.audioValidationMessage = 'You can only add three audios to the table.';
       } else {
         this.audioValidationMessage = '';
-        this.selectedAudios = [];
         Array.from(inputElement.files).forEach(file => {
           const reader = new FileReader();
           reader.onload = (e: any) => {
@@ -223,6 +221,10 @@ export class MultimediaComponent {
         });
       }
     }
+  }
+
+  deleteAudio(audio: SelectedAudio): void {
+    this.selectedAudios = this.selectedAudios.filter(a => a !== audio);
   }
 
   formatDuration(duration: number): string {
