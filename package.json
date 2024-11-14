@@ -43,6 +43,7 @@
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.2",
     "@tailwindcss/typography": "^0.5.4",
+    "@tinymce/tinymce-angular": "^8.0.1",
     "angular-svg-icon": "^13.0.0",
     "apexcharts": "^3.35.3",
     "country-list": "^2.3.0",
@@ -55,6 +56,7 @@
     "primeng": "^17.18.10",
     "rxjs": "~7.8.1",
     "slick-carousel": "^1.8.1",
+    "tinymce": "^7.5.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },

@@ -152,7 +152,10 @@
         </div>
         <div *ngIf="selectedPage === 'terms-and-conditions'">
           <h2>Enter Terms and Conditions</h2>
-          <textarea rows="10" cols="50"></textarea>
+          <editor apiKey="i5diybtc5es3z3jzxigpkeokhccjnsw7x0xveym2arkt7hm8"
+    [(ngModel)]="termsAndConditions"
+    [init]="editorConfig">
+  </editor>
         </div>
       </div>
     </div>
