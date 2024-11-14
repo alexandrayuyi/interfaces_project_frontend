@@ -269,4 +269,8 @@ export class MultimediaComponent {
     }
   }
 
+  saveTerms(){
+    console.log('Terms saved:', this.termsAndConditions);
+  }
+
 }
