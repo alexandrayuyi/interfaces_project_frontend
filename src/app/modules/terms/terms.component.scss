@@ -1,4 +1,41 @@
 /* Aplica las clases dinámicas para textos */
-h1.dynamic-h1, h2.dynamic-h2, p.dynamic-p {
-    font-family: var(--font-family, 'Roboto, sans-serif') !important; /* Roboto como fallback si no hay fuente personalizada */
+h1 {
+    font-size: var(--h1-size);
+    font-family: var(--font-family, 'Roboto, sans-serif') !important; /* Asegúrate de que esté definido para aplicar la fuente */
+    margin-left: 1%;
+}
+
+  h2 {
+    font-size: var(--h2-size);
+    font-family: var(--font-family, 'Roboto, sans-serif') !important; /* Asegúrate de que esté definido para aplicar la fuente */
+    margin-left: 1%
+}
+
+  p {
+    font-size: var(--p-size);
+    margin-left: 2%
+}
+
+ul {
+    font-size: var(--p-size);
+    margin-left: 2%
+}
+
+li {
+    font-size: var(--p-size);
+    margin-left: 2%
+}
+
+  .dynamic-h1 {
+    font-size: var(--h1-size);
+    font-family: var(--font-family, 'Roboto, sans-serif') !important; /* Asegúrate de que esté definido para aplicar la fuente */
+  }
+
+  .dynamic-h2 {
+    font-size: var(--h2-size);
+    font-family: var(--font-family, 'Roboto, sans-serif') !important; /* Asegúrate de que esté definido para aplicar la fuente */
+  }
+
+  .dynamic-p {
+    font-size: var(--p-size);
   }
