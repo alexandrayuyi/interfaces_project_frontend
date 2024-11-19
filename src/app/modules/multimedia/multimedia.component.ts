@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { FormsModule } from '@angular/forms';
+import { FilesService } from '../landing/services/files.service'; // Importa el servicio
 
 interface SelectedImage {
   name: string;
@@ -62,6 +63,7 @@ interface SelectedSubtitle {
     EditorModule,
     FormsModule
   ],
+  providers: [FilesService] // Provee el servicio
 })
 export class MultimediaComponent {
   selectedPage: string = 'images'; // Default selection
@@ -72,33 +74,26 @@ export class MultimediaComponent {
   selectedSubtitle: SelectedSubtitle | null = null;
   termsAndConditions: string = '';
 
-  editorConfig = {
-    plugins: [
-      'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace',
-      'table', 'visualblocks', 'wordcount', 'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter',
-      'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode',
-      'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags',
-      'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
-    ],
-    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table ' +
-             'mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | ' +
-             'checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-    tinycomments_mode: 'embedded',
-    tinycomments_author: 'Author name',
-    mergetags_list: [
-      { value: 'First.Name', title: 'First Name' },
-      { value: 'Email', title: 'Email' },
-    ],
-    ai_request: (_request: any, respondWith: any) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-    exportpdf_converter_options: { format: 'Letter', margin_top: '1in', margin_right: '1in', margin_bottom: '1in', margin_left: '1in' },
-    exportword_converter_options: { document: { size: 'Letter' } },
-    importword_converter_options: { formatting: { styles: 'inline', resets: 'inline', defaults: 'inline' } }
-  };
-
   imageValidationMessage: string = '';
   audioValidationMessage: string = '';
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  editorConfig: any; // Define la propiedad editorConfig
+
+  constructor(private router: Router, private route: ActivatedRoute, private filesService: FilesService) {
+    this.editorConfig = {
+      // Configuración del editor
+      height: 500,
+      menubar: false,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount'
+      ],
+      toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                alignleft aligncenter alignright alignjustify | \
+                bullist numlist outdent indent | removeformat | help'
+    };
+  }
 
   ngOnInit() {
     this.route.url.subscribe(url => {
@@ -182,6 +177,7 @@ export class MultimediaComponent {
       reader.readAsDataURL(file);
     }
   }
+
   onSubtitleChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
@@ -196,7 +192,7 @@ export class MultimediaComponent {
       reader.readAsDataURL(file);
     }
   }
-  
+
   onAudioChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files) {
@@ -249,30 +245,66 @@ export class MultimediaComponent {
   }
 
   saveImages() {
-    // Implement your save logic here
-    console.log('Images saved:', this.selectedImages);
+    const files = this.selectedImages.map(image => this.dataURLtoFile(image.dataUrl, image.name));
+    this.filesService.uploadFiles({ images: files }).subscribe(response => {
+      console.log('Images uploaded:', response);
+    });
   }
 
   saveAudios() {
-    // Implement your save logic here
-    console.log('Audios saved:', this.selectedAudios);
+    const files = this.selectedAudios.map(audio => audio.file);
+    this.filesService.uploadFiles({ audios: files }).subscribe(response => {
+      console.log('Audios uploaded:', response);
+    });
   }
 
   savePDF() {
-    // Implement your save logic here
-    console.log('PDF saved');
-  }
-
-  saveVideo() {
-    if (this.selectedSubtitle) {
-      console.log('Video and subtitles saved:', this.selectedVideo, this.selectedSubtitle);
-    } else {
-      console.log('Video saved:', this.selectedVideo);
+    if (this.selectedPDF) {
+      const file = this.dataURLtoFile(this.selectedPDF.dataUrl, this.selectedPDF.name);
+      this.filesService.uploadFiles({ pdf: file }).subscribe(response => {
+        console.log('PDF uploaded:', response);
+      });
     }
   }
 
-  saveTerms(){
+  saveVideo() {
+    const files: { video?: File, subtitle?: File } = {};
+    if (this.selectedVideo) {
+      files.video = this.dataURLtoFile(this.selectedVideo.dataUrl, this.selectedVideo.name);
+    }
+    if (this.selectedSubtitle) {
+      files.subtitle = this.dataURLtoFile(this.selectedSubtitle.dataUrl, this.selectedSubtitle.name);
+    }
+    this.filesService.uploadFiles(files).subscribe(response => {
+      console.log('Video and subtitles uploaded:', response);
+    });
+  }
+
+  saveTerms() {
     console.log('Terms saved:', this.termsAndConditions);
   }
 
+  private dataURLtoFile(dataUrl: string, filename: string): File {
+    try {
+      const arr = dataUrl.split(',');
+      if (arr.length !== 2) {
+        throw new Error('Invalid data URL format');
+      }
+      const mimeMatch = arr[0].match(/:(.*?);/);
+      if (!mimeMatch) {
+        throw new Error('Invalid MIME type in data URL');
+      }
+      const mime = mimeMatch[1];
+      const bstr = atob(arr[1]);
+      let n = bstr.length;
+      const u8arr = new Uint8Array(n);
+      while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+      }
+      return new File([u8arr], filename, { type: mime });
+    } catch (error) {
+      console.error('Error converting data URL to file:', error);
+      throw error;
+    }
+  }
 }
