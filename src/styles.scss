@@ -50,6 +50,20 @@
     font-size: var(--p-size);
   }
 
+  h1 {
+    font-size: var(--h1-size);
+    font-family: var(--font-family, 'Roboto, sans-serif') !important; /* Asegúrate de que esté definido para aplicar la fuente */
+  }
+
+  h2 {
+    font-size: var(--h2-size);
+    font-family: var(--font-family, 'Roboto, sans-serif') !important; /* Asegúrate de que esté definido para aplicar la fuente */
+  }
+
+  p {
+    font-size: var(--p-size);
+  }
+
   .leaflet-control-zoom{
     background-color: var(--primary);
     border: none !important;
