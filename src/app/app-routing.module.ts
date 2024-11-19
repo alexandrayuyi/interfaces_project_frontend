@@ -51,6 +51,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'terms',
+    loadChildren: () => import('./modules/terms/terms.module').then(m => m.TermsModule),
+  },
+  {
     path: '**',
     redirectTo: 'errors/404'
   },
