@@ -162,6 +162,10 @@
   <div class="mt-4 text-center">
     <button type="button" class="dynamic-h2" (click)="saveTerms()">Save</button>
   </div>
+  <div class="mt-4 text-center" *ngIf="savedContent">
+    <h3>Saved Content:</h3>
+    <div [innerHTML]="savedContent"></div>
+  </div>
         </div>
       </div>
     </div>

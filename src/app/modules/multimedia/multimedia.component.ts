@@ -73,6 +73,7 @@ export class MultimediaComponent {
   selectedVideo: SelectedVideo | null = null;
   selectedSubtitle: SelectedSubtitle | null = null;
   termsAndConditions: string = '';
+  savedContent: string = '';
 
   imageValidationMessage: string = '';
   audioValidationMessage: string = '';
@@ -281,7 +282,7 @@ export class MultimediaComponent {
   }
 
   saveTerms() {
-    console.log('Terms saved:', this.termsAndConditions);
+    this.savedContent = this.termsAndConditions;
   }
 
   private dataURLtoFile(dataUrl: string, filename: string): File {
