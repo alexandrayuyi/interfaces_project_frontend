@@ -17,6 +17,13 @@ export class FilesService {
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
+  deleteFile(id: string): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getFiles(): Observable<any> {
     const headers = this.getHeaders();
     return this.http.get(this.apiUrl, { headers }).pipe(
