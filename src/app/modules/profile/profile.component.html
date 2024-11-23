@@ -147,9 +147,9 @@
               <label class="label">
                 <span class="label-text">Country of nationality</span>
               </label>
-              <p-autoComplete 
+              <p-autoComplete
                 [(ngModel)]="query2"
-                name="Nationality" 
+                name="Nationality"
                 [suggestions]="displayDataDirection2"
                 (completeMethod)="search2($event)"
                 placeholder="Search for your country"
@@ -161,6 +161,11 @@
                 (scroll)="handleEvent(11,5)"
                 (focus)="handleFocus(11)">
               </p-autoComplete>
+            </div>
+
+            <div class="form-control">
+              <label class="label">Profile Photo</label>
+              <input type="file" (change)="onFileChange($event)" accept=".png, .jpg" class="mt-1 block" />
             </div>
             <div class="form-control col-span-full pt-16">
               <div class="flex justify-center">

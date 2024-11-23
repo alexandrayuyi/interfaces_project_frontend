@@ -80,7 +80,9 @@ export class ProfileReadonlyComponent implements OnInit {
         this.gender = profile.gender;
         this.phone = profile.phone;
         this.email = profile.user.email;
-        this.profilePicture = profile.imagePath;
+        this.profilePicture = 'http://localhost:5000/' + profile.imagePath.replace(/\\/g, '/');
+        console.log(this.profilePicture);
+        console.log('http://localhost:5000/' + profile.imagePath);
         this.timezone = profile.timezone;
         this.username = profile.user.username;
         this.password = profile.user.password;
