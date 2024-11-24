@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
     this.themeService.theme$.subscribe(theme => {
       this.theme = theme;
       this.applyTheme();
+      
     });
   }
 
