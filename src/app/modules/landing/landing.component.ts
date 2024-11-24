@@ -10,6 +10,7 @@ import { FilesService } from './services/files.service';
 })
 export class LandingComponent implements OnInit, AfterViewInit {
   slides: any[] = [];
+  video: any;
 
   constructor(private filesService: FilesService) {}
 
@@ -21,6 +22,12 @@ export class LandingComponent implements OnInit, AfterViewInit {
           imageSrc: `http://localhost:5000/uploads/${file.filename}` // Ajusta esto según la estructura de tu respuesta
         }));
       console.log(this.slides);
+      //get the legth of an array of videos in the response
+      this.video = response.data // buscar el ultimo video subido
+        .filter((file: any) => file.mimetype.startsWith('video/')) // Filtrar solo videos
+        .map((file: any) => ({
+          videoSrc: `http://localhost:5000/uploads/${file.filename}` // Ajusta esto según la estructura de tu respuesta
+        }))[(response.data.filter((file: any) => file.mimetype.startsWith('video/')).length)-1];
     });
   }
 
