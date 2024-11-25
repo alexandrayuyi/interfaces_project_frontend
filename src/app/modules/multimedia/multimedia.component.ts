@@ -79,6 +79,9 @@ export class MultimediaComponent {
 
   editorConfig: any; // Define la propiedad editorConfig
 
+  showModal: boolean = false;
+  imageToDelete: SelectedImage | null = null;
+
   constructor(private router: Router, private route: ActivatedRoute, private filesService: FilesService) {
     this.editorConfig = {
       // Configuración del editor
@@ -169,18 +172,33 @@ export class MultimediaComponent {
   }
 
   deleteImage(image: SelectedImage): void {
+
     this.selectedImages = this.selectedImages.filter(i => i !== image);
     this.tableImages = this.tableImages.filter(i => i !== image);
-    // implement this function of the file service:
-    // deleteFile(id: string): Observable<any> {
-    //   const headers = this.getHeaders();
-    //   return this.http.delete(`${this.apiUrl}/${id}`, { headers }).pipe(
-    //     catchError(this.handleError)
-    //   );
-    // }
     this.filesService.deleteFile(image.id).subscribe(response => {
       console.log('Image deleted:', response);
     });
+  }
+
+  openDeleteModal(image: SelectedImage): void {
+    this.imageToDelete = image;
+    this.showModal = true;
+  }
+
+  cancelDelete(): void {
+    this.showModal = false;
+    this.imageToDelete = null;
+  }
+
+  confirmDelete(): void {
+    if (this.imageToDelete) {
+      this.selectedImages = this.selectedImages.filter(i => i !== this.imageToDelete);
+      this.tableImages = this.tableImages.filter(i => i !== this.imageToDelete);
+      this.filesService.deleteFile(this.imageToDelete.id).subscribe(response => {
+        console.log('Image deleted:', response);
+      });
+      this.cancelDelete();
+    }
   }
 
   generateNewName(originalName: string): string {
