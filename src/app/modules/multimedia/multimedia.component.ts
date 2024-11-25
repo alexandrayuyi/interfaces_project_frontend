@@ -53,11 +53,9 @@ interface SelectedSubtitle {
   standalone: true,
   imports: [CommonModule,
     LayoutModule,
-    ButtonComponent,
     SidebarComponent,
     NavbarComponent,
     FooterComponent,
-    BottomNavbarComponent,
     ReactiveFormsModule,
     PdfViewerModule,
     EditorModule,
@@ -282,7 +280,14 @@ export class MultimediaComponent {
   }
 
   saveTerms() {
-    this.savedContent = this.termsAndConditions;
+    const termsContent = this.termsAndConditions;
+    const blob = new Blob([termsContent], { type: 'text/html' });
+    const file = new File([blob], 'terms-and-conditions.html', { type: 'text/html' });
+  
+    this.filesService.uploadFiles({ html: file }).subscribe(response => {
+      console.log('Terms and conditions uploaded:', response);
+      this.savedContent = termsContent; // Guardar el contenido del WYSIWYG en una variable
+    });
   }
 
   private dataURLtoFile(dataUrl: string, filename: string): File {

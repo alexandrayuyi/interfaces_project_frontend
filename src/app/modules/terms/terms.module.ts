@@ -6,11 +6,10 @@ import { TermsComponent } from './terms.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [TermsComponent],
   imports: [
     CommonModule,
     TermsRoutingModule,
-    TermsComponent
   ]
 })
 export class TermsModule { }

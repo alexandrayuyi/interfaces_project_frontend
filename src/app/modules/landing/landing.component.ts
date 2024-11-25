@@ -11,6 +11,8 @@ import { FilesService } from './services/files.service';
 export class LandingComponent implements OnInit, AfterViewInit {
   slides: any[] = [];
   video: any;
+  subs: any;
+  audios: any[] = [];
 
   constructor(private filesService: FilesService) {}
 
@@ -21,15 +23,28 @@ export class LandingComponent implements OnInit, AfterViewInit {
         .map((file: any) => ({
           imageSrc: `http://localhost:5000/uploads/${file.filename}` // Ajusta esto según la estructura de tu respuesta
         }));
-      console.log(this.slides);
       //get the legth of an array of videos in the response
       this.video = response.data // buscar el ultimo video subido
         .filter((file: any) => file.mimetype.startsWith('video/')) // Filtrar solo videos
         .map((file: any) => ({
           videoSrc: `http://localhost:5000/uploads/${file.filename}` // Ajusta esto según la estructura de tu respuesta
         }))[(response.data.filter((file: any) => file.mimetype.startsWith('video/')).length)-1];
+      
+      this.subs = response.data // buscar el ultimo video subido
+        .filter((file: any) => file.mimetype.startsWith('application/vtt') || file.mimetype.startsWith('vtt') || file.mimetype.startsWith('WEBVTT') || file.mimetype.startsWith('text/plain') || file.mimetype.startsWith('application/txt')) // Filtrar solo videos
+        .map((file: any) => ({
+          subsSrc: `http://localhost:5000/uploads/${file.filename}` // Ajusta esto según la estructura de tu respuesta
+        }))[(response.data.filter((file: any) => file.mimetype.startsWith('application/vtt') || file.mimetype.startsWith('vtt') || file.mimetype.startsWith('WEBVTT') || file.mimetype.startsWith('text/plain') || file.mimetype.startsWith('application/txt')).length)-1];
+        console.log(this.subs);
+      
+      this.audios = response.data
+      .filter((file: any) => file.mimetype.startsWith('mp3/') || file.mimetype.startsWith('audio/'))
+
+      console.log(this.audios)
     });
+      
   }
+
 
   ngAfterViewInit(): void {
     this.initializeSlick();

@@ -17,8 +17,8 @@
       </div>
     </div>
   </nav>
-  @if (htmlContent != '') {
-    <div id="wysiwyg-content" class=""></div>
+  @if (htmlContent != undefined) {
+    <div id="wysiwyg-content" [innerHTML]="htmlContent" class=""></div>
   }
   @else {
     <div id="placeholder-content">
