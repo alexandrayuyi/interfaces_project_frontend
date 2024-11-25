@@ -14,11 +14,10 @@ import { FormsModule } from '@angular/forms';
 import { FilesService } from '../landing/services/files.service'; // Importa el servicio
 
 interface SelectedImage {
+  id: string;
   name: string;
   dataUrl: string;
   size: number;
-  width: number;
-  height: number;
   extension: string;
 }
 
@@ -72,6 +71,8 @@ export class MultimediaComponent {
   selectedSubtitle: SelectedSubtitle | null = null;
   termsAndConditions: string = '';
   savedContent: string = '';
+  dbImages: any[] = [];
+  tableImages: any[] = [];
 
   imageValidationMessage: string = '';
   audioValidationMessage: string = '';
@@ -99,15 +100,31 @@ export class MultimediaComponent {
       const path = url[0]?.path || 'images';
       this.selectedPage = path;
     });
-  }
+
+    this.filesService.getFiles().subscribe(response => {
+      this.dbImages = response.data
+        .filter((file: any) => file.mimetype.startsWith('image/')) // Filtrar solo imágenes
+        //create an image object
+        .map((file: any) => ({
+          id: file.id,
+          name: file.filename,
+          dataUrl: `http://localhost:5000/uploads/${file.filename}`,
+          size: file.size,
+          extension: file.filename.split('.').pop() || ''
+        }));
+        //push dbImages to selectedImages
+        this.tableImages.push(...this.dbImages);
+  });
+}
 
   onSelectChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedPage = selectElement.value;
   }
 
+  
+
   onImageChange(event: Event): void {
-    this.selectedImages = [];
     const input = event.target as HTMLInputElement;
     if (input.files) {
       this.imageValidationMessage = '';
@@ -126,11 +143,17 @@ export class MultimediaComponent {
             } else {
               this.imageValidationMessage = '';
               this.selectedImages.push({
+                id: Math.floor(Math.random() * 1000).toString(),
                 name: file.name,
                 dataUrl: e.target.result,
                 size: file.size,
-                width: img.width,
-                height: img.height,
+                extension: file.name.split('.').pop() || ''
+              });
+              this.tableImages.push({
+                id: Math.floor(Math.random() * 1000).toString(),
+                name: file.name,
+                dataUrl: e.target.result,
+                size: file.size,
                 extension: file.name.split('.').pop() || ''
               });
             }
@@ -141,13 +164,23 @@ export class MultimediaComponent {
       });
 
       if (!valid) {
-        this.selectedImages = [];
       }
     }
   }
 
   deleteImage(image: SelectedImage): void {
     this.selectedImages = this.selectedImages.filter(i => i !== image);
+    this.tableImages = this.tableImages.filter(i => i !== image);
+    // implement this function of the file service:
+    // deleteFile(id: string): Observable<any> {
+    //   const headers = this.getHeaders();
+    //   return this.http.delete(`${this.apiUrl}/${id}`, { headers }).pipe(
+    //     catchError(this.handleError)
+    //   );
+    // }
+    this.filesService.deleteFile(image.id).subscribe(response => {
+      console.log('Image deleted:', response);
+    });
   }
 
   generateNewName(originalName: string): string {
