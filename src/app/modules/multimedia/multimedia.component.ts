@@ -83,6 +83,7 @@ export class MultimediaComponent {
   editorConfig: any; // Define la propiedad editorConfig
 
   showModal: boolean = false;
+  showSaveModal: boolean = false;
   imageToDelete: SelectedImage | null = null;
   audioToDelete: SelectedAudio | null = null;
 i: number = 0;
@@ -336,6 +337,7 @@ i: number = 0;
     this.filesService.uploadFiles({ images: files }).subscribe(response => {
       console.log('Images uploaded:', response);
     });
+    this.fshowSaveModal();
   }
 
   saveAudios() {
@@ -343,6 +345,7 @@ i: number = 0;
     this.filesService.uploadFiles({ audios: files }).subscribe(response => {
       console.log('Audios uploaded:', response);
     });
+    this.fshowSaveModal();
   }
 
   savePDF() {
@@ -351,6 +354,7 @@ i: number = 0;
       this.filesService.uploadFiles({ pdf: file }).subscribe(response => {
         console.log('PDF uploaded:', response);
       });
+      this.fshowSaveModal();
     }
   }
 
@@ -365,6 +369,7 @@ i: number = 0;
     this.filesService.uploadFiles(files).subscribe(response => {
       console.log('Video and subtitles uploaded:', response);
     });
+    this.fshowSaveModal();
   }
 
   saveTerms() {
@@ -376,6 +381,7 @@ i: number = 0;
       console.log('Terms and conditions uploaded:', response);
       this.savedContent = termsContent; // Guardar el contenido del WYSIWYG en una variable
     });
+    this.fshowSaveModal();
   }
 
   private dataURLtoFile(dataUrl: string, filename: string): File {
@@ -400,5 +406,13 @@ i: number = 0;
       console.error('Error converting data URL to file:', error);
       throw error;
     }
+  }
+
+  fshowSaveModal(){
+    this.showSaveModal = true;
+  }
+
+  closeSaveModal(){
+    this.showSaveModal = false;
   }
 }

@@ -22,6 +22,16 @@
             <option value="terms-and-conditions">Terms and Conditions</option>
           </select>
         </div>
+        <!-- modal to notify save successfull -->
+<div *ngIf="showSaveModal" class="fixed inset-0 flex items-center justify-center z-50">
+  <div class="bg-white p-4 rounded shadow-lg">
+    <h2 class="text-lg font-bold mb-4 text-green-500">Success</h2>
+    <p>Saved successfully</p>
+    <div class="mt-4 flex justify-end">
+      <button class="btn btn-primary" (click)="closeSaveModal()">Close</button>
+    </div>
+  </div>
+</div>
         <div *ngIf="selectedPage === 'images'">
           <h2>Upload Images</h2>
           <p>Select them in the order you want them to appear</p>
@@ -37,7 +47,6 @@
     </div>
   </div>
 </div>
-
           <form>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
