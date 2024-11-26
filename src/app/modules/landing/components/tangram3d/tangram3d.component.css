@@ -1409,58 +1409,58 @@
 
  .trian-big-1{
 	animation-name: animate-trian-big-1;
-	animation-duration: 5s;
+	animation-duration: 6s;
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 	animation-fill-mode:forwards;
-	animation-delay: 5s;
+	animation-delay:0s;
 
  }
  .trian-big-2{
 	animation-name: animate-trian-big-2;
-	animation-duration: 5s;
+	animation-duration: 6s;
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 	animation-fill-mode:forwards;
-	animation-delay:5s;
+	animation-delay:0s;
  }
  .trian-medium{
 	animation-name: animate-trian-medium;
-	animation-duration: 5s;
+	animation-duration: 6s;
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 	animation-fill-mode:forwards;
-	animation-delay:5s;
+	animation-delay:0s;
  }
  .trian-small-1{
 	animation-name: animate-trian-small-1;
-	animation-duration: 5s;
+	animation-duration: 6s;
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 	animation-fill-mode:forwards;
-	animation-delay:5s;
+	animation-delay:0s;
  }
  .trian-small-2{
 	animation-name: animate-trian-small-2;
-	animation-duration: 5s;
+	animation-duration: 6s;
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 	animation-fill-mode:forwards;
-	animation-delay:5s;
+	animation-delay:0s;
  }
 .cube{
 	animation-name: animate-cube;
-	animation-duration: 5s;
+	animation-duration: 6s;
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 	animation-fill-mode:forwards;
-	animation-delay:5s;
+	animation-delay:0s;
  }
 .rombo{
 	animation-name: animate-rombo;
-	animation-duration: 5s;
+	animation-duration: 6s;
 	animation-timing-function: ease-in-out;
 	animation-iteration-count: infinite;
 	animation-fill-mode:forwards;
-	animation-delay:5s;
+	animation-delay:0s;
  }

@@ -13,6 +13,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { FormsModule } from '@angular/forms';
 import { FilesService } from '../landing/services/files.service'; // Importa el servicio
 
+
 interface SelectedImage {
   id: string;
   name: string;
@@ -84,6 +85,7 @@ export class MultimediaComponent {
   showModal: boolean = false;
   imageToDelete: SelectedImage | null = null;
   audioToDelete: SelectedAudio | null = null;
+i: number = 0;
 
   constructor(private router: Router, private route: ActivatedRoute, private filesService: FilesService) {
     this.editorConfig = {
@@ -231,6 +233,7 @@ export class MultimediaComponent {
         console.log('Audio deleted:', response);
       });
       this.cancelDeleteAudio();
+      this.i --;
   }
 }
 
@@ -276,6 +279,7 @@ export class MultimediaComponent {
       if (this.selectedAudios.length === 3) {
         this.audioValidationMessage = 'You can only add three audios to the table.';
       } else {
+        this.i ++;
         this.audioValidationMessage = '';
         Array.from(inputElement.files).forEach(file => {
           const reader = new FileReader();

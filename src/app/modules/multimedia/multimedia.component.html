@@ -97,6 +97,7 @@
               <table class="table-auto border-separate border border-muted">
                 <thead class="border border-muted">
                   <tr class="border border-muted">
+                     <th class="border border-muted">Order</th>
                     <th class="border border-muted">Name</th>
                     <th class="border border-muted">Play</th>
                     <th class="border border-muted">Action</th>
@@ -104,6 +105,7 @@
                 </thead>
                 <tbody class="border border-muted">
                   <tr *ngFor="let audio of tableAudios" class="border border-muted">
+                    <td class="border border-muted">{{ i }}</td>
                     <td class="border border-muted">{{ audio.name }}</td>
                     <td class="border border-muted">
                       <audio [src]="audio.dataUrl" controls></audio>
