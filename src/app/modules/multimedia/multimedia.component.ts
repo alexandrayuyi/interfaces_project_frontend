@@ -24,6 +24,7 @@ interface SelectedImage {
 
 interface SelectedAudio {
   id: string;
+  index: number;
   file: File;
   name: string;
   dataUrl: string;
@@ -76,6 +77,7 @@ export class MultimediaComponent {
   savedContent: string = '';
   dbImages: any[] = [];
   tableImages: any[] = [];
+  data: any[] = [];
 
   imageValidationMessage: string = '';
   audioValidationMessage: string = '';
@@ -111,6 +113,7 @@ i: number = 0;
     });
 
     this.filesService.getFiles().subscribe(response => {
+      this.data = response.data;
       this.dbImages = response.data
         .filter((file: any) => file.mimetype.startsWith('image/')) // Filtrar solo imágenes
         //create an image object
@@ -129,11 +132,12 @@ i: number = 0;
         .map((file: any) => ({
           id: file.id,
           name: file.filename,
+          index: file.audioIndex,
           duration: '00:00',
           dataUrl: `http://localhost:5000/uploads/${file.filename}`
         }));
-        //push dbAudios to selectedAudios
-        this.tableAudios.push(...this.dbAudios);
+        //sort the elements by audioIndex
+        this.tableAudios.push(...this.dbAudios.sort((a, b) => a.index - b.index));
   });
 }
 
@@ -205,6 +209,19 @@ i: number = 0;
     this.showModal = true;
   }
 
+  openDeleteModal(): void {
+    this.showModal = true;
+  }
+
+  cancelDelete(): void {
+    this.showModal = false;
+  }
+
+  confirmDeleteSub(): void {
+    this.deleteSub();
+    this.showModal = false;
+  }
+
   cancelDeleteIMG(): void {
     this.showModal = false;
     this.imageToDelete = null;
@@ -234,7 +251,6 @@ i: number = 0;
         console.log('Audio deleted:', response);
       });
       this.cancelDeleteAudio();
-      this.i --;
   }
 }
 
@@ -288,6 +304,7 @@ i: number = 0;
             const audio = new Audio(e.target.result);
             audio.onloadedmetadata = () => {
               this.selectedAudios.push({
+                index: 1,
                 id: Math.floor(Math.random() * 1000).toString(),
                 file,
                 name: file.name,
@@ -370,6 +387,18 @@ i: number = 0;
       console.log('Video and subtitles uploaded:', response);
     });
     this.fshowSaveModal();
+  }
+
+  deleteSub(){
+    //show modal to confirm delete
+    this.showModal = true;
+    const files = this.data.filter((file: any) => file.mimetype.startsWith('text/vtt'));
+    //delete the files from the database
+    files.forEach((file: any) => {
+      this.filesService.deleteFile(file.id).subscribe(response => {
+        console.log('Subtitle deleted:', response);
+      });
+    });
   }
 
   saveTerms() {

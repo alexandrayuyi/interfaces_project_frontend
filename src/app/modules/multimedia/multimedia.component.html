@@ -106,18 +106,26 @@
               <table class="table-auto border-separate border border-muted">
                 <thead class="border border-muted">
                   <tr class="border border-muted">
-                     <th class="border border-muted">Order</th>
                     <th class="border border-muted">Name</th>
                     <th class="border border-muted">Play</th>
+                    <th class="border border-muted">Order</th>
                     <th class="border border-muted">Action</th>
                   </tr>
                 </thead>
                 <tbody class="border border-muted">
                   <tr *ngFor="let audio of tableAudios" class="border border-muted">
-                    <td class="border border-muted">{{ i }}</td>
                     <td class="border border-muted">{{ audio.name }}</td>
                     <td class="border border-muted">
                       <audio [src]="audio.dataUrl" controls></audio>
+                    </td>
+                    <!-- cell with select from the numbers 1 2 or 3-->
+                    <td class="border border-muted">
+                      <select class="w-16">
+                        <option value="" selected></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                      </select>
                     </td>
                     <td class="border border-muted">
                       <button type="button" class="dynamic-h2" (click)="openDeleteModalAudio(audio)">Delete</button>
@@ -133,12 +141,23 @@
         </div>
         <div *ngIf="selectedPage === 'video'">
           <h2>Upload Video</h2>
+          <div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center z-50">
+            <div class="bg-white p-4 rounded shadow-lg">
+              <h2 class="text-lg font-bold mb-4 text-red-500">Confirm Deletion</h2>
+              <p>Are you sure you want to delete?</p>
+              <div class="mt-4 flex justify-end">
+                <button class="btn btn-secondary mr-2" (click)="cancelDelete()">Cancel</button>
+                <button class="btn btn-danger text-red-600" (click)="confirmDeleteSub()">Delete</button>
+              </div>
+            </div>
+          </div>
           <form>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div class="grid-cols-1">
                 <input type="file" accept=".mp4" (change)="onVideoChange($event)">
                 <p>Subtitles (optional)</p>
                 <input type="file" accept=".vtt" (change)="onSubtitleChange($event)">
+                <button (click)="openDeleteModal()" class="mt-5">Delete subtitles</button>
               </div>
               <table class="table-auto border-separate border border-muted">
                 <thead class="border border-muted">
