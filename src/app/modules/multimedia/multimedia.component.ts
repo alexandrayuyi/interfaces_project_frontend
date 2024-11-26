@@ -22,9 +22,9 @@ interface SelectedImage {
 }
 
 interface SelectedAudio {
+  id: string;
   file: File;
   name: string;
-  duration: string;
   dataUrl: string;
 }
 
@@ -66,6 +66,8 @@ export class MultimediaComponent {
   selectedPage: string = 'images'; // Default selection
   selectedImages: SelectedImage[] = [];
   selectedAudios: SelectedAudio[] = [];
+  dbAudios: any[] = [];
+  tableAudios: any[] = [];
   selectedPDF: SelectedPDF | null = null;
   selectedVideo: SelectedVideo | null = null;
   selectedSubtitle: SelectedSubtitle | null = null;
@@ -81,6 +83,7 @@ export class MultimediaComponent {
 
   showModal: boolean = false;
   imageToDelete: SelectedImage | null = null;
+  audioToDelete: SelectedAudio | null = null;
 
   constructor(private router: Router, private route: ActivatedRoute, private filesService: FilesService) {
     this.editorConfig = {
@@ -117,6 +120,17 @@ export class MultimediaComponent {
         }));
         //push dbImages to selectedImages
         this.tableImages.push(...this.dbImages);
+
+      this.dbAudios = response.data
+        .filter((file: any) => file.mimetype.startsWith('audio/')) // Filtrar solo audios
+        .map((file: any) => ({
+          id: file.id,
+          name: file.filename,
+          duration: '00:00',
+          dataUrl: `http://localhost:5000/uploads/${file.filename}`
+        }));
+        //push dbAudios to selectedAudios
+        this.tableAudios.push(...this.dbAudios);
   });
 }
 
@@ -124,8 +138,6 @@ export class MultimediaComponent {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedPage = selectElement.value;
   }
-
-  
 
   onImageChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -180,32 +192,47 @@ export class MultimediaComponent {
     });
   }
 
-  openDeleteModal(image: SelectedImage): void {
+  openDeleteModalIMG(image: SelectedImage): void {
     this.imageToDelete = image;
     this.showModal = true;
   }
 
-  cancelDelete(): void {
+  openDeleteModalAudio(audio: SelectedAudio): void {
+    this.audioToDelete = audio;
+    this.showModal = true;
+  }
+
+  cancelDeleteIMG(): void {
     this.showModal = false;
     this.imageToDelete = null;
   }
 
-  confirmDelete(): void {
+  cancelDeleteAudio(): void {
+    this.showModal = false;
+    this.audioToDelete = null;
+  }
+
+  confirmDeleteIMG(): void {
     if (this.imageToDelete) {
       this.selectedImages = this.selectedImages.filter(i => i !== this.imageToDelete);
       this.tableImages = this.tableImages.filter(i => i !== this.imageToDelete);
       this.filesService.deleteFile(this.imageToDelete.id).subscribe(response => {
         console.log('Image deleted:', response);
       });
-      this.cancelDelete();
+      this.cancelDeleteIMG();
     }
   }
 
-  generateNewName(originalName: string): string {
-    const timestamp = new Date().getTime();
-    const extension = originalName.split('.').pop();
-    return `${timestamp}.${extension}`;
+  confirmDeleteAudio(): void {
+    if (this.audioToDelete) {
+      this.selectedAudios = this.selectedAudios.filter(a => a !== this.audioToDelete);
+      this.tableAudios = this.tableAudios.filter(a => a !== this.audioToDelete);
+      this.filesService.deleteFile(this.audioToDelete.id).subscribe(response => {
+        console.log('Audio deleted:', response);
+      });
+      this.cancelDeleteAudio();
   }
+}
 
   onVideoChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
@@ -256,8 +283,14 @@ export class MultimediaComponent {
             const audio = new Audio(e.target.result);
             audio.onloadedmetadata = () => {
               this.selectedAudios.push({
+                id: Math.floor(Math.random() * 1000).toString(),
                 file,
-                name: this.generateNewName(file.name),
+                name: file.name,
+                dataUrl: e.target.result
+              });
+              this.tableAudios.push({
+                file,
+                name: file.name,
                 duration: this.formatDuration(audio.duration),
                 dataUrl: e.target.result
               });

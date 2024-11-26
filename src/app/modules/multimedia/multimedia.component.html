@@ -30,10 +30,10 @@
 <div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center z-50">
   <div class="bg-white p-4 rounded shadow-lg">
     <h2 class="text-lg font-bold mb-4 text-red-500">Confirm Deletion</h2>
-    <p>Are you sure you want to delete this image?</p>
+    <p>Are you sure you want to delete?</p>
     <div class="mt-4 flex justify-end">
-      <button class="btn btn-secondary mr-2" (click)="cancelDelete()">Cancel</button>
-      <button class="btn btn-danger text-red-600" (click)="confirmDelete()">Delete</button>
+      <button class="btn btn-secondary mr-2" (click)="cancelDeleteIMG()">Cancel</button>
+      <button class="btn btn-danger text-red-600" (click)="confirmDeleteIMG()">Delete</button>
     </div>
   </div>
 </div>
@@ -64,7 +64,7 @@
                       <td class="border border-muted">{{ (image.size / 1024).toFixed(2) }}</td>
                       <td class="border border-muted">{{ image.extension }}</td>
                       <td class="border border-muted">
-                        <button type="button" class="dynamic-h2" (click)="openDeleteModal(image)">Delete</button>
+                        <button type="button" class="dynamic-h2" (click)="openDeleteModalIMG(image)">Delete</button>
                     </tr>
                   </tbody>
                 </table>
@@ -77,6 +77,17 @@
         <div *ngIf="selectedPage === 'audios'">
           <h2>Upload Audios</h2>
           <p>They will appear in the same order as in the table</p>
+                    <!-- Modal -->
+<div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center z-50">
+  <div class="bg-white p-4 rounded shadow-lg">
+    <h2 class="text-lg font-bold mb-4 text-red-500">Confirm Deletion</h2>
+    <p>Are you sure you want to delete?</p>
+    <div class="mt-4 flex justify-end">
+      <button class="btn btn-secondary mr-2" (click)="cancelDeleteAudio()">Cancel</button>
+      <button class="btn btn-danger text-red-600" (click)="confirmDeleteAudio()">Delete</button>
+    </div>
+  </div>
+</div>
           <form>
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div class="grid-cols-1">
@@ -87,20 +98,18 @@
                 <thead class="border border-muted">
                   <tr class="border border-muted">
                     <th class="border border-muted">Name</th>
-                    <th class="border border-muted">Duration</th>
                     <th class="border border-muted">Play</th>
                     <th class="border border-muted">Action</th>
                   </tr>
                 </thead>
                 <tbody class="border border-muted">
-                  <tr *ngFor="let audio of selectedAudios" class="border border-muted">
+                  <tr *ngFor="let audio of tableAudios" class="border border-muted">
                     <td class="border border-muted">{{ audio.name }}</td>
-                    <td class="border border-muted">{{ audio.duration }}</td>
                     <td class="border border-muted">
                       <audio [src]="audio.dataUrl" controls></audio>
                     </td>
                     <td class="border border-muted">
-                      <button type="button" class="dynamic-h2" (click)="deleteAudio(audio)">Delete</button>
+                      <button type="button" class="dynamic-h2" (click)="openDeleteModalAudio(audio)">Delete</button>
                   </tr>
                 </tbody>
               </table>
