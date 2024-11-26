@@ -18,6 +18,8 @@ export class LandingComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.filesService.getFiles().subscribe(response => {
+      const data = response.data;
+      console.log(data);
       this.slides = response.data
         .filter((file: any) => file.mimetype.startsWith('image/')) // Filtrar solo imágenes
         .map((file: any) => ({
@@ -31,18 +33,16 @@ export class LandingComponent implements OnInit, AfterViewInit {
         }))[(response.data.filter((file: any) => file.mimetype.startsWith('video/')).length)-1];
       
       this.subs = response.data // buscar el ultimo video subido
-        .filter((file: any) => file.mimetype.startsWith('application/vtt') || file.mimetype.startsWith('vtt') || file.mimetype.startsWith('WEBVTT') || file.mimetype.startsWith('text/plain') || file.mimetype.startsWith('application/txt')) // Filtrar solo videos
+        .filter((file: any) => file.mimetype.startsWith('text/vtt'))
         .map((file: any) => ({
           subsSrc: `http://localhost:5000/uploads/${file.filename}` // Ajusta esto según la estructura de tu respuesta
-        }))[(response.data.filter((file: any) => file.mimetype.startsWith('application/vtt') || file.mimetype.startsWith('vtt') || file.mimetype.startsWith('WEBVTT') || file.mimetype.startsWith('text/plain') || file.mimetype.startsWith('application/txt')).length)-1];
+        }))[(response.data.filter((file: any) => file.mimetype.startsWith('text/vtt')).length)-1];
         console.log(this.subs);
       
       this.audios = response.data
       .filter((file: any) => file.mimetype.startsWith('mp3/') || file.mimetype.startsWith('audio/'))
-
       console.log(this.audios)
     });
-      
   }
 
 
