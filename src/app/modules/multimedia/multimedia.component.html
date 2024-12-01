@@ -18,6 +18,7 @@
             <option value="images">Images</option>
             <option value="audios">Audios</option>
             <option value="video">Video</option>
+            <option value="sub">Subtitles</option>
             <option value="pdf">PDF</option>
             <option value="terms-and-conditions">Terms and Conditions</option>
           </select>
@@ -155,9 +156,6 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div class="grid-cols-1">
                 <input type="file" accept=".mp4" (change)="onVideoChange($event)">
-                <p>Subtitles (optional)</p>
-                <input type="file" accept=".vtt" (change)="onSubtitleChange($event)">
-                <button (click)="openDeleteModal()" class="mt-5">Delete subtitles</button>
               </div>
               <table class="table-auto border-separate border border-muted">
                 <thead class="border border-muted">
@@ -181,6 +179,31 @@
             </div>
           </form>
         </div>
+        <div *ngIf="selectedPage === 'sub'">
+          <h2>Upload Subtitles</h2>
+          <form>
+            <div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center z-50">
+              <div class="bg-white p-4 rounded shadow-lg">
+                <h2 class="text-lg font-bold mb-4 text-red-500">Confirm Deletion</h2>
+                <p>Are you sure you want to delete?</p>
+                <div class="mt-4 flex justify-end">
+                  <button class="btn btn-secondary mr-2" (click)="cancelDelete()">Cancel</button>
+                  <button class="btn btn-danger text-red-600" (click)="confirmDeleteSub()">Delete</button>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div class="grid-cols-1">
+                <p>Subtitles (optional)</p>
+                <input type="file" accept=".vtt" (change)="onSubtitleChange($event)">
+                <button (click)="openDeleteModal()" class="mt-5 mr-4">Delete subtitles</button>
+                <button type="button" class="dynamic-h2" (click)="saveVideo()">Save</button>
+              </div>
+            </div>
+            
+          </form>
+          
+        </div>
         <div *ngIf="selectedPage === 'pdf'">
           <h2>Upload PDF</h2>
           <form>
@@ -202,15 +225,13 @@
         <div *ngIf="selectedPage === 'terms-and-conditions'">
           <h2>Enter Terms and Conditions</h2>
           <editor apiKey="i5diybtc5es3z3jzxigpkeokhccjnsw7x0xveym2arkt7hm8"
-    [(ngModel)]="termsAndConditions"
-    [init]="editorConfig">
+    [(ngModel)]="termsAndConditionsA"
+    [init]="editorConfig"
+    >
+
   </editor>
   <div class="mt-4 text-center">
     <button type="button" class="dynamic-h2" (click)="saveTerms()">Save</button>
-  </div>
-  <div class="mt-4 text-center" *ngIf="savedContent">
-    <h3>Saved Content:</h3>
-    <div [innerHTML]="savedContent"></div>
   </div>
         </div>
       </div>

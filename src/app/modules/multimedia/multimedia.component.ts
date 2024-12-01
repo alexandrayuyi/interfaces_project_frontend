@@ -90,6 +90,7 @@ export class MultimediaComponent {
   audioToDelete: SelectedAudio | null = null;
 i: number = 0;
 
+termsAndConditionsA: string = '';
   constructor(private router: Router, private route: ActivatedRoute, private filesService: FilesService) {
     this.editorConfig = {
       // Configuración del editor
@@ -103,7 +104,9 @@ i: number = 0;
       toolbar: 'undo redo | formatselect | bold italic backcolor | \
                 alignleft aligncenter alignright alignjustify | \
                 bullist numlist outdent indent | removeformat | help'
+
     };
+    this.termsAndConditionsA = localStorage.getItem('terms') || ''; // Obtener el contenido del WYSIWYG de localStorage
   }
 
   ngOnInit() {
@@ -402,13 +405,15 @@ i: number = 0;
   }
 
   saveTerms() {
-    const termsContent = this.termsAndConditions;
+    //save terms in local storage
+    localStorage.setItem("terms", this.termsAndConditionsA);
+    const termsContent = this.termsAndConditionsA;
     const blob = new Blob([termsContent], { type: 'text/html' });
     const file = new File([blob], 'terms-and-conditions.html', { type: 'text/html' });
   
     this.filesService.uploadFiles({ html: file }).subscribe(response => {
       console.log('Terms and conditions uploaded:', response);
-      this.savedContent = termsContent; // Guardar el contenido del WYSIWYG en una variable
+      this.savedContent = localStorage.getItem('terms') || ''; // Guardar el contenido del WYSIWYG en una variable
     });
     this.fshowSaveModal();
   }
