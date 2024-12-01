@@ -12,6 +12,7 @@ export class TermsComponent implements OnInit {
   constructor(private filesService: FilesService) {}
 
   ngOnInit(): void {
+
     this.filesService.getFiles().subscribe(response => {
       const htmlFiles = response.data
         .filter((file: any) => file.mimetype === 'text/html') // Filtrar solo archivos HTML
@@ -19,8 +20,8 @@ export class TermsComponent implements OnInit {
       if (htmlFiles.length > 0) {
         const lastHtmlFile = htmlFiles[htmlFiles.length -1];
         this.htmlContent = lastHtmlFile.content; // Asumimos que el contenido está en la propiedad 'content'
+        this.htmlContent = localStorage.getItem('terms') || '';
       }
-      console.log(htmlFiles);
     });
   }
 }
