@@ -17,7 +17,7 @@ export class UserGuideComponent implements OnInit {
         .filter((file: any) => file.mimetype === 'application/pdf') // Filtrar solo PDFs
         .map((file: any) => ({
           pdfSrc: `http://localhost:5000/uploads/${file.filename}` // Ajusta esto según la estructura de tu respuesta
-        }))[0]; // Asumimos que solo hay un PDF
+        }))[(response.data.filter((file: any) => file.mimetype.startsWith('application/pdf')).length)-1];
 
       if (pdfFile) {
         this.pdfSrc = pdfFile.pdfSrc;
